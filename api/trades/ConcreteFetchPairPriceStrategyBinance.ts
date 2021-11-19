@@ -2,7 +2,7 @@ import { FetchPairTradesStrategy } from './FetchPairPriceStrategy'
 import SymbolPair from '../../models/SymbolPair'
 import { getQueryString } from '../../utils/getQueryString'
 import Trade from '../../models/Trade'
-import { PairNotSupportedError } from '../../errors/errors'
+import { NetworkRequestError, PairNotSupportedError } from '../../errors/errors'
 
 interface ResponseObject {
    price: number
@@ -32,7 +32,7 @@ export default class ConcreteFetchPairPriceStrategyBinance implements FetchPairT
          if (err.code === ConcreteFetchPairPriceStrategyBinance.PAIR_NOT_SUPPORTED_ERROR_NUMBER) {
             throw new PairNotSupportedError()
          }
-         throw err
+         throw new NetworkRequestError()
       }
    }
 }

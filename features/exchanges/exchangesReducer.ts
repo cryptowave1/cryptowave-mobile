@@ -44,13 +44,22 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit: number = 1):
          promises.push(recentTradesPromise)
       })
 
-      const exchangesTrades: Trade[][] = await Promise.all(promises)
+      const exchangesTrades = await Promise.allSettled(promises)
 
       Object.keys(slices).forEach((key, index) => {
-         dispatch(slices[key as SlicesKey].actions.fetchRecentTradesSuccess({
-            ticker: assetPair.toTicker(),
-            trades: exchangesTrades[index],
-         }))
+         if (exchangesTrades[index].status !== "fulfilled") {
+            dispatch(slices[key as SlicesKey].actions.fetchRecentTradesSuccess({
+               ticker: assetPair.toTicker(),
+               // @ts-ignore allSettled returns PromiseSettledResult, which is not exported at all
+               trades: exchangesTrades[index].value,
+            }))
+         } else {
+            dispatch(slices[key as SlicesKey].actions.fetchRecentTradesFailed({
+               ticker: assetPair.toTicker(),
+               // @ts-ignore allSettled returns PromiseSettledResult, which is not exported at all
+               error: exchangesTrades[index].reason
+            }))
+         }
       })
    }
 

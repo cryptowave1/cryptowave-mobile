@@ -9,19 +9,16 @@ interface Props {
    onAssetSelected: (asset: Asset) => void
 }
 
-const HomeScreen: React.FC<Props> = (props: Props) => {
-   return (<>
-         <ScrollView>
-            {
-               props.assets.map(asset => <SingleAssetComponent
-                  asset={asset}
-                  isSelected={props.selectedAsset?.getId() === asset.getId()}
-                  onPressed={asset => props.onAssetSelected(asset)}
-                  key={asset.getId()}/>)
-            }
-         </ScrollView>
-      </>
-   )
+const AssetsList: React.FC<Props> = (props: Props) => {
+   return <ScrollView>
+      {
+         props.assets.map(asset => <SingleAssetComponent
+            asset={asset}
+            isSelected={props.selectedAsset?.getId() === asset.getId()}
+            onPressed={asset => props.onAssetSelected(asset)}
+            key={asset.getId()}/>)
+      }
+   </ScrollView>
 }
 
-export default HomeScreen
+export default AssetsList

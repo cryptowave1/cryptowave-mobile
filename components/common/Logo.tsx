@@ -9,7 +9,7 @@ const Logo: React.FC<Props> = (props: Props) => {
    return <View style={props.style}>
       <Image
          style={styles.tinyLogo}
-         source={require('../assets/images/google-logo.jpg')}
+         source={require('../../assets/images/google-logo.jpg')}
       />
    </View>
 }
