@@ -5526,7 +5526,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.7.2":
+"prop-types@^15.5.10", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha1-UsQedbjIfnK52TYOAga5ncv/psU="
   "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -5600,6 +5600,14 @@
   "integrity" "sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ="
   "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
+
+"react-native-charts-wrapper@^0.5.7":
+  "integrity" "sha1-E82zh+3mf0KSuSyLA6jxXeOnovc="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/react-native-charts-wrapper/-/react-native-charts-wrapper-0.5.7.tgz"
+  "version" "0.5.7"
+  dependencies:
+    "prop-types" "^15.5.10"
+    "react" "16.8.3"
 
 "react-native-codegen@^0.0.7":
   "integrity" "sha1-hmUcXF/sZ6gHfvf0429+1FkEPhQ="
@@ -5707,6 +5715,16 @@
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
+
+"react@16.8.3":
+  "integrity" "sha1-xvmIos6JU3XeIW7c+u3WuadkUdk="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/react/-/react-16.8.3.tgz"
+  "version" "16.8.3"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
+    "scheduler" "^0.13.3"
 
 "read-pkg-up@^7.0.1":
   "integrity" "sha1-86YTV1hFlzOuK5VjgFbhhU5+9Qc="
@@ -6021,6 +6039,14 @@
   "version" "5.0.1"
   dependencies:
     "xmlchars" "^2.2.0"
+
+"scheduler@^0.13.3":
+  "integrity" "sha1-RmpOwzJGezGpG5v3TlNHBy5M2Ik="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/scheduler/-/scheduler-0.13.6.tgz"
+  "version" "0.13.6"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
 
 "scheduler@^0.20.2":
   "integrity" "sha1-S67jlDbjSqk7SHS93L8P6Li1DpE="
