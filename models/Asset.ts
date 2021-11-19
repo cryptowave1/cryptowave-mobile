@@ -1,27 +1,57 @@
-export default class Asset {
-   private readonly name: string;
-   private readonly symbol: string;
-   private readonly imageUrl: string;
+import { MarketData } from './MarketData'
 
-   constructor(name: string, symbol: string, imageUrl: string) {
-      this.name = name;
-      this.symbol = symbol;
-      this.imageUrl = imageUrl;
+export default class Asset {
+   private readonly name: string
+   private readonly symbol: string
+   private readonly id: string
+   private readonly imageUrl: string
+   private marketData: MarketData
+
+   constructor(name: string, symbol: string, id: string, imageUrl: string, marketData: MarketData) {
+      this.name = name
+      this.symbol = symbol
+      this.id = id
+      this.imageUrl = imageUrl
+      this.marketData = marketData
    }
 
+   public static filterAssets(assets: Asset[], label: string): Asset[] {
+      return assets.filter(asset =>
+         asset.getSymbol().toLowerCase().indexOf(label.toLowerCase()) > -1 ||
+         asset.getName().toLowerCase().indexOf(label.toLowerCase()) > -1)
+   }
+
+   public static sortAssetsByMarketCap(assets: Asset[]): Asset[] {
+      return assets.sort((firstAsset: Asset, secondAsset: Asset) =>
+         secondAsset.getMarketData().getMarketCap() - firstAsset.getMarketData().getMarketCap())
+   }
+
+
    getName(): string {
-      return this.name;
+      return this.name
    }
 
    getSymbol(): string {
-      return this.symbol;
+      return this.symbol
+   }
+
+   getId(): string {
+      return this.id
    }
 
    getImageUrl(): string {
-      return this.imageUrl;
+      return this.imageUrl
+   }
+
+   getMarketData(): MarketData {
+      return this.marketData
+   }
+
+   setMarketData(marketData: MarketData) {
+      this.marketData = marketData
    }
 
    toString() {
-      return this.getSymbol();
+      return this.getId()
    }
 }

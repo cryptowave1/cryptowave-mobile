@@ -1,13 +1,13 @@
-import Asset from '../../models/Asset';
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { theme } from '../../style/style';
-import commonConstants from '../../style/commonConstants';
+import Asset from '../../models/Asset'
+import React from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { theme } from '../../style/style'
+import commonConstants from '../../style/commonConstants'
 
 interface Props {
-   asset: Asset;
-   isSelected: boolean;
-   onPressed: (asset: Asset) => void;
+   asset: Asset
+   isSelected: boolean
+   onPressed: (asset: Asset) => void
 }
 
 const SingleAssetComponent: React.FC<Props> = (props: Props) => {
@@ -23,10 +23,11 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
          }}
          style={style.image}/>
       <Text>{props.asset.getName()}</Text>
+      <Text>{props.asset.getMarketData().getMarketCap()}</Text>
    </TouchableOpacity>
-};
+}
 
-export default SingleAssetComponent;
+export default SingleAssetComponent
 
 const style = StyleSheet.create({
    container: {
@@ -42,4 +43,4 @@ const style = StyleSheet.create({
       width: commonConstants.homeScreenAssetImageSize,
       height: commonConstants.homeScreenAssetImageSize,
    }
-});
+})

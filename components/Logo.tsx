@@ -1,8 +1,8 @@
-import React from 'react';
-import { Image, StyleSheet, View, ViewStyle } from 'react-native';
+import React from 'react'
+import { Image, StyleSheet, View, ViewStyle } from 'react-native'
 
 interface Props {
-   style: ViewStyle;
+   style: ViewStyle
 }
 
 const Logo: React.FC<Props> = (props: Props) => {
@@ -14,7 +14,7 @@ const Logo: React.FC<Props> = (props: Props) => {
    </View>
 }
 
-export default Logo;
+export default Logo
 
 const styles = StyleSheet.create({
    tinyLogo: {

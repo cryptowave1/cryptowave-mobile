@@ -1,4 +1,4 @@
 export default {
    mainBackgroundColor: '#fff',
-   selectedAssetBorderColor: '#00f'
+   selectedAssetBorderColor: '#00f',
 }

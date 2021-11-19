@@ -1,12 +1,12 @@
-import Asset from '../../models/Asset';
-import React, { useEffect } from 'react';
-import { ScrollView, } from 'react-native';
-import SingleAssetComponent from './SingleAssetComponent';
+import React from 'react'
+import Asset from '../../models/Asset'
+import { ScrollView, } from 'react-native'
+import SingleAssetComponent from './SingleAssetComponent'
 
 interface Props {
-   assets: Asset[];
-   selectedAsset?: Asset;
-   onAssetSelected: (asset: Asset) => void;
+   assets: Asset[]
+   selectedAsset?: Asset
+   onAssetSelected: (asset: Asset) => void
 }
 
 const HomeScreen: React.FC<Props> = (props: Props) => {
@@ -15,13 +15,13 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
             {
                props.assets.map(asset => <SingleAssetComponent
                   asset={asset}
-                  isSelected={props.selectedAsset?.getSymbol() === asset.getSymbol()}
+                  isSelected={props.selectedAsset?.getId() === asset.getId()}
                   onPressed={asset => props.onAssetSelected(asset)}
-                  key={asset.getSymbol()}/>)
+                  key={asset.getId()}/>)
             }
          </ScrollView>
       </>
-   );
+   )
 }
 
-export default HomeScreen;
+export default HomeScreen

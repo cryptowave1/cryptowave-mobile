@@ -1,3 +1,3 @@
 export default {
-   homeScreenAssetImageSize: 50
+   homeScreenAssetImageSize: 30,
 }

@@ -1261,6 +1261,11 @@
   "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/@tootallnate/once/-/once-1.1.2.tgz"
   "version" "1.1.2"
 
+"@types/async@^3.2.10":
+  "integrity" "sha1-DVdespiDmPdUEhqhnj4I+cXV8R8="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/@types/async/-/async-3.2.10.tgz"
+  "version" "3.2.10"
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   "integrity" "sha1-vBLHS31l6C0ph2tdC69cYlrFhwI="
   "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/@types/babel__core/-/babel__core-7.1.16.tgz"
@@ -1746,6 +1751,11 @@
   "version" "2.6.3"
   dependencies:
     "lodash" "^4.17.14"
+
+"async@^3.2.2":
+  "integrity" "sha1-LrdnEDS7IZTUXTDjHiTsfn+WcM0="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/async/-/async-3.2.2.tgz"
+  "version" "3.2.2"
 
 "asynckit@^0.4.0":
   "integrity" "sha1-x57Zf380y48robyXkLzDZkdLS3k="
@@ -5666,6 +5676,11 @@
     "esprima" "~4.0.0"
     "source-map" "~0.6.1"
     "tslib" "^2.0.1"
+
+"reduce-reducers@^1.0.4":
+  "integrity" "sha1-+3fnUanrAgF2CsWmBcqMnC0FN/g="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/reduce-reducers/-/reduce-reducers-1.0.4.tgz"
+  "version" "1.0.4"
 
 "redux-flipper@^2.0.1":
   "integrity" "sha1-pDYDoT5vBqSMYnrnwURXm9Tx+lQ="

@@ -1,24 +1,18 @@
-import createFlipperDebugger from 'redux-flipper';
-import { enableMapSet } from 'immer';
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-/**
- * Reducer imports
- */
-import assetsReducer from '../features/assets/assetsSlice';
-import exchangesReducer from '../features/exchanges/exchangesSlice';
+import createFlipperDebugger from 'redux-flipper'
+import { enableMapSet } from 'immer'
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
+import rootReducers from './rootReducers'
 
 // Enables the use of Map/Set objects inside the store's state
-enableMapSet();
+// todo akolov: find out why it is not working correctly
+enableMapSet()
 
 export const store = configureStore({
-   reducer: {
-      assets: assetsReducer,
-      exchanges: exchangesReducer,
-   },
+   reducer: rootReducers,
    middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({serializableCheck: false}).concat(createFlipperDebugger())
 })
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>
