@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import Logo from '../components/common/Logo'
-import { globalStyle } from '../style/style'
+import { mainBackgroundColor } from '../style/globalStyle'
 import AssetPairSelectorComponent from '../features/assets/AssetPairSelectorComponent'
 import { AssetPair } from '../models/assets/AssetPair'
 import { useDispatch } from 'react-redux'
@@ -16,7 +16,7 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
    const [assetPair, setAssetPair] = useState<AssetPair | undefined>(undefined)
 
    return (
-      <SafeAreaView style={[globalStyle.mainBackgroundColor, style.wrapper]}>
+      <SafeAreaView style={[mainBackgroundColor, style.wrapper]}>
          <Logo style={style.logo}/>
          <AssetPairSelectorComponent
             onSelectedAssetPair={(assetPair: AssetPair) => {

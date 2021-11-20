@@ -60,4 +60,8 @@ export default class Asset {
    toString() {
       return this.getId()
    }
+
+   isEqual(secodAsset: Asset): boolean {
+      return this.toString() === secodAsset.toString();
+   }
 }

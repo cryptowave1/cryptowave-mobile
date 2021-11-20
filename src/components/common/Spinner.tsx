@@ -1,6 +1,6 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
-import { theme } from '../../style/style'
+import { theme } from '../../style/theme'
 
 interface Props {
    size?: 'large' | 'small'

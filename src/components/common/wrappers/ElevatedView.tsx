@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Platform, ViewStyle } from 'react-native'
 import commonConstants from '../../../style/commonConstants'
-import { theme } from '../../../style/style'
+import { theme } from '../../../style/theme'
 
 interface Props {
    elevation?: number
-   style?: ViewStyle
+   style?: ViewStyle | ViewStyle[]
    children: JSX.Element
 }
 

@@ -1,7 +1,7 @@
 import Asset from '../../models/assets/Asset'
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { theme } from '../../style/style'
+import { theme } from '../../style/theme'
 import commonConstants from '../../style/commonConstants'
 
 interface Props {

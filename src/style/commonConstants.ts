@@ -1,8 +1,20 @@
+const smallDistance = 10;
+const mediumDistance = smallDistance * 2;
+const bigDistance = smallDistance * 3;
+
 export default {
+   layout: {
+      distance: {
+         small: smallDistance,
+         medium: mediumDistance,
+         big: bigDistance
+      },
+   },
+
    common: {
       elevatedView: {
          defaultElevation: 3,
-      }
+      },
    },
 
    asset: {
@@ -13,9 +25,8 @@ export default {
          homeScreen: {
             initialHeight: 50,
          },
-      }
+      },
    },
-
 
    singleExchangePairTrades: {},
 }
