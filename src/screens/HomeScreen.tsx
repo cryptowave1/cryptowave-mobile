@@ -5,7 +5,7 @@ import { globalStyle } from '../style/style'
 import AssetPairSelectorComponent from '../features/assets/AssetPairSelectorComponent'
 import { AssetPair } from '../models/assets/AssetPair'
 import { useDispatch } from 'react-redux'
-import ExchangesRecentTradesList from '../features/exchanges/ExchangeRecentTradesList'
+import ExchangesRecentTradesList from '../features/exchanges/trades/ExchangeRecentTradesList'
 
 interface Props {
 }

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
-import { fetchRecentTradesThunk } from './exchangesReducer'
-import { AssetPair } from '../../models/assets/AssetPair'
-import { RootState } from '../../app/store'
+import { fetchRecentTradesThunk } from '../exchangesSlice'
+import { AssetPair } from '../../../models/assets/AssetPair'
+import { RootState } from '../../../app/store'
 import SingleExchangePairTradesComponent from './SingleExchangePairTradesComponent'
+import Exchange from '../../../models/exchanges/Exchange';
 
 interface Props {
    assetPair: AssetPair
@@ -13,8 +14,8 @@ interface Props {
 const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
    const dispatch = useDispatch()
 
-   const exchanges = useSelector((state: RootState) => {
-      return Object.entries(state.exchanges).map(entry => entry[1].exchange)
+   const exchanges: Exchange[] = useSelector((state: RootState) => {
+      return Object.values(state.exchanges.exchangeIdToExchangeTrades).map(obj => obj.getExchange())
    })
 
    useEffect(() => {

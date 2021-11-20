@@ -19,7 +19,6 @@ export const assetsSlice = createSlice({
    name: 'assetsListItems',
    initialState,
    reducers: {
-      // todo: add loading
       fetchAssetsListItemsSuccess(state, action: PayloadAction<AssetsListItem[]>) {
          state.loading = false
          state.assetsListItems = action.payload

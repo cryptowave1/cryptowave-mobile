@@ -34,8 +34,4 @@ export default class AssetPairTrades {
    addTrades(trades: Trade[]) {
       this.trades.push(...trades)
    }
-
-   toString() {
-      return `${this.getAssetPair().getBaseAsset().toString()}_${this.getAssetPair().getQuoteAsset().toString()}`
-   }
 }

@@ -2,32 +2,39 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
-import text from '../../text'
+import text, { locale } from '../../text'
 import commonConstants from '../../style/commonConstants'
 import getArrayLastItem from '../../utils/functions/getArrayLastItem'
 import ElevatedView from '../common/wrappers/ElevatedView'
+import Spinner from '../common/Spinner';
 
 interface Props {
-   assetPairTrades: AssetPairTrades
+   loading: boolean
+   assetPairTrades: AssetPairTrades | undefined
 }
 
 const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
-   const isSuported = props.assetPairTrades.getSupported()
+   const getChild = () => {
+      const spinner = <Spinner/>
 
-   let child
-   if (isSuported) {
-      const lastTrade: Trade | undefined = getArrayLastItem(props.assetPairTrades.getTrades())
-      if (!lastTrade) {
-         return null
+      if (props.loading || !props.assetPairTrades) {
+         return spinner
       }
-      const lastTradePriceString: string = new Intl.NumberFormat('de-DE').format(lastTrade.getPrice())
-      child = <Text>{lastTradePriceString}</Text>
-   } else {
-      child = <Text>{text.exchange_trades_pair_not_supported}</Text>
+
+      if (props.assetPairTrades.getSupported()) {
+         const lastTrade: Trade | undefined = getArrayLastItem(props.assetPairTrades.getTrades())
+         if (!lastTrade) {
+            return spinner
+         }
+         const lastTradePriceString: string = new Intl.NumberFormat(locale).format(lastTrade.getPrice())
+         return <Text>{lastTradePriceString}</Text>
+      }
+
+      return <Text>{text.exchange_trades_pair_not_supported}</Text>
    }
 
    return <ElevatedView style={styles.wrapper}>
-      {child}
+      {getChild()}
    </ElevatedView>
 }
 export default SingleExchangePairTrades

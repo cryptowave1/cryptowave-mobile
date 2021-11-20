@@ -64,7 +64,6 @@ const fetchAdditionalAssetsQueue: QueueObject<AppThunk> = async.queue<AppThunk>(
 
 export const addToFetchAdditionalAssetsQueue = (thunk: AppThunk) => {
    fetchAdditionalAssetsQueue.push(thunk)
-   console.log(fetchAdditionalAssetsQueue.length())
 }
 
 export const fetchAdditionalAssets = (label: string, resultsPerPage: number, pageNumber: number): AppThunk =>
@@ -96,7 +95,6 @@ export const fetchAdditionalAssets = (label: string, resultsPerPage: number, pag
          const newAssets: Asset[] = await fetchAssets(fetchResultsPerPage, pageNumber, idsToFetch)
          dispatch(assetsSlice.actions.fetchAdditionalAssetsSuccess(newAssets))
       } catch (err) {
-         console.log(err)
          dispatch(assetsSlice.actions.fetchAdditionalAssetsFailed(err as Error))
       }
    }
