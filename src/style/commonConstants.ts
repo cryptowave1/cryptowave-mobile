@@ -3,6 +3,12 @@ const mediumDistance = smallDistance * 2;
 const bigDistance = smallDistance * 3;
 
 export default {
+   sizes: {
+      roundedBorders: {
+         topBarHome: 30,
+      },
+   },
+
    layout: {
       distance: {
          small: smallDistance,

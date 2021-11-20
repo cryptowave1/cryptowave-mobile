@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
-import Spinner from './Spinnet'
+import Spinner from './Spinner'
 
 interface Props {
    size: 'large' | 'small'

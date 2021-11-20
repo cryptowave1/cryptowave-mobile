@@ -5703,6 +5703,11 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-status-bar-height@^2.6.0":
+  "integrity" "sha1-tq/SW249UzxD0Pzc/Vyv13VZLOo="
+  "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/react-native-status-bar-height/-/react-native-status-bar-height-2.6.0.tgz"
+  "version" "2.6.0"
+
 "react-native-vector-icons@^9.0.0":
   "integrity" "sha1-qzjsaUHz80DTmEbx6DAOWYY+L7E="
   "resolved" "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/react-native-vector-icons/-/react-native-vector-icons-9.0.0.tgz"

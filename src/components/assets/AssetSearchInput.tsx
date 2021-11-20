@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 
 interface Props {
    value: string
@@ -19,3 +19,7 @@ const AssetSearchInput: React.FC<Props> = (props: Props) => {
    </View>
 }
 export default AssetSearchInput
+
+const style = StyleSheet.create({
+
+});

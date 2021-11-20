@@ -1,6 +1,7 @@
 import { immerable } from 'immer'
 import { AssetPair } from './AssetPair'
 import Trade from '../market/Trade'
+import getArrayLastItem from '../../utils/functions/getArrayLastItem';
 
 export default class AssetPairTrades {
    [immerable] = true
@@ -33,5 +34,9 @@ export default class AssetPairTrades {
 
    addTrades(trades: Trade[]) {
       this.trades.push(...trades)
+   }
+
+   getLastPrice(): number | undefined {
+      return getArrayLastItem(this.getTrades())?.getPrice()
    }
 }

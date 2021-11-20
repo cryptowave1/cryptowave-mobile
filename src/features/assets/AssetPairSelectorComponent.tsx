@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ViewStyle } from 'react-native'
 import Asset from '../../models/assets/Asset'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
@@ -13,6 +13,7 @@ const INITIAL_ASSETS_FETCH_COUNT = 20
 
 interface Props {
    onSelectedAssetPair: (assetPair: AssetPair) => void
+   style?: ViewStyle
 }
 
 const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
@@ -39,7 +40,7 @@ const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
       props.onSelectedAssetPair(assetPair)
    }, [baseSelectedAsset, quoteSelectedAsset])
 
-   return <View style={style.assetsListsWrapper}>
+   return <View style={[style.assetsListsWrapper, props.style]}>
       <View style={style.singleAssetListWrapper}>
          <AssetSelectorComponent
             initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}

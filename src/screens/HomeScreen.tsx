@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet } from 'react-native'
-import Logo from '../components/common/Logo'
-import { mainBackgroundColor } from '../style/globalStyle'
+import { SafeAreaView, StyleSheet, View } from 'react-native'
+import { background1 } from '../style/globalStyle'
 import AssetPairSelectorComponent from '../features/assets/AssetPairSelectorComponent'
 import { AssetPair } from '../models/assets/AssetPair'
 import { useDispatch } from 'react-redux'
 import ExchangesRecentTradesList from '../features/exchanges/trades/ExchangeRecentTradesList'
+import TopBarHome from '../features/layout/TopBarHome'
+import commonConstants from '../style/commonConstants';
 
 interface Props {
+
 }
 
 const HomeScreen: React.FC<Props> = (props: Props) => {
-   const dispatch = useDispatch()
-
    const [assetPair, setAssetPair] = useState<AssetPair | undefined>(undefined)
 
    return (
-      <SafeAreaView style={[mainBackgroundColor, style.wrapper]}>
-         <Logo style={style.logo}/>
+      <View style={[style.wrapper]}>
+         <TopBarHome/>
          <AssetPairSelectorComponent
+            style={style.assetPairSelector}
             onSelectedAssetPair={(assetPair: AssetPair) => {
                setAssetPair(assetPair)
             }}
          />
          {assetPair && <ExchangesRecentTradesList assetPair={assetPair}/>}
-      </SafeAreaView>
+      </View>
    )
 }
 export default HomeScreen
@@ -35,5 +36,8 @@ const style = StyleSheet.create({
    },
    logo: {
       alignItems: 'center'
+   },
+   assetPairSelector: {
+      marginTop: commonConstants.layout.distance.medium
    }
 })

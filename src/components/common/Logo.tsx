@@ -2,14 +2,15 @@ import React from 'react'
 import { Image, StyleSheet, View, ViewStyle } from 'react-native'
 
 interface Props {
-   style: ViewStyle
+   style?: ViewStyle
+   width?: number
 }
 
-const Logo: React.FC<Props> = (props: Props) => {
-   return <View style={props.style}>
+const Logo: React.FC<Props> = ({style, width = 200}: Props) => {
+   return <View style={style}>
       <Image
-         style={styles.tinyLogo}
-         source={require('../../assets/images/google-logo.jpg')}
+         style={[styles.logo, {width}]}
+         source={require('../../assets/images/cryptowave-logo-medium.png')}
       />
    </View>
 }
@@ -17,8 +18,7 @@ const Logo: React.FC<Props> = (props: Props) => {
 export default Logo
 
 const styles = StyleSheet.create({
-   tinyLogo: {
-      width: 100,
-      height: 50,
+   logo: {
+      resizeMode: 'contain',
    },
 })

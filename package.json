@@ -21,6 +21,7 @@
     "react-native-charts-wrapper": "^0.5.7",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
+    "react-native-status-bar-height": "^2.6.0",
     "react-native-vector-icons": "^9.0.0",
     "react-redux": "^7.2.6",
     "reduce-reducers": "^1.0.4"
