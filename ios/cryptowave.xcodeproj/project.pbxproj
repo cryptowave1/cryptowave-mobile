@@ -37,6 +37,19 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = cryptowave/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = cryptowave/main.m; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-cryptowave-cryptowaveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptowave-cryptowaveTests.release.xcconfig"; path = "Target Support Files/Pods-cryptowave-cryptowaveTests/Pods-cryptowave-cryptowaveTests.release.xcconfig"; sourceTree = "<group>"; };
+		36BF03AB274939AB008DFFA9 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		36BF03AC274939AB008DFFA9 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		36BF03AD274939AB008DFFA9 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		36BF03AE274939AB008DFFA9 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		36BF03B0274939AB008DFFA9 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		36BF03B1274939AB008DFFA9 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		36BF03B2274939AB008DFFA9 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		36BF03B3274939AB008DFFA9 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		36BF03B6274939AB008DFFA9 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		36BF03B7274939AB008DFFA9 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		36BF03B8274939AB008DFFA9 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		36BF03B9274939AB008DFFA9 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		36BF03BA274939AB008DFFA9 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-cryptowave.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cryptowave.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-cryptowave-cryptowaveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptowave-cryptowaveTests.debug.xcconfig"; path = "Target Support Files/Pods-cryptowave-cryptowaveTests/Pods-cryptowave-cryptowaveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = cryptowave/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,6 +99,7 @@
 		13B07FAE1A68108700A75B9A /* cryptowave */ = {
 			isa = PBXGroup;
 			children = (
+				36BF03AA274939AB008DFFA9 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -106,6 +120,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		36BF03AA274939AB008DFFA9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				36BF03AB274939AB008DFFA9 /* Fontisto.ttf */,
+				36BF03AC274939AB008DFFA9 /* Octicons.ttf */,
+				36BF03AD274939AB008DFFA9 /* Feather.ttf */,
+				36BF03AE274939AB008DFFA9 /* Entypo.ttf */,
+				36BF03B0274939AB008DFFA9 /* MaterialCommunityIcons.ttf */,
+				36BF03B1274939AB008DFFA9 /* AntDesign.ttf */,
+				36BF03B2274939AB008DFFA9 /* Foundation.ttf */,
+				36BF03B3274939AB008DFFA9 /* Ionicons.ttf */,
+				36BF03B6274939AB008DFFA9 /* FontAwesome.ttf */,
+				36BF03B7274939AB008DFFA9 /* Zocial.ttf */,
+				36BF03B8274939AB008DFFA9 /* EvilIcons.ttf */,
+				36BF03B9274939AB008DFFA9 /* SimpleLineIcons.ttf */,
+				36BF03BA274939AB008DFFA9 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +157,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E233CBF5F47BEE60B243DCF8 /* Pods */,
+				A9A5B4A312AD488784B87C3E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -137,6 +173,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A9A5B4A312AD488784B87C3E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +188,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-cryptowave-cryptowaveTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-cryptowave-cryptowaveTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

@@ -8,7 +8,7 @@ export default {
       spinnerColor: 'blue',
 
       elevatedView: {
-         shadowColorIOS: '#000',
+         shadowColorIOS: '#777',
          defaultBackgroundColor: mainBackgroundColor,
       },
    },

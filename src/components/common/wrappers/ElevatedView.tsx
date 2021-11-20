@@ -18,7 +18,7 @@ const ElevatedView: React.FC<Props & Record<string, any>> =
       const additionalStyle: ViewStyle = Platform.OS === 'android'
          ? {elevation}
          : {
-            shadowColor: '#000',
+            shadowColor: theme.common.elevatedView.shadowColorIOS,
             shadowOpacity: 0.2 * elevation + 0.2,
             shadowRadius: 1 * elevation,
             shadowOffset: {

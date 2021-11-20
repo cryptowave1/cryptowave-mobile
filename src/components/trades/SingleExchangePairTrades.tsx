@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
-import text, { locale } from '../../text'
+import text, { getIntlLocale } from '../../text'
 import commonConstants from '../../style/commonConstants'
 import getArrayLastItem from '../../utils/functions/getArrayLastItem'
 import ElevatedView from '../common/wrappers/ElevatedView'
@@ -27,7 +27,8 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          if (!lastTrade) {
             return spinner
          }
-         const lastTradePriceString: string = new Intl.NumberFormat(locale).format(lastTrade.getPrice())
+         const lastTradePriceString: string = new Intl.NumberFormat(getIntlLocale())
+            .format(lastTrade.getPrice())
          return <Text>{lastTradePriceString}</Text>
       }
 

@@ -8,6 +8,8 @@ import commonConstants from '../../../style/commonConstants';
 import SingleExchangePairTrades from '../../../components/trades/SingleExchangePairTrades';
 import text from '../../../text'
 
+import Icon from 'react-native-vector-icons/dist/FontAwesome'
+
 interface Props {
    assetPair: AssetPair
 }
@@ -36,6 +38,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
    return <View style={style.wrapper}>
       <TouchableOpacity>
          <Text>{text.common_price}</Text>
+         <Icon name="rocket" size={30} color="#900" />
       </TouchableOpacity>
       {
          assetPairTrades
