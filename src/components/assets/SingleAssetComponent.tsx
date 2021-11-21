@@ -1,8 +1,8 @@
 import Asset from '../../models/assets/Asset'
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { theme } from '../../style/theme'
-import commonConstants from '../../style/commonConstants'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { borderColorN1, horizontalLayout, roundedBorderS } from '../../style/globalStyle';
+import formatPrice from '../../utils/functions/formatPrice';
 
 interface Props {
    asset: Asset
@@ -22,8 +22,10 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
             uri: props.asset.getImageUrl(),
          }}
          style={style.image}/>
-      <Text>{props.asset.getName()}</Text>
-      <Text>{props.asset.getMarketData().getMarketCap()}</Text>
+      <View>
+         <Text>{props.asset.getName()}</Text>
+         <Text>{formatPrice(props.asset.getMarketData().getMarketCap())}</Text>
+      </View>
    </TouchableOpacity>
 }
 
@@ -31,16 +33,16 @@ export default SingleAssetComponent
 
 const style = StyleSheet.create({
    container: {
+      ...horizontalLayout,
       height: 50,
       flex: 1,
-      flexDirection: 'row'
    },
    selectedStyle: {
-      borderWidth: 1,
-      borderColor: theme.asserts.selectedAssetBorderColor,
+      ...roundedBorderS,
+      ...borderColorN1,
    },
    image: {
-      width: commonConstants.asset.homeScreen.imageSize,
-      height: commonConstants.asset.homeScreen.imageSize,
+      width: 50,
+      height: 50,
    },
 })

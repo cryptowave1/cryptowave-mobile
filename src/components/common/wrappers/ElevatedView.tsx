@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Platform, ViewStyle } from 'react-native'
-import commonConstants from '../../../style/commonConstants'
 import { theme } from '../../../style/theme'
+import globalConstants from '../../../style/globalConstants';
 
 interface Props {
    elevation?: number
@@ -11,14 +11,14 @@ interface Props {
 
 const ElevatedView: React.FC<Props & Record<string, any>> =
    ({
-       elevation = commonConstants.common.elevatedView.defaultElevation,
+       elevation = globalConstants.elevation.m,
        style,
        ...otherProps
     }) => {
       const additionalStyle: ViewStyle = Platform.OS === 'android'
          ? {elevation}
          : {
-            shadowColor: theme.common.elevatedView.shadowColorIOS,
+            shadowColor: '#000',
             shadowOpacity: 0.2 * elevation + 0.2,
             shadowRadius: 1 * elevation,
             shadowOffset: {
@@ -26,9 +26,9 @@ const ElevatedView: React.FC<Props & Record<string, any>> =
                height: 0,
             },
          }
-      additionalStyle.backgroundColor = theme.common.elevatedView.defaultBackgroundColor
+      additionalStyle.backgroundColor = '#fff'
 
-      return <View style={[style, additionalStyle]} {...otherProps}>
+      return <View style={[additionalStyle, style]} {...otherProps}>
          {otherProps.children}
       </View>
    }

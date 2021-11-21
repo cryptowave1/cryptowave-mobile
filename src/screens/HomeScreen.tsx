@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
-import { background1 } from '../style/globalStyle'
+import React, { useCallback, useState } from 'react'
+import { StyleSheet, View } from 'react-native'
 import AssetPairSelectorComponent from '../features/assets/AssetPairSelectorComponent'
 import { AssetPair } from '../models/assets/AssetPair'
-import { useDispatch } from 'react-redux'
 import ExchangesRecentTradesList from '../features/exchanges/trades/ExchangeRecentTradesList'
 import TopBarHome from '../features/layout/TopBarHome'
-import commonConstants from '../style/commonConstants';
+import commonConstants from '../style/globalConstants';
 
 interface Props {
 
@@ -15,14 +13,14 @@ interface Props {
 const HomeScreen: React.FC<Props> = (props: Props) => {
    const [assetPair, setAssetPair] = useState<AssetPair | undefined>(undefined)
 
+   const onAssetPairChange = useCallback((assetPair) => setAssetPair(assetPair), [assetPair])
+
    return (
       <View style={[style.wrapper]}>
          <TopBarHome/>
          <AssetPairSelectorComponent
             style={style.assetPairSelector}
-            onSelectedAssetPair={(assetPair: AssetPair) => {
-               setAssetPair(assetPair)
-            }}
+            onSelectedAssetPair={onAssetPairChange}
          />
          {assetPair && <ExchangesRecentTradesList assetPair={assetPair}/>}
       </View>
@@ -38,6 +36,6 @@ const style = StyleSheet.create({
       alignItems: 'center'
    },
    assetPairSelector: {
-      marginTop: commonConstants.layout.distance.medium
+      marginTop: commonConstants.layout.distance.m
    }
 })

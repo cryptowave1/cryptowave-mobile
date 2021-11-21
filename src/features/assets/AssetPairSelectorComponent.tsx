@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 import Asset from '../../models/assets/Asset'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,35 +28,37 @@ const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
    }, [])
 
    useEffect(() => {
+      if (baseSelectedAsset && quoteSelectedAsset) {
+         return
+      }
       setBaseSelectedAsset(Asset.findAsset(assets, INITIAL_BASE_SELECTED_ASSET_SYMBOL))
       setQuoteSelectedAsset(Asset.findAsset(assets, INITIAL_QUOTE_SELECTED_ASSET_SYMBOL))
-   }, [assets])
+   }, [assets, baseSelectedAsset, quoteSelectedAsset])
 
    useEffect(() => {
       if (!baseSelectedAsset || !quoteSelectedAsset) {
          return
       }
-      const assetPair: AssetPair = new AssetPair(baseSelectedAsset!, quoteSelectedAsset!)
+      const assetPair: AssetPair = new AssetPair(baseSelectedAsset, quoteSelectedAsset)
       props.onSelectedAssetPair(assetPair)
    }, [baseSelectedAsset, quoteSelectedAsset])
+
+   const onBaseChange = useCallback((base) => setBaseSelectedAsset(base), [baseSelectedAsset])
+   const onQuoteChange = useCallback((quote) => setQuoteSelectedAsset(quote), [quoteSelectedAsset])
 
    return <View style={[style.assetsListsWrapper, props.style]}>
       <View style={style.singleAssetListWrapper}>
          <AssetSelectorComponent
             initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
             selectedAsset={baseSelectedAsset}
-            onSelectedAssetChange={(asset: Asset) => {
-               setBaseSelectedAsset(asset)
-            }}
+            onSelectedAssetChange={onBaseChange}
          />
       </View>
       <View style={style.singleAssetListWrapper}>
          <AssetSelectorComponent
             initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
             selectedAsset={quoteSelectedAsset}
-            onSelectedAssetChange={(asset: Asset) => {
-               setQuoteSelectedAsset(asset)
-            }}
+            onSelectedAssetChange={onQuoteChange}
          />
       </View>
    </View>

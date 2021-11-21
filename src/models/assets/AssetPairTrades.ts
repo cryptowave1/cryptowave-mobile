@@ -2,6 +2,7 @@ import { immerable } from 'immer'
 import { AssetPair } from './AssetPair'
 import Trade from '../market/Trade'
 import getArrayLastItem from '../../utils/functions/getArrayLastItem';
+import { SortValue } from '../common/SortValue';
 
 export default class AssetPairTrades {
    [immerable] = true
@@ -38,5 +39,26 @@ export default class AssetPairTrades {
 
    getLastPrice(): number | undefined {
       return getArrayLastItem(this.getTrades())?.getPrice()
+   }
+
+   public static sortAssetPairTrades(assets: (AssetPairTrades | undefined)[], sortValue: SortValue):
+      (AssetPairTrades | undefined)[] {
+      return assets
+         .filter(trades => !!trades)
+         .sort((left: (AssetPairTrades | undefined), right: (AssetPairTrades | undefined)) => {
+            if (!left?.getLastPrice() && !right?.getLastPrice()) {
+               return 0
+            }
+            if (!left?.getLastPrice()) {
+               return -1
+            }
+            if (!right?.getLastPrice()) {
+               return 1
+            }
+            if (sortValue === 'asc') {
+               return left.getLastPrice()! - right.getLastPrice()!
+            }
+            return right.getLastPrice()! - left.getLastPrice()!
+         })
    }
 }

@@ -1,29 +1,29 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import Logo from '../../components/common/Logo'
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import commonConstants from '../../style/commonConstants';
-import { background1 } from '../../style/globalStyle';
+import commonConstants from '../../style/globalConstants';
+import ElevatedView from '../../components/common/wrappers/ElevatedView';
+import { bgN1 } from '../../style/globalStyle';
 
 interface Props {
-
 }
 
-const CenteredSpinner: React.FC<Props> = (props: Props) => {
-   return <View style={style.wrapper}>
+const TopBarHome: React.FC<Props> = (props: Props) => {
+   return <ElevatedView style={style.wrapper}>
       <Logo style={style.logo}/>
-   </View>
+   </ElevatedView>
 }
 
-export default CenteredSpinner
+export default TopBarHome
 
 const style = StyleSheet.create({
    wrapper: {
-      ...background1,
-      paddingTop: getStatusBarHeight() + 10,
-      paddingBottom: commonConstants.layout.distance.small,
-      borderBottomLeftRadius: commonConstants.sizes.roundedBorders.topBarHome,
-      borderBottomRightRadius: commonConstants.sizes.roundedBorders.topBarHome
+      ...bgN1,
+      paddingTop: getStatusBarHeight() + commonConstants.layout.distance.s,
+      paddingBottom: commonConstants.layout.distance.m,
+      borderBottomLeftRadius: 30,
+      borderBottomRightRadius: 30,
    },
    container: {
       flex: 1,

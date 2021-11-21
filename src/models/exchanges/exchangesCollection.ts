@@ -1,4 +1,4 @@
-import text from '../../text'
+import text from '../../strings'
 import Exchange from './Exchange'
 import HttpRequestStrategy from '../http/fetch/HttpFetchStrategy'
 import SymbolPair from '../assets/SymbolPair'
