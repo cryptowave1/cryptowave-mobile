@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, Platform, ViewStyle } from 'react-native'
-import { theme } from '../../../style/theme'
 import globalConstants from '../../../style/globalConstants'
 
 interface Props {
    elevation?: number
    style?: ViewStyle | ViewStyle[]
-   children: JSX.Element
+   children: JSX.Element | JSX.Element[]
 }
 
 const ElevatedView: React.FC<Props & Record<string, any>> =

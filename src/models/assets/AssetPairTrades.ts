@@ -7,6 +7,8 @@ import { SortValue } from '../common/SortValue'
 export default class AssetPairTrades {
    [immerable] = true
 
+   private static readonly TRADES_MAX_COUNT: number = 10000;
+
    private readonly assetPair: AssetPair
    private supported?: boolean
    private readonly trades: Trade[]
@@ -35,30 +37,39 @@ export default class AssetPairTrades {
 
    addTrades(trades: Trade[]) {
       this.trades.push(...trades)
+      if (trades.length > AssetPairTrades.TRADES_MAX_COUNT) {
+         this.trades.splice(0, trades.length - AssetPairTrades.TRADES_MAX_COUNT)
+      }
    }
 
    getLastPrice(): number | undefined {
       return getArrayLastItem(this.getTrades())?.getPrice()
    }
 
-   public static sortAssetPairTrades(assets: (AssetPairTrades | undefined)[], sortValue: SortValue):
-      (AssetPairTrades | undefined)[] {
-      return assets
-         .filter(trades => !!trades)
-         .sort((left: (AssetPairTrades | undefined), right: (AssetPairTrades | undefined)) => {
-            if (!left?.getLastPrice() && !right?.getLastPrice()) {
-               return 0
-            }
-            if (!left?.getLastPrice()) {
-               return -1
-            }
-            if (!right?.getLastPrice()) {
-               return 1
-            }
-            if (sortValue === 'asc') {
-               return left.getLastPrice()! - right.getLastPrice()!
-            }
-            return right.getLastPrice()! - left.getLastPrice()!
-         })
+   public static getComparatorValue(left: (AssetPairTrades | undefined), right: (AssetPairTrades | undefined),
+                                    sortValue: SortValue): number {
+      if (!left?.getLastPrice() && !right?.getLastPrice()) {
+         return 0
+      }
+      if (sortValue === 'asc') {
+         if (!left?.getLastPrice()) {
+            return -1
+         }
+         if (!right?.getLastPrice()) {
+            return 1
+         }
+      } else {
+         if (!left?.getLastPrice()) {
+            return 1
+         }
+         if (!right?.getLastPrice()) {
+            return -1
+         }
+      }
+
+      if (sortValue === 'asc') {
+         return left.getLastPrice()! - right.getLastPrice()!
+      }
+      return right.getLastPrice()! - left.getLastPrice()!
    }
 }

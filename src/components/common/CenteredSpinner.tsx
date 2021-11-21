@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 import Spinner from './Spinner'
-import { flex } from '../../style/globalStyle';
+import { flex } from '../../style/globalStyle'
 
 interface Props {
    size?: 'large' | 'small'

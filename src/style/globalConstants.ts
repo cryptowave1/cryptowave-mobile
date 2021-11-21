@@ -1,4 +1,4 @@
-const s = 10
+const s = 6
 
 export default {
    layout: {
@@ -7,7 +7,7 @@ export default {
          s: s,
          m: s * 2,
          l: s * 3,
-         xl: s * 3.5,
+         xl: s * 4,
       },
    },
 
@@ -25,16 +25,22 @@ export default {
 
    border: {
       roundness: {
-         s: 10,
-         m: 20,
-         l: 30,
+         s: s,
+         m: s * 1.5,
+         l: s * 2,
       },
 
       width: {
-         xs: 0.5,
-         s: 1,
-         m: 2,
+         s: 0.5,
+         m: 1,
          l: 3,
+      },
+   },
+
+   icons: {
+      size: {
+         s: s * 3,
+         m: s * 4,
       },
    },
 }

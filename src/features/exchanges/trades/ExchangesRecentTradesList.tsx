@@ -1,20 +1,31 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { fetchRecentTradesThunk } from '../exchangesSlice'
 import { AssetPair } from '../../../models/assets/AssetPair'
 import { RootState } from '../../../app/store'
 import SingleExchangePairTrades from '../../../components/trades/SingleExchangePairTrades'
 import text from '../../../strings'
 // @ts-ignore
-import AntDesignIcon from 'react-native-vector-icons/dist/AntDesign'
-import AssetPairTrades from '../../../models/assets/AssetPairTrades'
-import { flex, horizontalLayout, paddingM1 } from '../../../style/globalStyle'
+import IoniconsIcon from 'react-native-vector-icons/dist/Ionicons'
+import {
+   borderColorN1,
+   borderSizeS,
+   centerAligned,
+   flex,
+   horizontalLayout,
+   middleAligned,
+   paddingL,
+   paddingS, textN1
+} from '../../../style/globalStyle'
 import { theme } from '../../../style/theme'
-import CenteredSpinner from '../../../components/common/CenteredSpinner'
 import globalConstants from '../../../style/globalConstants'
+import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
+import AssetPairTrades from '../../../models/assets/AssetPairTrades';
+
 
 interface Props {
+   style?: ViewStyle
    assetPair: AssetPair
 }
 
@@ -25,12 +36,18 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
 
    const [sortValue, setSortValue] = useState<SortValue>('asc')
 
-   const assetPairTrades: (AssetPairTrades | undefined)[] = useSelector((state: RootState) =>
-      Object.values(state.exchanges.exchangeIdToExchangeTrades)
-         .map(obj => obj.getAssetPairTrades(props.assetPair.toTicker())))
+   const exchangeTrades: ExchangeTrades[] = useSelector((state: RootState) =>
+      Object.values(state.exchanges.exchangeIdToExchangeTrades))
 
-   const displayedAssetPairTrades = useMemo(
-      () => AssetPairTrades.sortAssetPairTrades(assetPairTrades, sortValue), [assetPairTrades, sortValue])
+   const assetPairTicker = props.assetPair.toTicker()
+
+   const displayedExchangeTrades: ExchangeTrades[] = useMemo(
+      () => exchangeTrades
+         .sort((left, right) => AssetPairTrades.getComparatorValue(
+            left.getAssetPairTrades(assetPairTicker),
+            right.getAssetPairTrades(assetPairTicker),
+            sortValue))
+      , [exchangeTrades, sortValue])
 
 
    useEffect(() => {
@@ -41,40 +58,39 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
          dispatch(fetchRecentTradesThunk(props.assetPair))
       }
       cb()
-      const interval = setInterval(cb, 100000)
+      const interval = setInterval(cb, 3000)
       return () => clearInterval(interval)
    }, [props.assetPair])
 
 
    const getChild = () => {
-      if (!displayedAssetPairTrades.length) {
-         return <CenteredSpinner/>
-      }
       return <>
          <TouchableOpacity
             onPress={() => {
                setSortValue(sortValue === 'asc' ? 'desc' : 'asc')
             }}
-            style={[horizontalLayout, styles.sortButton]}>
-            <Text>{text.common_price}</Text>
-            <AntDesignIcon name={sortValue === 'asc' ? 'caretup' : 'caretdown'}
-                           size={30}
+            style={styles.sortButton}>
+            <Text style={styles.sortButtonText}>{text.common_price}</Text>
+            <IoniconsIcon name={sortValue === 'asc' ? 'caret-up-outline' : 'caret-down-outline'}
+                           size={globalConstants.icons.size.m}
                            color={theme.normal.n2}/>
          </TouchableOpacity>
          <View style={styles.exchangesTradesList}>
             {
-               displayedAssetPairTrades
-                  .map((assetPairTrade, index) => <SingleExchangePairTrades
+               displayedExchangeTrades
+                  .map((exchangeTrades, index) => <SingleExchangePairTrades
                      key={index}
-                     loading={!assetPairTrade || assetPairTrade.getSupported() === undefined}
-                     assetPairTrades={assetPairTrade}
+                     exchange={exchangeTrades.getExchange()}
+                     loading={!exchangeTrades.getAssetPairTrades(assetPairTicker) ||
+                     exchangeTrades.getAssetPairTrades(assetPairTicker)!.getSupported() === undefined}
+                     assetPairTrades={exchangeTrades.getAssetPairTrades(assetPairTicker)}
                   />)
             }
          </View>
       </>
    }
 
-   return <View style={styles.wrapper}>
+   return <View style={[styles.wrapper, props.style]}>
       {getChild()}
    </View>
 }
@@ -85,12 +101,21 @@ const styles = StyleSheet.create({
       ...flex,
    },
    sortButton: {
+      ...horizontalLayout,
+      ...centerAligned,
+      ...middleAligned,
+      ...paddingS,
       alignSelf: 'center',
-      backgroundColor: theme.opposing.o2,
       width: 'auto',
+   },
+   sortButtonText: {
+      ...textN1,
    },
    exchangesTradesList: {
       ...flex,
+      ...paddingL,
+      paddingTop: 0,
       marginTop: globalConstants.layout.distance.m,
+      // backgroundColor: 'red',
    },
 })

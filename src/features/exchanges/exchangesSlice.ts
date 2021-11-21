@@ -59,7 +59,7 @@ export const exchangesSlice = createSlice({
    },
 })
 
-export const fetchRecentTradesThunk = (assetPair: AssetPair, limit: number = 1): AppThunk =>
+export const fetchRecentTradesThunk = (assetPair: AssetPair, limit?: number): AppThunk =>
    async (dispatch: AppDispatch, getState: () => RootState) => {
       const exchanges: Exchange[] = Object.values(getState().exchanges.exchangeIdToExchangeTrades)
          .map(obj => obj.getExchange())
@@ -73,7 +73,7 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit: number = 1):
          }
          if (assetPairTrades?.getSupported() !== false) {
             exchange.getFetchPairRecentTradesStrategy().execute({
-               limit: 1,
+               limit: limit ? limit : undefined,
                symbolPair: assetPair.toSymbolPair(),
             })
                .then((trades: Trade[]) => {
@@ -84,6 +84,7 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit: number = 1):
                   }))
                })
                .catch((err) => {
+                  console.log(err)
                   dispatch(exchangesSlice.actions.fetchRecentTradesFailed({
                      exchangeId: exchange.getId(),
                      assetPair: assetPair,

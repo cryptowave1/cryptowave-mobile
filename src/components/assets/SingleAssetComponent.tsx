@@ -4,9 +4,10 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import {
    borderColorN1, centerAligned, flex,
    horizontalLayout,
-   marginListItemS, textN1,
+   marginListItemS, paddingM, textN1,
 } from '../../style/globalStyle'
 import formatPrice from '../../utils/functions/formatPrice'
+import globalConstants from '../../style/globalConstants';
 
 interface Props {
    asset: Asset
@@ -27,7 +28,7 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
          }}
          style={styles.image}/>
       <View>
-         <Text style={styles.name}>{props.asset.getSymbol()}</Text>
+         <Text style={styles.name}>{props.asset.getSymbol().toUpperCase()}</Text>
          <Text style={styles.price}>${formatPrice(props.asset.getMarketData().getPriceUsd())}</Text>
       </View>
    </TouchableOpacity>
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
       ...marginListItemS,
       ...centerAligned,
       ...flex,
+      ...paddingM,
       height: 50,
    },
    selectedStyle: {
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
    image: {
       width: 30,
       height: 30,
+      marginRight: globalConstants.layout.distance.m,
    },
    name: {
       ...textN1,

@@ -22,7 +22,7 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
             style={styles.assetPairSelector}
             onSelectedAssetPair={onAssetPairChange}
          />
-         {assetPair && <ExchangesRecentTradesList assetPair={assetPair}/>}
+         {assetPair && <ExchangesRecentTradesList style={styles.tradesList} assetPair={assetPair}/>}
       </View>
    )
 }
@@ -38,5 +38,8 @@ const styles = StyleSheet.create({
    },
    assetPairSelector: {
       marginTop: commonConstants.layout.distance.m,
+   },
+   tradesList: {
+      marginTop: commonConstants.layout.distance.xl,
    },
 })

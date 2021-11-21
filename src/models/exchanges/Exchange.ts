@@ -2,9 +2,9 @@ import { immerable } from 'immer'
 import HttpFetchStrategy from '../http/fetch/HttpFetchStrategy'
 import SymbolPair from '../assets/SymbolPair'
 
-interface FetchRecentTradesArguments {
+export interface FetchRecentTradesArguments {
    symbolPair: SymbolPair
-   limit: number
+   limit?: number
 }
 
 export default class Exchange {

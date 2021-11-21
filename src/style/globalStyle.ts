@@ -32,14 +32,25 @@ export const bgO2: ViewStyle = {
 /**
  * Layout
  */
-export const marginListItemS: ViewStyle = {
-   margin: globalConstants.layout.distance.s,
+export const marginListItem: ViewStyle = {
    marginTop: 0,
+   marginLeft: 0,
+   marginRight: 0,
+}
+
+export const marginListItemS: ViewStyle = {
+   ...marginListItem,
+   margin: globalConstants.layout.distance.s,
 }
 
 export const marginListItemM: ViewStyle = {
+   ...marginListItem,
    margin: globalConstants.layout.distance.m,
-   marginTop: 0,
+}
+
+export const marginListItemL: ViewStyle = {
+   ...marginListItem,
+   margin: globalConstants.layout.distance.l,
 }
 
 export const horizontalLayout: ViewStyle = {
@@ -50,6 +61,11 @@ export const centerAligned: ViewStyle = {
    alignItems: 'center',
 }
 
+export const middleAligned: ViewStyle = {
+   justifyContent: 'center',
+}
+
+
 
 /**
  * Containers
@@ -58,12 +74,20 @@ export const flex: ViewStyle = {
    flex: 1,
 }
 
-export const marginM1: ViewStyle = {
+export const marginM: ViewStyle = {
    margin: globalConstants.layout.distance.m,
 }
 
-export const paddingM1: ViewStyle = {
+export const paddingS: ViewStyle = {
+   padding: globalConstants.layout.distance.s,
+}
+
+export const paddingM: ViewStyle = {
    padding: globalConstants.layout.distance.m,
+}
+
+export const paddingL: ViewStyle = {
+   padding: globalConstants.layout.distance.l,
 }
 
 export const roundedCornerS: ViewStyle = {
@@ -72,10 +96,6 @@ export const roundedCornerS: ViewStyle = {
 
 export const roundedCornerM: ViewStyle = {
    borderRadius: globalConstants.border.roundness.m,
-}
-
-export const borderSizeXS: ViewStyle = {
-   borderWidth: globalConstants.border.width.xs,
 }
 
 export const borderSizeS: ViewStyle = {
