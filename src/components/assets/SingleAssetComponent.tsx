@@ -1,7 +1,7 @@
 import Asset from '../../models/assets/Asset'
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { borderColorN1, horizontalLayout, roundedBorderS } from '../../style/globalStyle';
+import { borderColorN1, horizontalLayout, roundedCornerS } from '../../style/globalStyle';
 import formatPrice from '../../utils/functions/formatPrice';
 
 interface Props {
@@ -16,12 +16,12 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
       onPress={() => {
          props.onPressed(props.asset)
       }}
-      style={[props.isSelected ? style.selectedStyle : null, style.container]}>
+      style={[props.isSelected ? styles.selectedStyle : null, styles.container]}>
       <Image
          source={{
             uri: props.asset.getImageUrl(),
          }}
-         style={style.image}/>
+         style={styles.image}/>
       <View>
          <Text>{props.asset.getName()}</Text>
          <Text>{formatPrice(props.asset.getMarketData().getMarketCap())}</Text>
@@ -31,14 +31,14 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
 
 export default SingleAssetComponent
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
    container: {
       ...horizontalLayout,
       height: 50,
       flex: 1,
    },
    selectedStyle: {
-      ...roundedBorderS,
+      ...roundedCornerS,
       ...borderColorN1,
    },
    image: {

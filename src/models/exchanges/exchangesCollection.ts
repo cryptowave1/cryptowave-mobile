@@ -14,8 +14,8 @@ interface BinanceTradeResponse {
 const binance: Exchange = new Exchange(
    'binance',
    text.exchange_name_binance,
-   new HttpRequestStrategy<Trade[], {symbolPair: SymbolPair, limit: number}, BinanceTradeResponse[]>(
-      (params: {symbolPair: SymbolPair, limit: number}) => {
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceTradeResponse[]>(
+      (params: { symbolPair: SymbolPair, limit: number }) => {
          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
          return {
             method: 'GET' as const,
@@ -30,7 +30,6 @@ const binance: Exchange = new Exchange(
          return response.map((obj: BinanceTradeResponse) => new Trade(obj.price, obj.qty, obj.time))
       },
       (err: any) => {
-         console.log(err)
          if (err.code === -1121) {
             return new PairNotSupportedError()
          }
@@ -42,8 +41,8 @@ const binance: Exchange = new Exchange(
 const binance2: Exchange = new Exchange(
    'binance2',
    text.exchange_name_binance,
-   new HttpRequestStrategy<Trade[], {symbolPair: SymbolPair, limit: number}, BinanceTradeResponse[]>(
-      (params: {symbolPair: SymbolPair, limit: number}) => {
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceTradeResponse[]>(
+      (params: { symbolPair: SymbolPair, limit: number }) => {
          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
          return {
             method: 'GET' as const,
@@ -69,8 +68,8 @@ const binance2: Exchange = new Exchange(
 const binance3: Exchange = new Exchange(
    'binance3',
    text.exchange_name_binance,
-   new HttpRequestStrategy<Trade[], {symbolPair: SymbolPair, limit: number}, BinanceTradeResponse[]>(
-      (params: {symbolPair: SymbolPair, limit: number}) => {
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceTradeResponse[]>(
+      (params: { symbolPair: SymbolPair, limit: number }) => {
          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
          return {
             method: 'GET' as const,
@@ -92,7 +91,6 @@ const binance3: Exchange = new Exchange(
       },
    )
 )
-
 
 
 export default [binance, binance2, binance3]

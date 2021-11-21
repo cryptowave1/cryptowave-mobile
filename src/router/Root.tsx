@@ -7,8 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
  */
 import * as routes from './routes'
 import { RootStackParamList } from './routes'
-import HomeScreen from '../screens/HomeScreen'
-import DetailsScreen from '../screens/DetailsScreen'
+import HomeScreen from '../features/screens/HomeScreen'
+import DetailsScreen from '../features/screens/DetailsScreen'
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>()

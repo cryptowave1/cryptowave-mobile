@@ -12,6 +12,7 @@ import AssetPairTrades from '../../../models/assets/AssetPairTrades';
 import { horizontalLayout, paddingM1 } from '../../../style/globalStyle';
 import { theme } from '../../../style/theme';
 import CenteredSpinner from '../../../components/common/CenteredSpinner';
+import globalConstants from '../../../style/globalConstants';
 
 interface Props {
    assetPair: AssetPair
@@ -33,8 +34,6 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
 
 
    useEffect(() => {
-      // console.log('ASET PAIIIIR')
-      // console.log(props.assetPair)
       if (!props.assetPair) {
          return
       }
@@ -48,19 +47,21 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
 
 
    const getChild = () => {
-      let child
-      if (displayedAssetPairTrades.length) {
-         child = <View>
-            <TouchableOpacity
-               onPress={() => {
-                  setSortValue(sortValue === 'asc' ? 'desc' : 'asc')
-               }}
-               style={[horizontalLayout, style.sortButton]}>
-               <Text>{text.common_price}</Text>
-               <AntDesignIcon name={sortValue === 'asc' ? 'caretup' : 'caretdown'}
-                              size={30}
-                              color={theme.normal.n2}/>
-            </TouchableOpacity>
+      if (!displayedAssetPairTrades.length) {
+         return <CenteredSpinner/>
+      }
+      return <>
+         <TouchableOpacity
+            onPress={() => {
+               setSortValue(sortValue === 'asc' ? 'desc' : 'asc')
+            }}
+            style={[horizontalLayout, styles.sortButton]}>
+            <Text>{text.common_price}</Text>
+            <AntDesignIcon name={sortValue === 'asc' ? 'caretup' : 'caretdown'}
+                           size={30}
+                           color={theme.normal.n2}/>
+         </TouchableOpacity>
+         <View style={styles.exchangesTradesList}>
             {
                displayedAssetPairTrades
                   .map((assetPairTrade, index) => <SingleExchangePairTrades
@@ -70,47 +71,26 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
                   />)
             }
          </View>
-      } else {
-         child = <CenteredSpinner/>
-      }
-      return child;
+      </>
    }
 
-
-   return <View style={style.wrapper}>
+   return <View style={styles.wrapper}>
       {getChild()}
-      <View>
-         <TouchableOpacity
-            onPress={() => {
-               setSortValue(sortValue === 'asc' ? 'desc' : 'asc')
-            }}
-            style={[horizontalLayout, style.sortButton]}>
-            <Text>{text.common_price}</Text>
-            <AntDesignIcon name={sortValue === 'asc' ? 'caretup' : 'caretdown'}
-                           size={30}
-                           color={theme.normal.n2}/>
-         </TouchableOpacity>
-         {
-            displayedAssetPairTrades
-               .map((assetPairTrade, index) => <SingleExchangePairTrades
-                  key={index}
-                  loading={!assetPairTrade || assetPairTrade.getSupported() === undefined}
-                  assetPairTrades={assetPairTrade}
-               />)
-         }
-      </View>
    </View>
 }
 export default ExchangesRecentTradesList
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
    wrapper: {
-      ...paddingM1,
       flex: 1,
    },
    sortButton: {
       alignSelf: 'center',
       backgroundColor: theme.opposing.o2,
       width: 'auto',
+   },
+   exchangesTradesList: {
+      flex: 1,
+      marginTop: globalConstants.layout.distance.m,
    },
 })

@@ -59,49 +59,37 @@ export const exchangesSlice = createSlice({
    },
 })
 
-interface ExchangeIdWithTradesPromise extends ExchangeId {
-   tradesPromise: Promise<Trade[]>
-}
-
 export const fetchRecentTradesThunk = (assetPair: AssetPair, limit: number = 1): AppThunk =>
    async (dispatch: AppDispatch, getState: () => RootState) => {
       const exchanges: Exchange[] = Object.values(getState().exchanges.exchangeIdToExchangeTrades)
          .map(obj => obj.getExchange());
 
-      const promisesWithExchangeIds: ExchangeIdWithTradesPromise[] = []
       exchanges.forEach(exchange => {
-         let assetPairTrades: AssetPairTrades | undefined = getState().exchanges.exchangeIdToExchangeTrades[exchange.getId()]
-            .getAssetPairTrades(assetPair.toTicker());
+         let assetPairTrades: AssetPairTrades | undefined =
+            getState().exchanges.exchangeIdToExchangeTrades[exchange.getId()].getAssetPairTrades(assetPair.toTicker())
          if (!assetPairTrades) {
             dispatch(exchangesSlice.actions.initAssetPairTrades(
                {exchangeId: exchange.getId(), assetPair: assetPair}));
          }
          if (assetPairTrades?.getSupported() !== false) {
-            const tradesPromise: Promise<Trade[]> = exchange.getFetchPairRecentTradesStrategy().execute({
+            exchange.getFetchPairRecentTradesStrategy().execute({
                limit: 1,
                symbolPair: assetPair.toSymbolPair(),
             })
-            promisesWithExchangeIds.push({exchangeId: exchange.getId(), tradesPromise: tradesPromise})
-         }
-      })
-
-      const exchangesTrades = await Promise.allSettled(promisesWithExchangeIds.map(obj => obj.tradesPromise));
-
-      promisesWithExchangeIds.forEach(({tradesPromise, exchangeId}, index) => {
-         if (exchangesTrades[index] && exchangesTrades[index].status === 'fulfilled') {
-            dispatch(exchangesSlice.actions.fetchRecentTradesSuccess({
-               exchangeId: exchangeId,
-               assetPair: assetPair,
-               // @ts-ignore allSettled returns PromiseSettledResult, which is not exported at all
-               trades: exchangesTrades[index].value,
-            }))
-         } else {
-            dispatch(exchangesSlice.actions.fetchRecentTradesFailed({
-               exchangeId: exchangeId,
-               assetPair: assetPair,
-               // @ts-ignore allSettled returns PromiseSettledResult, which is not exported at all
-               error: exchangesTrades[index].reason,
-            }))
+               .then((trades: Trade[]) => {
+                  dispatch(exchangesSlice.actions.fetchRecentTradesSuccess({
+                     exchangeId: exchange.getId(),
+                     assetPair: assetPair,
+                     trades: trades
+                  }))
+               })
+               .catch((err) => {
+                  dispatch(exchangesSlice.actions.fetchRecentTradesFailed({
+                     exchangeId: exchange.getId(),
+                     assetPair: assetPair,
+                     error: err
+                  }))
+               })
          }
       })
    }

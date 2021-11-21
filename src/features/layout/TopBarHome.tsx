@@ -10,14 +10,14 @@ interface Props {
 }
 
 const TopBarHome: React.FC<Props> = (props: Props) => {
-   return <ElevatedView style={style.wrapper}>
-      <Logo style={style.logo}/>
+   return <ElevatedView style={styles.wrapper}>
+      <Logo style={styles.logo}/>
    </ElevatedView>
 }
 
 export default TopBarHome
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
    wrapper: {
       ...bgN1,
       paddingTop: getStatusBarHeight() + commonConstants.layout.distance.s,

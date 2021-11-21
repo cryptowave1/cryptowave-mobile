@@ -25,9 +25,9 @@ export default {
 
    border: {
       roundness: {
-         s: 5,
-         m: 10,
-         l: 20,
+         s: 10,
+         m: 20,
+         l: 30,
       },
 
       width: {

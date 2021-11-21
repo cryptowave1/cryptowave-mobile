@@ -12,9 +12,9 @@ interface Props {
 const AssetSearchInput: React.FC<Props> = (props: Props) => {
    const [value, onChangeText] = useState<string>(props.value)
 
-   return <ElevatedView elevation={commonConstants.elevation.s} style={style.wrapper}>
+   return <ElevatedView elevation={commonConstants.elevation.s} style={styles.wrapper}>
       <TextInput
-         style={style.input}
+         style={styles.input}
          value={value}
          onChangeText={text => {
             props.onValueChange(text)
@@ -24,7 +24,7 @@ const AssetSearchInput: React.FC<Props> = (props: Props) => {
 }
 export default AssetSearchInput
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
    wrapper: {
       ...bgO1,
       ...marginM1,

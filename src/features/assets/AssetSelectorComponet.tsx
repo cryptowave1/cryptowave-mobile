@@ -47,7 +47,7 @@ const AssetSelectorComponent: React.FC<Props> = (props: Props) => {
    }
    const displayedAssets = useMemo(() => filterAssets(assets, text), [assets, text, inputChanged])
 
-   return <View style={style.wrapper}>
+   return <View style={styles.wrapper}>
       <AssetSearchInput
          value={text}
          onValueChange={(value: string) => {
@@ -55,7 +55,7 @@ const AssetSelectorComponent: React.FC<Props> = (props: Props) => {
             setText(value)
          }}
       />
-      <View style={style.wrapper}>
+      <View style={styles.wrapper}>
          <AssetsList
             assets={displayedAssets}
             selectedAsset={props.selectedAsset}
@@ -68,7 +68,7 @@ const AssetSelectorComponent: React.FC<Props> = (props: Props) => {
 
 export default AssetSelectorComponent
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
    wrapper: {
       flex: 1,
    },

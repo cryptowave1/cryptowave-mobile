@@ -21,6 +21,10 @@ export const bgO1: ViewStyle = {
    backgroundColor: theme.opposing.o1,
 }
 
+export const bgO2: ViewStyle = {
+   backgroundColor: theme.opposing.o2,
+}
+
 
 /**
  * Layout
@@ -45,9 +49,14 @@ export const paddingM1: ViewStyle = {
    padding: globalConstants.layout.distance.m,
 }
 
-export const roundedBorderS: ViewStyle = {
+export const roundedCornerS: ViewStyle = {
    borderRadius: globalConstants.border.roundness.s,
 }
+
+export const roundedCornerM: ViewStyle = {
+   borderRadius: globalConstants.border.roundness.m,
+}
+
 
 export const borderColorN1: ViewStyle = {
    borderColor: theme.normal.n1,

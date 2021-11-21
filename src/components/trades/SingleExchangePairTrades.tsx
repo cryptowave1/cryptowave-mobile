@@ -1,13 +1,14 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
 import text from '../../strings'
 import getArrayLastItem from '../../utils/functions/getArrayLastItem'
 import ElevatedView from '../common/wrappers/ElevatedView'
 import Spinner from '../common/Spinner';
-import { marginListItemM } from '../../style/globalStyle';
+import { bgO2, marginListItemM, roundedCornerM, roundedCornerS } from '../../style/globalStyle';
 import formatPrice from '../../utils/functions/formatPrice';
+import globalConstants from '../../style/globalConstants';
 
 interface Props {
    loading: boolean
@@ -27,13 +28,15 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          if (!lastTrade) {
             return spinner
          }
-         return <Text>{formatPrice(lastTrade.getPrice())}</Text>
+         return <View style={styles.price}>
+            <Text>{formatPrice(lastTrade.getPrice())}</Text>
+         </View>
       }
 
       return <Text>{text.exchange_trades_pair_not_supported}</Text>
    }
 
-   return <ElevatedView style={[styles.wrapper, marginListItemM]}>
+   return <ElevatedView elevation={globalConstants.elevation.s} style={styles.wrapper}>
       {getChild()}
    </ElevatedView>
 }
@@ -41,7 +44,12 @@ export default SingleExchangePairTrades
 
 const styles = StyleSheet.create({
    wrapper: {
+      ...marginListItemM,
+      ...bgO2,
+      ...roundedCornerM,
       flex: 1,
-      height: 400, // todo animated
    },
+   price: {
+      flex: 1,
+   }
 })

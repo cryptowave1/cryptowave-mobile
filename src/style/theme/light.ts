@@ -6,7 +6,7 @@ export default {
    },
    opposing: {
       o1: '#fff',
-      o2: '#E6E8E6',
+      o2: '#eaeff5',
       o3: '#EAF4F4'
    },
    complementary: {

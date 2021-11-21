@@ -46,15 +46,15 @@ const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
    const onBaseChange = useCallback((base) => setBaseSelectedAsset(base), [baseSelectedAsset])
    const onQuoteChange = useCallback((quote) => setQuoteSelectedAsset(quote), [quoteSelectedAsset])
 
-   return <View style={[style.assetsListsWrapper, props.style]}>
-      <View style={style.singleAssetListWrapper}>
+   return <View style={[styles.assetsListsWrapper, props.style]}>
+      <View style={styles.singleAssetListWrapper}>
          <AssetSelectorComponent
             initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
             selectedAsset={baseSelectedAsset}
             onSelectedAssetChange={onBaseChange}
          />
       </View>
-      <View style={style.singleAssetListWrapper}>
+      <View style={styles.singleAssetListWrapper}>
          <AssetSelectorComponent
             initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
             selectedAsset={quoteSelectedAsset}
@@ -65,7 +65,7 @@ const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
 }
 export default AssetPairSelectorComponent
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
    assetsListsWrapper: {
       flex: 1,
       flexDirection: 'row',
