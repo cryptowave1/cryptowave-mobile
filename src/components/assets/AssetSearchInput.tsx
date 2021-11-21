@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import commonConstants from '../../style/globalConstants';
-import ElevatedView from '../common/wrappers/ElevatedView';
-import { bgO1, marginM1, textN1 } from '../../style/globalStyle';
+import commonConstants from '../../style/globalConstants'
+import ElevatedView from '../common/wrappers/ElevatedView'
+import { bgO1, flex, marginM1, textN1 } from '../../style/globalStyle'
 
 interface Props {
    value: string
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
    },
    input: {
       ...textN1,
-      flex: 1,
+      ...flex,
       textAlign: 'center',
    },
-});
+})

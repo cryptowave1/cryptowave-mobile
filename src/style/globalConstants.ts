@@ -1,4 +1,4 @@
-const s = 10;
+const s = 10
 
 export default {
    layout: {
@@ -12,8 +12,8 @@ export default {
    },
 
    fonts: {
-      regular: 'Montserrat-Regular',
-      light: 'Montserrat-Light',
+      regular: 'Montserrat-SemiBold',
+      light: 'Montserrat-Regular',
       bold: 'Montserrat-Bold',
    },
 
@@ -31,9 +31,10 @@ export default {
       },
 
       width: {
+         xs: 0.5,
          s: 1,
-         m: 3,
-         l: 5,
+         m: 2,
+         l: 3,
       },
    },
 }

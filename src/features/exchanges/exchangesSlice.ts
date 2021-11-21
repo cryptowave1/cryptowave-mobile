@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AssetPair } from '../../models/assets/AssetPair'
 import { AppDispatch, AppThunk, RootState } from '../../app/store'
 import Trade from '../../models/market/Trade'
-import exchangesCollection from '../../models/exchanges/exchangesCollection';
-import Exchange from '../../models/exchanges/Exchange';
-import ExchangeTrades from '../../models/exchanges/ExchangeTrades';
-import { PairNotSupportedError } from '../../errors/errors';
-import AssetPairTrades from '../../models/assets/AssetPairTrades';
+import exchangesCollection from '../../models/exchanges/exchangesCollection'
+import Exchange from '../../models/exchanges/Exchange'
+import ExchangeTrades from '../../models/exchanges/ExchangeTrades'
+import { PairNotSupportedError } from '../../errors/errors'
+import AssetPairTrades from '../../models/assets/AssetPairTrades'
 
 export interface ExchangesState {
    exchangeIdToExchangeTrades: { [key: string]: ExchangeTrades }
@@ -62,14 +62,14 @@ export const exchangesSlice = createSlice({
 export const fetchRecentTradesThunk = (assetPair: AssetPair, limit: number = 1): AppThunk =>
    async (dispatch: AppDispatch, getState: () => RootState) => {
       const exchanges: Exchange[] = Object.values(getState().exchanges.exchangeIdToExchangeTrades)
-         .map(obj => obj.getExchange());
+         .map(obj => obj.getExchange())
 
       exchanges.forEach(exchange => {
          let assetPairTrades: AssetPairTrades | undefined =
             getState().exchanges.exchangeIdToExchangeTrades[exchange.getId()].getAssetPairTrades(assetPair.toTicker())
          if (!assetPairTrades) {
             dispatch(exchangesSlice.actions.initAssetPairTrades(
-               {exchangeId: exchange.getId(), assetPair: assetPair}));
+               {exchangeId: exchange.getId(), assetPair: assetPair}))
          }
          if (assetPairTrades?.getSupported() !== false) {
             exchange.getFetchPairRecentTradesStrategy().execute({

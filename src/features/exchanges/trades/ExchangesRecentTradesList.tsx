@@ -4,15 +4,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { fetchRecentTradesThunk } from '../exchangesSlice'
 import { AssetPair } from '../../../models/assets/AssetPair'
 import { RootState } from '../../../app/store'
-import SingleExchangePairTrades from '../../../components/trades/SingleExchangePairTrades';
+import SingleExchangePairTrades from '../../../components/trades/SingleExchangePairTrades'
 import text from '../../../strings'
 // @ts-ignore
 import AntDesignIcon from 'react-native-vector-icons/dist/AntDesign'
-import AssetPairTrades from '../../../models/assets/AssetPairTrades';
-import { horizontalLayout, paddingM1 } from '../../../style/globalStyle';
-import { theme } from '../../../style/theme';
-import CenteredSpinner from '../../../components/common/CenteredSpinner';
-import globalConstants from '../../../style/globalConstants';
+import AssetPairTrades from '../../../models/assets/AssetPairTrades'
+import { flex, horizontalLayout, paddingM1 } from '../../../style/globalStyle'
+import { theme } from '../../../style/theme'
+import CenteredSpinner from '../../../components/common/CenteredSpinner'
+import globalConstants from '../../../style/globalConstants'
 
 interface Props {
    assetPair: AssetPair
@@ -40,7 +40,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
       const cb = () => {
          dispatch(fetchRecentTradesThunk(props.assetPair))
       }
-      cb();
+      cb()
       const interval = setInterval(cb, 100000)
       return () => clearInterval(interval)
    }, [props.assetPair])
@@ -82,7 +82,7 @@ export default ExchangesRecentTradesList
 
 const styles = StyleSheet.create({
    wrapper: {
-      flex: 1,
+      ...flex,
    },
    sortButton: {
       alignSelf: 'center',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       width: 'auto',
    },
    exchangesTradesList: {
-      flex: 1,
+      ...flex,
       marginTop: globalConstants.layout.distance.m,
    },
 })

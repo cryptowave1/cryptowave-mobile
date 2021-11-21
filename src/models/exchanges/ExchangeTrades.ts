@@ -16,7 +16,7 @@ export default class ExchangeTrades {
    }
 
    getExchange(): Exchange {
-      return this.exchange;
+      return this.exchange
    }
 
    initAssetPairTrades(assetPair: AssetPair, trades?: Trade[], supported?: boolean) {

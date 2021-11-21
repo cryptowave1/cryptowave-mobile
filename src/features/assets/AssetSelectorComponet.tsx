@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Asset from '../../models/assets/Asset'
-import { RootStackProps } from '../../router/routes'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToFetchAdditionalAssetsQueue, fetchAdditionalAssets, fetchAssetsThunk } from './assetsSlice'
 import useThrottledEffect from '../../utils/effects/useThrottledEffect'
 import AssetSearchInput from '../../components/assets/AssetSearchInput'
 import AssetsList from '../../components/assets/AssetsList'
 import { RootState } from '../../app/store'
+import globalConstants from '../../style/globalConstants'
+import { flex } from '../../style/globalStyle'
 
 const INITIAL_ASSETS_FETCH_COUNT = 20
 const ADDITIONAL_ASSETS_FETCH_COUNT = 5
@@ -61,7 +62,9 @@ const AssetSelectorComponent: React.FC<Props> = (props: Props) => {
             selectedAsset={props.selectedAsset}
             onAssetSelected={(asset: Asset) => {
                props.onSelectedAssetChange(asset)
-            }}/>
+            }}
+            style={styles.assetsList}
+         />
       </View>
    </View>
 }
@@ -70,6 +73,9 @@ export default AssetSelectorComponent
 
 const styles = StyleSheet.create({
    wrapper: {
-      flex: 1,
+      ...flex,
    },
+   assetsList: {
+      marginTop: globalConstants.layout.distance.s
+   }
 })

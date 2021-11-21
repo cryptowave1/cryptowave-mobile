@@ -4,14 +4,14 @@ import { Platform, NativeModules } from 'react-native'
 import en_us from './en-US.json'
 
 export const getIntlLocale = () => {
-   let locale: string;
+   let locale: string
    if (Platform.OS === 'ios') {
       locale = NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0]
    } else {
       locale = NativeModules.I18nManager.localeIdentifier
    }
 
-   locale = locale.replace('_', '-');
+   locale = locale.replace('_', '-')
    const split = locale.split('-')
    return split[0]
 }

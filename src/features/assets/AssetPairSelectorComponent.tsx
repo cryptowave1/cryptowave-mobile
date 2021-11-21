@@ -6,6 +6,7 @@ import { RootState } from '../../app/store'
 import { AssetPair } from '../../models/assets/AssetPair'
 import AssetSelectorComponent from './AssetSelectorComponet'
 import { fetchAssetsThunk } from './assetsSlice'
+import { flex } from '../../style/globalStyle'
 
 const INITIAL_BASE_SELECTED_ASSET_SYMBOL = 'BTC'
 const INITIAL_QUOTE_SELECTED_ASSET_SYMBOL = 'USDT'
@@ -67,11 +68,11 @@ export default AssetPairSelectorComponent
 
 const styles = StyleSheet.create({
    assetsListsWrapper: {
-      flex: 1,
+      ...flex,
       flexDirection: 'row',
    },
    singleAssetListWrapper: {
-      flex: 1,
+      ...flex,
       width: '49%',
    },
    logo: {

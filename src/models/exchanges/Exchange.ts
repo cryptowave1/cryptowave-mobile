@@ -1,6 +1,6 @@
 import { immerable } from 'immer'
 import HttpFetchStrategy from '../http/fetch/HttpFetchStrategy'
-import SymbolPair from '../assets/SymbolPair';
+import SymbolPair from '../assets/SymbolPair'
 
 interface FetchRecentTradesArguments {
    symbolPair: SymbolPair
@@ -30,7 +30,7 @@ export default class Exchange {
    }
 
    getFetchPairRecentTradesStrategy(): HttpFetchStrategy<any, FetchRecentTradesArguments, any> {
-      return this.fetchPairRecentTradesStrategy;
+      return this.fetchPairRecentTradesStrategy
    }
 
    toString(): string {

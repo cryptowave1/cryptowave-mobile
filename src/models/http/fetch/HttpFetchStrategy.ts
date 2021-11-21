@@ -32,7 +32,7 @@ export default class HttpRequestStrategy<RequiredType, ExecuteArgumentsType, Res
          const result: ResponseType = await response.json()
 
          if (!response.ok) {
-            throw result;
+            throw result
          }
 
          if (this.transformResponseFunction) {

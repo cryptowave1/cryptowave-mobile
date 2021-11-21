@@ -5,10 +5,10 @@ import AssetPairTrades from '../../models/assets/AssetPairTrades'
 import text from '../../strings'
 import getArrayLastItem from '../../utils/functions/getArrayLastItem'
 import ElevatedView from '../common/wrappers/ElevatedView'
-import Spinner from '../common/Spinner';
-import { bgO2, marginListItemM, roundedCornerM, roundedCornerS } from '../../style/globalStyle';
-import formatPrice from '../../utils/functions/formatPrice';
-import globalConstants from '../../style/globalConstants';
+import Spinner from '../common/Spinner'
+import { bgO2, flex, marginListItemM, roundedCornerM, roundedCornerS } from '../../style/globalStyle'
+import formatPrice from '../../utils/functions/formatPrice'
+import globalConstants from '../../style/globalConstants'
 
 interface Props {
    loading: boolean
@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
       ...marginListItemM,
       ...bgO2,
       ...roundedCornerM,
-      flex: 1,
+      ...flex,
    },
    price: {
-      flex: 1,
+      ...flex,
    }
 })

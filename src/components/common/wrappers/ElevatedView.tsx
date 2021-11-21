@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Platform, ViewStyle } from 'react-native'
 import { theme } from '../../../style/theme'
-import globalConstants from '../../../style/globalConstants';
+import globalConstants from '../../../style/globalConstants'
 
 interface Props {
    elevation?: number

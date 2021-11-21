@@ -16,4 +16,8 @@ export class MarketData {
    getMarketCap() {
       return this.marketCap
    }
+
+   getPriceUsd(): number {
+      return this.priceUsd
+   }
 }

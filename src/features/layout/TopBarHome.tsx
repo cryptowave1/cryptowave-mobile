@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import Logo from '../../components/common/Logo'
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import commonConstants from '../../style/globalConstants';
-import ElevatedView from '../../components/common/wrappers/ElevatedView';
-import { bgN1 } from '../../style/globalStyle';
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import commonConstants from '../../style/globalConstants'
+import ElevatedView from '../../components/common/wrappers/ElevatedView'
+import { bgN1, flex } from '../../style/globalStyle'
 
 interface Props {
 }
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
       borderBottomRightRadius: 30,
    },
    container: {
-      flex: 1,
+      ...flex,
       justifyContent: 'center'
    },
    logo: {

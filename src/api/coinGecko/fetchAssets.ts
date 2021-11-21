@@ -12,7 +12,7 @@ interface ResponseObject {
    name: string
    id: string
    image: string
-   currentPrice: number
+   current_price: number
    market_cap: number
    price_change_24h: number
 }
@@ -41,6 +41,6 @@ export default async function fetchAssets(resultsPerPage: number, pageNumber: nu
          obj.symbol,
          obj.id,
          obj.image,
-         new MarketData(obj.currentPrice, obj.market_cap, obj.price_change_24h),
-      ))
+         new MarketData(Number(obj.current_price), Number(obj.market_cap), Number(obj.price_change_24h)))
+      )
 }

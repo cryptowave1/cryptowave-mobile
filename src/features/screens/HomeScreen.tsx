@@ -4,8 +4,8 @@ import AssetPairSelectorComponent from '../assets/AssetPairSelectorComponent'
 import { AssetPair } from '../../models/assets/AssetPair'
 import ExchangesRecentTradesList from '../exchanges/trades/ExchangesRecentTradesList'
 import TopBarHome from '../layout/TopBarHome'
-import commonConstants from '../../style/globalConstants';
-import { bgO1 } from '../../style/globalStyle';
+import commonConstants from '../../style/globalConstants'
+import { bgO1, flex } from '../../style/globalStyle'
 
 interface Props {
 }
@@ -31,7 +31,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
    wrapper: {
       ...bgO1,
-      flex: 1,
+      ...flex,
    },
    logo: {
       alignItems: 'center'

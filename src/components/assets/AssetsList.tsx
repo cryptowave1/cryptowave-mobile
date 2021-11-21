@@ -1,16 +1,17 @@
 import React from 'react'
 import Asset from '../../models/assets/Asset'
-import { ScrollView, } from 'react-native'
+import { ScrollView, ViewStyle, } from 'react-native'
 import SingleAssetComponent from './SingleAssetComponent'
 
 interface Props {
+   style?: ViewStyle,
    assets: Asset[]
    selectedAsset?: Asset
    onAssetSelected: (asset: Asset) => void
 }
 
 const AssetsList: React.FC<Props> = (props: Props) => {
-   return <ScrollView>
+   return <ScrollView style={props.style}>
       {
          props.assets.map(asset => <SingleAssetComponent
             asset={asset}

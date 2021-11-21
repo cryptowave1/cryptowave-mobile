@@ -1,8 +1,12 @@
 import Asset from '../../models/assets/Asset'
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { borderColorN1, horizontalLayout, roundedCornerS } from '../../style/globalStyle';
-import formatPrice from '../../utils/functions/formatPrice';
+import {
+   borderColorN1, centerAligned, flex,
+   horizontalLayout,
+   marginListItemS, textN1,
+} from '../../style/globalStyle'
+import formatPrice from '../../utils/functions/formatPrice'
 
 interface Props {
    asset: Asset
@@ -23,8 +27,8 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
          }}
          style={styles.image}/>
       <View>
-         <Text>{props.asset.getName()}</Text>
-         <Text>{formatPrice(props.asset.getMarketData().getMarketCap())}</Text>
+         <Text style={styles.name}>{props.asset.getSymbol()}</Text>
+         <Text style={styles.price}>${formatPrice(props.asset.getMarketData().getPriceUsd())}</Text>
       </View>
    </TouchableOpacity>
 }
@@ -34,15 +38,22 @@ export default SingleAssetComponent
 const styles = StyleSheet.create({
    container: {
       ...horizontalLayout,
+      ...marginListItemS,
+      ...centerAligned,
+      ...flex,
       height: 50,
-      flex: 1,
    },
    selectedStyle: {
-      ...roundedCornerS,
       ...borderColorN1,
    },
    image: {
-      width: 50,
-      height: 50,
+      width: 30,
+      height: 30,
+   },
+   name: {
+      ...textN1,
+   },
+   price: {
+      ...textN1,
    },
 })

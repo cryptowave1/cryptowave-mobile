@@ -62,6 +62,6 @@ export default class Asset {
    }
 
    isEqual(secodAsset: Asset): boolean {
-      return this.toString() === secodAsset.toString();
+      return this.toString() === secodAsset.toString()
    }
 }

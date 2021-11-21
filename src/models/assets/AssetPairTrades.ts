@@ -1,8 +1,8 @@
 import { immerable } from 'immer'
 import { AssetPair } from './AssetPair'
 import Trade from '../market/Trade'
-import getArrayLastItem from '../../utils/functions/getArrayLastItem';
-import { SortValue } from '../common/SortValue';
+import getArrayLastItem from '../../utils/functions/getArrayLastItem'
+import { SortValue } from '../common/SortValue'
 
 export default class AssetPairTrades {
    [immerable] = true
