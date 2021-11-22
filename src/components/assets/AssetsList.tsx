@@ -1,6 +1,6 @@
 import React from 'react'
 import Asset from '../../models/assets/Asset'
-import { ScrollView, ViewStyle, } from 'react-native'
+import { FlatList, ViewStyle, } from 'react-native'
 import SingleAssetComponent from './SingleAssetComponent'
 
 interface Props {
@@ -11,15 +11,13 @@ interface Props {
 }
 
 const AssetsList: React.FC<Props> = (props: Props) => {
-   return <ScrollView style={props.style}>
-      {
-         props.assets.map(asset => <SingleAssetComponent
-            asset={asset}
-            isSelected={props.selectedAsset?.getId() === asset.getId()}
-            onPressed={asset => props.onAssetSelected(asset)}
-            key={asset.getId()}/>)
-      }
-   </ScrollView>
+   return <FlatList
+      data={props.assets}
+      renderItem={({item}) => <SingleAssetComponent
+         asset={item}
+         isSelected={props.selectedAsset?.getId() === item.getId()}
+         onPressed={asset => props.onAssetSelected(asset)}
+         key={item.getId()}/>
+      }/>
 }
-
 export default AssetsList

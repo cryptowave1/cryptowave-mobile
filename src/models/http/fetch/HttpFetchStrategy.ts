@@ -22,9 +22,13 @@ export default class HttpRequestStrategy<RequiredType, ExecuteArgumentsType, Res
 
    public async execute(params: ExecuteArgumentsType): Promise<RequiredType | Response> {
       const requestParams: RequestParams = this.transformRequestFunction(params)
-      const endpointWithQuery: string = `${requestParams.endpoint}?${getQueryString(requestParams.query)}`
+      let endpoint = requestParams.endpoint
+      let queryString = getQueryString(requestParams.query)
+      if (queryString.length) {
+         endpoint += `?${getQueryString(requestParams.query)}`
+      }
       try {
-         const response: Response | Error = await fetch(endpointWithQuery, {
+         const response: Response | Error = await fetch(endpoint, {
             method: requestParams.method,
             body: requestParams.body,
          })

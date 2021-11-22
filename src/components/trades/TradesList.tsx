@@ -17,7 +17,8 @@ const TradesList: React.FC<Props> = (props: Props) => {
    return <ElevatedView outerViewStyle={[{...flex, ...paddingL}, props.style || {}]}>
       <FlatList
          data={[...props.assetPairTrades.getTrades()].reverse()}
-         renderItem={({item}) => <SingleTradeListItem key={item.getTimestamp()} trade={item}/>}/>
+         renderItem={({item}) => <SingleTradeListItem key={item.getTimestamp()} trade={item}/>}
+      />
    </ElevatedView>
 }
 export default TradesList

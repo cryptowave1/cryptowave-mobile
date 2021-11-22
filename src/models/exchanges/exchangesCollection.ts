@@ -60,7 +60,6 @@ const kraken: Exchange = new Exchange(
             endpoint: 'https://api.kraken.com/0/public/Trades',
             query: {
                pair: ticker,
-               since: 0,
             },
          }
       },
@@ -83,26 +82,47 @@ const kraken: Exchange = new Exchange(
    )
 )
 
-const binance3: Exchange = new Exchange(
-   'binance3',
-   strings.exchange_name_binance,
-   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceResponse[]>(
+interface HuobiResponse {
+   status: 'ok' | 'error'
+   data: Array<{
+      data: Array<{
+         direction: 'buy' | 'sell'
+         amount: number
+         price: number
+         ts: number
+      }>
+   }>
+}
+
+const huobi: Exchange = new Exchange(
+   'huobi',
+   strings.exchange_name_huobi,
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, HuobiResponse>(
       (params: { symbolPair: SymbolPair, limit: number }) => {
-         const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
+         const ticker: string = `${params.symbolPair.getBaseSymbol().toLowerCase()}${params.symbolPair.getQuoteSymbol().toLowerCase()}`
          return {
             method: 'GET' as const,
-            endpoint: 'https://api.binance.com/api/v3/trades',
+            endpoint: `https://api.huobi.pro/market/history/trade`,
             query: {
                symbol: ticker,
-               limit: params.limit,
+               size: params.limit,
             },
          }
       },
-      (response: BinanceResponse[]) => {
-         return response.map((obj: BinanceResponse) => new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
+      (response: HuobiResponse) => {
+         if (response.status === 'error') {
+            throw response
+         }
+         const trades: Trade[] = []
+         response.data.forEach((data) => {
+            data.data.forEach(obj => {
+               trades.push(new Trade(obj.direction === 'buy' ? 'b' : 's', obj.price, obj.amount, obj.ts))
+            })
+         })
+         return trades
       },
       (err: any) => {
-         if (err.code === -1121) {
+         if (err['err-msg'] === 'invalid symbol') {
             throw new PairNotSupportedError()
          }
          throw new NetworkRequestError()
@@ -110,32 +130,4 @@ const binance3: Exchange = new Exchange(
    )
 )
 
-const binance4: Exchange = new Exchange(
-   'binance4',
-   strings.exchange_name_binance,
-   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceResponse[]>(
-      (params: { symbolPair: SymbolPair, limit: number }) => {
-         const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
-         return {
-            method: 'GET' as const,
-            endpoint: 'https://api.binance.com/api/v3/trades',
-            query: {
-               symbol: ticker,
-               limit: params.limit,
-            },
-         }
-      },
-      (response: BinanceResponse[]) => {
-         return response.map((obj: BinanceResponse) => new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
-      },
-      (err: any) => {
-         if (err.code === -1121) {
-            throw new PairNotSupportedError()
-         }
-         throw new NetworkRequestError()
-      },
-   )
-)
-
-
-export default [binance, kraken, binance3, binance4]
+export default [binance, kraken, huobi]

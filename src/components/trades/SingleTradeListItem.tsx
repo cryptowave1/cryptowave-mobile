@@ -1,7 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, ViewStyle } from 'react-native'
 import Trade from '../../models/market/Trade'
-import { boldText, horizontalLayout, paddingS, text, textN1 } from '../../style/globalStyle'
+import {
+   boldText,
+   horizontalLayout,
+   middleAligned,
+   paddingS,
+   text,
+   textN1
+} from '../../style/globalStyle'
 import { theme } from '../../style/theme'
 import formatPrice from '../../utils/functions/formatPrice'
 import globalConstants from '../../style/globalConstants'
@@ -51,7 +58,9 @@ const styles = StyleSheet.create({
       marginRight: globalConstants.layout.distance.m,
    },
    qtyWrapper: {
+      ...middleAligned,
       position: 'absolute',
+      top: 4,
       right: globalConstants.layout.distance.m,
       width: 90
    }

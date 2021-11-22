@@ -42,19 +42,17 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
 
    const [lastTradePrice, setLastTradePRice] = useState<number>(0)
 
-   const tradesListStyle: ViewStyle = useAnimatedStyle(() => {
-      return {
-         height: interpolate(props.sharedExpandableViewHeight.value,
-            [0, RECENT_TRADES_CONTAINER_HEIGHT_MIN, RECENT_TRADES_CONTAINER_HEIGHT_MAX],
-            [0, 0, TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX]),
-         opacity: interpolate(props.sharedExpandableViewHeight.value,
-            [0,
-               RECENT_TRADES_CONTAINER_HEIGHT_MIN,
-               (RECENT_TRADES_CONTAINER_HEIGHT_MAX + RECENT_TRADES_CONTAINER_HEIGHT_MIN) / 2,
-               RECENT_TRADES_CONTAINER_HEIGHT_MAX],
-            [0, 0, 0.7, 1])
-      }
-   })
+   const tradesListStyle: ViewStyle = useAnimatedStyle(() => ({
+      height: interpolate(props.sharedExpandableViewHeight.value,
+         [0, RECENT_TRADES_CONTAINER_HEIGHT_MIN, RECENT_TRADES_CONTAINER_HEIGHT_MAX],
+         [0, 0, TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX]),
+      opacity: interpolate(props.sharedExpandableViewHeight.value,
+         [0,
+            RECENT_TRADES_CONTAINER_HEIGHT_MIN,
+            (RECENT_TRADES_CONTAINER_HEIGHT_MAX + RECENT_TRADES_CONTAINER_HEIGHT_MIN) / 2,
+            RECENT_TRADES_CONTAINER_HEIGHT_MAX],
+         [0, 0, 0.7, 1])
+   }))
 
    const isPriceUp: boolean = useMemo(() => {
       let result: boolean
@@ -152,7 +150,8 @@ const styles = StyleSheet.create({
       fontSize: 17,
    },
    notSupported: {
-      ...textN1,
+      ...textO1,
+      top: -globalConstants.layout.distance.m,
    },
    tradeDataWrapper: {
       ...flex,
