@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
-import text from '../../strings'
+import strings from '../../strings'
 import getArrayLastItem from '../../utils/functions/getArrayLastItem'
 import ElevatedView from '../common/wrappers/ElevatedView'
 import Spinner from '../common/Spinner'
@@ -73,7 +73,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          child = getPriceComponent(lastTrade.getPrice(), isPriceUp)
       }
    } else {
-      child = <Text style={styles.notSupported}>{text.exchange_trades_pair_not_supported}</Text>
+      child = <Text style={styles.notSupported}>{strings.exchange_trades_pair_not_supported}</Text>
    }
 
    return <TouchableOpacity

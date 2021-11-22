@@ -1,4 +1,4 @@
-import text from '../../strings'
+import strings from '../../strings'
 import Exchange, { FetchRecentTradesArguments } from './Exchange'
 import HttpRequestStrategy from '../http/fetch/HttpFetchStrategy'
 import SymbolPair from '../assets/SymbolPair'
@@ -14,7 +14,7 @@ interface BinanceResponse {
 
 const binance: Exchange = new Exchange(
    'binance',
-   text.exchange_name_binance,
+   strings.exchange_name_binance,
    new HttpRequestStrategy<Trade[], FetchRecentTradesArguments, BinanceResponse[]>(
       (params: { symbolPair: SymbolPair, limit?: number }) => {
          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
@@ -31,7 +31,7 @@ const binance: Exchange = new Exchange(
          return response
             .slice(-5)
             .map((obj: BinanceResponse) =>
-            new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
+               new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
       },
       (err: any) => {
          if (err.code === -1121) {
@@ -51,7 +51,7 @@ interface KrakenResponse {
 
 const kraken: Exchange = new Exchange(
    'kraken',
-   text.exchange_name_kraken,
+   strings.exchange_name_kraken,
    new HttpRequestStrategy<Trade[], FetchRecentTradesArguments, KrakenResponse>(
       (params: FetchRecentTradesArguments) => {
          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
@@ -72,7 +72,7 @@ const kraken: Exchange = new Exchange(
          return Object.values(response.result)[0]
             .slice(-5)
             .map((arr) =>
-            new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2])))
+               new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2])))
       },
       (err: any) => {
          if (err[0].includes('Unknown asset pair')) {
@@ -85,7 +85,7 @@ const kraken: Exchange = new Exchange(
 
 // const binance3: Exchange = new Exchange(
 //    'binance3',
-//    text.exchange_name_binance,
+//    strings.exchange_name_binance,
 //    new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceTradeResponse[]>(
 //       (params: { symbolPair: SymbolPair, limit: number }) => {
 //          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`

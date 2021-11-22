@@ -1,5 +1,6 @@
 {
-   "common_price": "PRICE",
+   "common_price": "Price",
+   "common_qty": "Qty",
    "exchange_name_binance": "Binance",
    "exchange_name_bitfinex": "Bitfinex",
    "exchange_name_huobi": "Huobi",

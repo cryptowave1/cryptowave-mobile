@@ -5,7 +5,7 @@ import { fetchRecentTradesThunk } from '../exchangesSlice'
 import { AssetPair } from '../../../models/assets/AssetPair'
 import { RootState } from '../../../app/store'
 import SingleExchangePairTrades from '../../../components/trades/SingleExchangePairTrades'
-import text from '../../../strings'
+import strings from '../../../strings'
 // @ts-ignore
 import IoniconsIcon from 'react-native-vector-icons/dist/Ionicons'
 import {
@@ -21,7 +21,6 @@ import { theme } from '../../../style/theme'
 import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
-
 
 interface Props {
    style?: ViewStyle
@@ -69,7 +68,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
                setSortValue(sortValue === 'asc' ? 'desc' : 'asc')
             }}
             style={styles.sortButton}>
-            <Text style={styles.sortButtonText}>{text.common_price}</Text>
+            <Text style={styles.sortButtonText}>{strings.common_price.toUpperCase()}</Text>
             <IoniconsIcon name={sortValue === 'asc' ? 'caret-up-outline' : 'caret-down-outline'}
                           size={globalConstants.icons.size.m}
                           color={theme.normal.n2}/>
