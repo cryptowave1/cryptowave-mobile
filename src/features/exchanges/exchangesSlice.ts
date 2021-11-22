@@ -84,7 +84,6 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit?: number): Ap
                   }))
                })
                .catch((err) => {
-                  console.log(err)
                   dispatch(exchangesSlice.actions.fetchRecentTradesFailed({
                      exchangeId: exchange.getId(),
                      assetPair: assetPair,

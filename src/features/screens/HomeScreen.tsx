@@ -1,15 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import AssetPairSelector from '../assets/AssetPairSelector'
 import { AssetPair } from '../../models/assets/AssetPair'
 import ExchangesRecentTradesList from '../exchanges/trades/ExchangesRecentTradesList'
 import TopBarHome from '../layout/TopBarHome'
 import commonConstants from '../../style/globalConstants'
-import { bgN1, bgO1, flex } from '../../style/globalStyle'
+import { bgN1, bgO1, flex, roundedCornerXXL } from '../../style/globalStyle'
 import Logo from '../../components/common/Logo'
 import ExpandableView from '../../components/common/wrappers/ExpandableView';
-import { Easing, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
 import ElevatedView from '../../components/common/wrappers/ElevatedView';
+import {
+   RECENT_TRADES_CONTAINER_HEIGHT_MAX,
+   RECENT_TRADES_CONTAINER_HEIGHT_MIN
+} from '../constants';
 
 interface Props {
 }
@@ -19,13 +23,13 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
 
    const onAssetPairChange = useCallback((assetPair: AssetPair) => setAssetPair(assetPair), [assetPair])
 
-   const initialHeight = useSharedValue(0)
+   const height = useSharedValue(0)
 
    useEffect(() => {
       if (!assetPair) {
          return
       }
-      initialHeight.value = withTiming(400, {
+      height.value = withTiming(RECENT_TRADES_CONTAINER_HEIGHT_MIN, {
          duration: 1000,
          easing: Easing.out(Easing.exp),
       })
@@ -40,11 +44,14 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
          onSelectedAssetPair={onAssetPairChange}
       />
       {assetPair && <ExpandableView
-            maxHeight={500}
-            minHeight={300}
-            initialHeight={initialHeight}>
-         <ElevatedView outerViewStyle={{...flex}} innerViewStyle={{...bgN1}}>
-            <ExchangesRecentTradesList style={styles.tradesList} assetPair={assetPair}/>
+            maxHeight={RECENT_TRADES_CONTAINER_HEIGHT_MAX}
+            minHeight={RECENT_TRADES_CONTAINER_HEIGHT_MIN}
+            sharedValue={height}>
+         <ElevatedView outerViewStyle={{...flex}} innerViewStyle={styles.tradesInnerStyle}>
+            <ExchangesRecentTradesList
+                  style={styles.tradesList}
+                  assetPair={assetPair}
+                  sharedExpandableViewHeight={height}/>
          </ElevatedView>
       </ExpandableView>}
    </View>
@@ -58,6 +65,10 @@ const styles = StyleSheet.create({
    },
    assetPairSelector: {
       marginTop: commonConstants.layout.distance.m,
+   },
+   tradesInnerStyle: {
+      ...bgN1,
+      ...roundedCornerXXL
    },
    tradesList: {
       marginTop: commonConstants.layout.distance.s

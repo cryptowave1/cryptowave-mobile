@@ -113,6 +113,10 @@ export const roundedCornerM: ViewStyle = {
    borderRadius: globalConstants.border.roundness.m,
 }
 
+export const roundedCornerXXL: ViewStyle = {
+   borderRadius: globalConstants.border.roundness.xxl,
+}
+
 export const borderSizeS: ViewStyle = {
    borderWidth: globalConstants.border.width.s,
 }

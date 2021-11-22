@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
 import strings from '../../strings'
@@ -11,7 +11,7 @@ import {
    centerAligned,
    flex, horizontalLayout, lightText,
    marginListItemL,
-   middleAligned,
+   middleAligned, roundedCornerM,
    textN1,
 } from '../../style/globalStyle'
 import formatPrice from '../../utils/functions/formatPrice'
@@ -22,17 +22,39 @@ import { HomeScreenProps } from '../../router/routes'
 import { theme } from '../../style/theme'
 // @ts-ignore
 import Ionicons from 'react-native-vector-icons/dist/Ionicons'
+import TradesListMiniHorizontal from './TradesListMiniHorizontal';
+import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
+import {
+   RECENT_TRADES_CONTAINER_HEIGHT_MAX,
+   RECENT_TRADES_CONTAINER_HEIGHT_MIN,
+   TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX
+} from '../../features/constants';
 
 interface Props {
    loading: boolean
    exchange: Exchange
    assetPairTrades: AssetPairTrades | undefined
+   sharedExpandableViewHeight: any
 }
 
 const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
    const navigation: HomeScreenProps['navigation'] = useNavigation()
 
    const [lastTradePrice, setLastTradePRice] = useState<number>(0)
+
+   const tradesListStyle: ViewStyle = useAnimatedStyle(() => {
+      return {
+         height: interpolate(props.sharedExpandableViewHeight.value,
+            [0, RECENT_TRADES_CONTAINER_HEIGHT_MIN, RECENT_TRADES_CONTAINER_HEIGHT_MAX],
+            [0, 0, TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX]),
+         opacity: interpolate(props.sharedExpandableViewHeight.value,
+            [0,
+               RECENT_TRADES_CONTAINER_HEIGHT_MIN,
+               (RECENT_TRADES_CONTAINER_HEIGHT_MAX + RECENT_TRADES_CONTAINER_HEIGHT_MIN) / 2,
+               RECENT_TRADES_CONTAINER_HEIGHT_MAX],
+            [0, 0, 0.7, 1])
+      }
+   })
 
    const isPriceUp: boolean = useMemo(() => {
       let result: boolean
@@ -42,7 +64,6 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          result = props.assetPairTrades!.getLastPrice()! > lastTradePrice
       }
       if (props.assetPairTrades?.getLastPrice()) {
-         console.log(props.assetPairTrades?.getLastPrice())
          setLastTradePRice(props.assetPairTrades?.getLastPrice()!)
       }
       return result
@@ -59,7 +80,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       </View>
    }
 
-   let canNavigate = false
+   let hasLastTrade = false
    let child
    const spinner = <Spinner/>
    if (props.loading || !props.assetPairTrades) {
@@ -69,17 +90,23 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       if (!lastTrade) {
          child = spinner
       } else {
-         canNavigate = true
-         child = getPriceComponent(lastTrade.getPrice(), isPriceUp)
+         hasLastTrade = true
+         child = <View style={styles.tradeDataWrapper}>
+            {getPriceComponent(lastTrade.getPrice(), isPriceUp)}
+            <Animated.View style={[tradesListStyle]}>
+               <TradesListMiniHorizontal trades={props.assetPairTrades.getLastNTrades(10)}/>
+            </Animated.View>
+         </View>
       }
    } else {
       child = <Text style={styles.notSupported}>{strings.exchange_trades_pair_not_supported}</Text>
    }
 
+
    return <TouchableOpacity
       style={{...flex}}
       onPress={() => {
-         if (!canNavigate) {
+         if (!hasLastTrade) {
             return
          }
          navigation.navigate('DetailsScreen', {
@@ -92,10 +119,8 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          outerViewStyle={{...flex, ...marginListItemL}}
          innerViewStyle={styles.innerWrapper}>
          <View style={styles.innerWrapper}>
-            <>
-               <Text style={styles.exchangeText}>{props.exchange.getName()}</Text>
-               {child}
-            </>
+            <Text style={styles.exchangeText}>{props.exchange.getName()}</Text>
+            {child}
          </View>
       </ElevatedView>
    </TouchableOpacity>
@@ -107,7 +132,8 @@ const styles = StyleSheet.create({
       ...centerAligned,
       ...middleAligned,
       ...bgO1,
-      ...flex
+      ...flex,
+      ...roundedCornerM
    },
    exchangeText: {
       ...textN1,
@@ -123,5 +149,10 @@ const styles = StyleSheet.create({
    },
    notSupported: {
       ...textN1,
-   }
+   },
+   tradeDataWrapper: {
+      ...flex,
+      ...centerAligned,
+      ...middleAligned,
+   },
 })

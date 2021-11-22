@@ -27,6 +27,7 @@ import ElevatedView from '../../../components/common/wrappers/ElevatedView';
 interface Props {
    style?: ViewStyle
    assetPair: AssetPair
+   sharedExpandableViewHeight: any
 }
 
 type SortValue = 'asc' | 'desc'
@@ -84,6 +85,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
                      loading={!exchangeTrades.getAssetPairTrades(assetPairTicker) ||
                      exchangeTrades.getAssetPairTrades(assetPairTicker)!.getSupported() === undefined}
                      assetPairTrades={exchangeTrades.getAssetPairTrades(assetPairTicker)}
+                     sharedExpandableViewHeight={props.sharedExpandableViewHeight}
                   />)
             }
          </View>

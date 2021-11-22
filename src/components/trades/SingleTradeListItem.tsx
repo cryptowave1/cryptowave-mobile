@@ -12,7 +12,6 @@ interface Props {
 }
 
 const SingleTradeListItem: React.FC<Props> = (props: Props) => {
-   console.log(props.trade.getType())
    const tradeWrapperStyle: ViewStyle = props.trade.getType() === 'b'
       ? {backgroundColor: theme.complementary.c1.first}
       : {backgroundColor: theme.complementary.c1.second}
@@ -54,7 +53,6 @@ const styles = StyleSheet.create({
    qtyWrapper: {
       position: 'absolute',
       right: globalConstants.layout.distance.m,
-      // backgroundColor: 'blue',
       width: 90
    }
 })

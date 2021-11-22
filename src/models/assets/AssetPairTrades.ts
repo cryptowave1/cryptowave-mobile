@@ -7,7 +7,7 @@ import { SortValue } from '../common/SortValue'
 export default class AssetPairTrades {
    [immerable] = true
 
-   private static readonly TRADES_MAX_COUNT: number = 200
+   private static readonly TRADES_MAX_COUNT: number = 100
 
    private readonly assetPair: AssetPair
    private supported?: boolean
@@ -37,13 +37,17 @@ export default class AssetPairTrades {
 
    addTrades(trades: Trade[]) {
       this.trades.push(...trades)
-      if (trades.length > AssetPairTrades.TRADES_MAX_COUNT) {
-         this.trades = trades.slice(trades.length - AssetPairTrades.TRADES_MAX_COUNT)
+      if (this.trades.length > AssetPairTrades.TRADES_MAX_COUNT) {
+         this.trades.splice(0, this.trades.length - AssetPairTrades.TRADES_MAX_COUNT)
       }
    }
 
    getLastPrice(): number | undefined {
       return getArrayLastItem(this.getTrades())?.getPrice()
+   }
+
+   getLastNTrades(count: number): Trade[] {
+      return this.trades.slice(-count)
    }
 
    public static getComparatorValue(left: (AssetPairTrades | undefined), right: (AssetPairTrades | undefined),
