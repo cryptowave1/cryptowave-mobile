@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, ViewStyle } from 'react-native'
-import Trade from '../../models/market/Trade';
-import { boldText, horizontalLayout, paddingS, text, textN1 } from '../../style/globalStyle';
-import { theme } from '../../style/theme';
-import formatPrice from '../../utils/functions/formatPrice';
-import globalConstants from '../../style/globalConstants';
-import strings from '../../strings';
+import Trade from '../../models/market/Trade'
+import { boldText, horizontalLayout, paddingS, text, textN1 } from '../../style/globalStyle'
+import { theme } from '../../style/theme'
+import formatPrice from '../../utils/functions/formatPrice'
+import globalConstants from '../../style/globalConstants'
+import strings from '../../strings'
 
 interface Props {
    trade: Trade

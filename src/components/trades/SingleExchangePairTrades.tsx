@@ -19,7 +19,7 @@ import globalConstants from '../../style/globalConstants'
 import Exchange from '../../models/exchanges/Exchange'
 import { useNavigation } from '@react-navigation/native'
 import { HomeScreenProps } from '../../router/routes'
-import { theme } from '../../style/theme';
+import { theme } from '../../style/theme'
 // @ts-ignore
 import Ionicons from 'react-native-vector-icons/dist/Ionicons'
 
@@ -35,7 +35,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
    const [lastTradePrice, setLastTradePRice] = useState<number>(0)
 
    const isPriceUp: boolean = useMemo(() => {
-      let result: boolean;
+      let result: boolean
       if (!props.assetPairTrades?.getLastPrice()) {
          result = false
       } else {

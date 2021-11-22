@@ -1,19 +1,19 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native'
+import { ScrollView, StyleSheet, View, ViewStyle } from 'react-native'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
 import ElevatedView from '../common/wrappers/ElevatedView'
 import {
    flex,
    paddingL, paddingS,
 } from '../../style/globalStyle'
-import SingleTradeListItem from './SingleTradeListItem';
+import SingleTradeListItem from './SingleTradeListItem'
 
 interface Props {
    assetPairTrades: AssetPairTrades
    style?: ViewStyle
 }
 
-const RecentTradesList: React.FC<Props> = (props: Props) => {
+const TradesList: React.FC<Props> = (props: Props) => {
    return <ElevatedView outerViewStyle={[{...flex, ...paddingL}, props.style || {}]}>
       <ScrollView>
          <View>
@@ -26,7 +26,7 @@ const RecentTradesList: React.FC<Props> = (props: Props) => {
       </ScrollView>
    </ElevatedView>
 }
-export default RecentTradesList
+export default TradesList
 
 const styles = StyleSheet.create({
    tradeWrapper: {

@@ -15,12 +15,14 @@ import {
    horizontalLayout,
    middleAligned,
    paddingL,
-   paddingS, textN1
+   paddingS, textN1, textO1
 } from '../../../style/globalStyle'
 import { theme } from '../../../style/theme'
 import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
+import ExpandableView from '../../../components/common/wrappers/ExpandableView';
+import ElevatedView from '../../../components/common/wrappers/ElevatedView';
 
 interface Props {
    style?: ViewStyle
@@ -71,7 +73,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
             <Text style={styles.sortButtonText}>{strings.common_price.toUpperCase()}</Text>
             <IoniconsIcon name={sortValue === 'asc' ? 'caret-up-outline' : 'caret-down-outline'}
                           size={globalConstants.icons.size.m}
-                          color={theme.normal.n2}/>
+                          color={theme.opposing.o1}/>
          </TouchableOpacity>
          <View style={styles.exchangesTradesList}>
             {
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
       width: 'auto',
    },
    sortButtonText: {
-      ...textN1,
+      ...textO1,
       ...boldText
    },
    exchangesTradesList: {

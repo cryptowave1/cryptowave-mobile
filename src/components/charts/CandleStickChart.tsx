@@ -10,10 +10,3 @@ const CandleStickChart: React.FC<Props> = (props: Props) => {
 }
 
 export default CandleStickChart
-
-const styles = StyleSheet.create({
-   tinyLogo: {
-      width: 100,
-      height: 50,
-   },
-})

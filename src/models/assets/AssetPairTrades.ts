@@ -7,7 +7,7 @@ import { SortValue } from '../common/SortValue'
 export default class AssetPairTrades {
    [immerable] = true
 
-   private static readonly TRADES_MAX_COUNT: number = 400
+   private static readonly TRADES_MAX_COUNT: number = 200
 
    private readonly assetPair: AssetPair
    private supported?: boolean

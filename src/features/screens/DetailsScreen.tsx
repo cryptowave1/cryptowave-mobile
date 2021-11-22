@@ -6,7 +6,7 @@ import { bgO1, centerAligned, flex, horizontalLayout, textO1 } from '../../style
 import IoniconsIcon from 'react-native-vector-icons/dist/Ionicons'
 import BackIcon from '../../components/common/BackIcon'
 import { DetailsScreenProps } from '../../router/routes'
-import RecentTradesList from '../../components/trades/RecentTradesList'
+import TradesList from '../../components/trades/TradesList'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 
@@ -29,7 +29,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({route, navigation}: Detail
             </Text>
          </View>
       </TopBarHome>
-      <RecentTradesList assetPairTrades={assetPairTradesFromStore!} style={{...flex}}/>
+      <TradesList assetPairTrades={assetPairTradesFromStore!} style={{...flex}}/>
    </View>
 }
 export default DetailsScreen

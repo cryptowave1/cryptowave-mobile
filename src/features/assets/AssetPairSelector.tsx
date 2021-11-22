@@ -7,6 +7,7 @@ import { AssetPair } from '../../models/assets/AssetPair'
 import AssetSelector from './AssetSelectorComponet'
 import { fetchAssetsThunk } from './assetsSlice'
 import { flex } from '../../style/globalStyle'
+import CenteredSpinner from '../../components/common/CenteredSpinner';
 
 const INITIAL_BASE_SELECTED_ASSET_SYMBOL = 'BTC'
 const INITIAL_QUOTE_SELECTED_ASSET_SYMBOL = 'USDT'
@@ -48,20 +49,26 @@ const AssetPairSelector: React.FC<Props> = (props: Props) => {
    const onQuoteChange = useCallback((quote) => setQuoteSelectedAsset(quote), [quoteSelectedAsset])
 
    return <View style={[styles.assetsListsWrapper, props.style]}>
-      <View style={styles.singleAssetListWrapper}>
-         <AssetSelector
-            initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
-            selectedAsset={baseSelectedAsset}
-            onSelectedAssetChange={onBaseChange}
-         />
-      </View>
-      <View style={styles.singleAssetListWrapper}>
-         <AssetSelector
-            initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
-            selectedAsset={quoteSelectedAsset}
-            onSelectedAssetChange={onQuoteChange}
-         />
-      </View>
+      {
+         !baseSelectedAsset || !quoteSelectedAsset
+            ? <CenteredSpinner/>
+            : <>
+               <View style={styles.singleAssetListWrapper}>
+                  <AssetSelector
+                     initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
+                     selectedAsset={baseSelectedAsset}
+                     onSelectedAssetChange={onBaseChange}
+                  />
+               </View>
+               <View style={styles.singleAssetListWrapper}>
+                  <AssetSelector
+                     initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
+                     selectedAsset={quoteSelectedAsset}
+                     onSelectedAssetChange={onQuoteChange}
+                  />
+               </View>
+            </>
+      }
    </View>
 }
 export default AssetPairSelector

@@ -10,8 +10,7 @@ interface Props {
    children: JSX.Element
 }
 
-
-const ElevatedView: React.FC<Props & Record<string, any>> =
+const ElevatedView: React.FC<Props> =
    ({
        elevation = globalConstants.elevation.m,
        outerViewStyle,
