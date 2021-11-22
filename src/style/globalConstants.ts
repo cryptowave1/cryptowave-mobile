@@ -41,6 +41,7 @@ export default {
       size: {
          s: s * 3,
          m: s * 4,
+         l: s * 5,
       },
    },
 }

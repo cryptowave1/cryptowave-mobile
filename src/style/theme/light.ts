@@ -11,8 +11,8 @@ export default {
    },
    complementary: {
       c1: {
-         first: '#FF4242',
-         second: '#99C24D',
+         first: '#99C24D',
+         second: '#FF4242',
       },
    },
 }

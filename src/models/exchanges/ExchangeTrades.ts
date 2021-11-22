@@ -4,7 +4,7 @@ import Exchange from './Exchange'
 import { AssetPair } from '../assets/AssetPair'
 import Trade from '../market/Trade'
 
-export default class ExchangeTrades {
+export default class TExchangeTrades {
    [immerable] = true
 
    private readonly exchange: Exchange

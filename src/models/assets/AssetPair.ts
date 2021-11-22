@@ -28,4 +28,8 @@ export class AssetPair {
    toTicker(): string {
       return `${this.getBaseAsset().getSymbol()}_${this.getQuoteAsset().getSymbol()}`
    }
+
+   toReadableTicker(): string {
+      return `${this.getBaseAsset().getSymbol().toUpperCase()} - ${this.getQuoteAsset().getSymbol().toUpperCase()}`
+   }
 }

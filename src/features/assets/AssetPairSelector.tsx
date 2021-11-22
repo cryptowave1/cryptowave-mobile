@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 import Asset from '../../models/assets/Asset'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import { AssetPair } from '../../models/assets/AssetPair'
-import AssetSelectorComponent from './AssetSelectorComponet'
+import AssetSelector from './AssetSelectorComponet'
 import { fetchAssetsThunk } from './assetsSlice'
 import { flex } from '../../style/globalStyle'
 
@@ -17,7 +17,7 @@ interface Props {
    style?: ViewStyle
 }
 
-const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
+const AssetPairSelector: React.FC<Props> = (props: Props) => {
    const dispatch = useDispatch()
 
    const assets: Asset[] = useSelector((state: RootState) => state.assets.assets)
@@ -49,14 +49,14 @@ const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
 
    return <View style={[styles.assetsListsWrapper, props.style]}>
       <View style={styles.singleAssetListWrapper}>
-         <AssetSelectorComponent
+         <AssetSelector
             initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
             selectedAsset={baseSelectedAsset}
             onSelectedAssetChange={onBaseChange}
          />
       </View>
       <View style={styles.singleAssetListWrapper}>
-         <AssetSelectorComponent
+         <AssetSelector
             initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
             selectedAsset={quoteSelectedAsset}
             onSelectedAssetChange={onQuoteChange}
@@ -64,7 +64,7 @@ const AssetPairSelectorComponent: React.FC<Props> = (props: Props) => {
       </View>
    </View>
 }
-export default AssetPairSelectorComponent
+export default AssetPairSelector
 
 const styles = StyleSheet.create({
    assetsListsWrapper: {

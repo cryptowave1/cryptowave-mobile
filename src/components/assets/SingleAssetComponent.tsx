@@ -7,8 +7,8 @@ import {
    marginListItemS, paddingM, textN1,
 } from '../../style/globalStyle'
 import formatPrice from '../../utils/functions/formatPrice'
-import globalConstants from '../../style/globalConstants';
-import ElevatedView from '../common/wrappers/ElevatedView';
+import globalConstants from '../../style/globalConstants'
+import ElevatedView from '../common/wrappers/ElevatedView'
 
 interface Props {
    asset: Asset

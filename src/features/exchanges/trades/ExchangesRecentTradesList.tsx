@@ -9,6 +9,7 @@ import text from '../../../strings'
 // @ts-ignore
 import IoniconsIcon from 'react-native-vector-icons/dist/Ionicons'
 import {
+   boldText,
    centerAligned,
    flex,
    horizontalLayout,
@@ -19,7 +20,7 @@ import {
 import { theme } from '../../../style/theme'
 import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
-import AssetPairTrades from '../../../models/assets/AssetPairTrades';
+import AssetPairTrades from '../../../models/assets/AssetPairTrades'
 
 
 interface Props {
@@ -32,7 +33,7 @@ type SortValue = 'asc' | 'desc'
 const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
    const dispatch = useDispatch()
 
-   const [sortValue, setSortValue] = useState<SortValue>('asc')
+   const [sortValue, setSortValue] = useState<SortValue>('desc')
 
    const exchangeTrades: ExchangeTrades[] = useSelector((state: RootState) =>
       Object.values(state.exchanges.exchangeIdToExchangeTrades))
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
    },
    sortButtonText: {
       ...textN1,
+      ...boldText
    },
    exchangesTradesList: {
       ...flex,

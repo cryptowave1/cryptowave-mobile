@@ -19,7 +19,7 @@ interface Props {
    initalSymbol: string
 }
 
-const AssetSelectorComponent: React.FC<Props> = (props: Props) => {
+const AssetSelector: React.FC<Props> = (props: Props) => {
    const dispatch = useDispatch()
 
    const assetsLoading: boolean = useSelector((state: RootState) => state.assets.loading)
@@ -69,7 +69,7 @@ const AssetSelectorComponent: React.FC<Props> = (props: Props) => {
    </View>
 }
 
-export default AssetSelectorComponent
+export default AssetSelector
 
 const styles = StyleSheet.create({
    wrapper: {

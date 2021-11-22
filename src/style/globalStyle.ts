@@ -9,10 +9,25 @@ export const text: TextStyle = {
    fontFamily: globalConstants.fonts.regular,
 }
 
+export const boldText: TextStyle = {
+   fontFamily: globalConstants.fonts.bold
+}
+
+export const lightText: TextStyle = {
+   fontFamily: globalConstants.fonts.light
+}
+
+
 export const textN1: TextStyle = {
    ...text,
-   color: theme.normal.n1,
+   color: theme.normal.n3,
 }
+
+export const textO1: TextStyle = {
+   ...text,
+   color: theme.opposing.o1,
+}
+
 
 /**
  * Background

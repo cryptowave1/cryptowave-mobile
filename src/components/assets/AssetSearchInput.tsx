@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 import { bgO1, flex, paddingM, paddingS, roundedCornerM, textN1 } from '../../style/globalStyle'
-import ElevatedView from '../common/wrappers/ElevatedView';
+import ElevatedView from '../common/wrappers/ElevatedView'
 
 interface Props {
    value: string

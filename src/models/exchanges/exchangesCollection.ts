@@ -5,17 +5,17 @@ import SymbolPair from '../assets/SymbolPair'
 import Trade from '../market/Trade'
 import { NetworkRequestError, PairNotSupportedError } from '../../errors/errors'
 
-interface BinanceTradeResponse {
+interface BinanceResponse {
    price: number
    qty: number
    time: number
+   isBuyerMaker: boolean
 }
-
 
 const binance: Exchange = new Exchange(
    'binance',
    text.exchange_name_binance,
-   new HttpRequestStrategy<Trade[], FetchRecentTradesArguments, BinanceTradeResponse[]>(
+   new HttpRequestStrategy<Trade[], FetchRecentTradesArguments, BinanceResponse[]>(
       (params: { symbolPair: SymbolPair, limit?: number }) => {
          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
          return {
@@ -27,8 +27,11 @@ const binance: Exchange = new Exchange(
             },
          }
       },
-      (response: BinanceTradeResponse[]) => {
-         return response.map((obj: BinanceTradeResponse) => new Trade(obj.price, obj.qty, obj.time))
+      (response: BinanceResponse[]) => {
+         return response
+            .slice(-5)
+            .map((obj: BinanceResponse) =>
+            new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
       },
       (err: any) => {
          if (err.code === -1121) {
@@ -57,6 +60,7 @@ const kraken: Exchange = new Exchange(
             endpoint: 'https://api.kraken.com/0/public/Trades',
             query: {
                pair: ticker,
+               since: 0,
             },
          }
       },
@@ -65,9 +69,10 @@ const kraken: Exchange = new Exchange(
             throw response.error
          }
 
-         return Object.values(response.result)[0].map((arr) =>
-            new Trade(Number(arr[0]), Number(arr[1]), Number(arr[2]))
-         )
+         return Object.values(response.result)[0]
+            .slice(-5)
+            .map((arr) =>
+            new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2])))
       },
       (err: any) => {
          if (err[0].includes('Unknown asset pair')) {

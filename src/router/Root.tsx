@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 /**
  * Screen imports
  */
-import * as routes from './routes'
 import { RootStackParamList } from './routes'
 import HomeScreen from '../features/screens/HomeScreen'
 import DetailsScreen from '../features/screens/DetailsScreen'
@@ -17,12 +16,12 @@ export default function Root() {
    return (
       <NavigationContainer>
          <Stack.Navigator
-            initialRouteName={routes.HOME_SCREEN}
+            initialRouteName={'HomeScreen'}
             screenOptions={{
                headerShown: false
             }}>
-            <Stack.Screen name={routes.HOME_SCREEN} component={HomeScreen}/>
-            <Stack.Screen name={routes.DETAILS_SCREEN} component={DetailsScreen}/>
+            <Stack.Screen name={'HomeScreen'} component={HomeScreen}/>
+            <Stack.Screen name={'DetailsScreen'} component={DetailsScreen}/>
          </Stack.Navigator>
       </NavigationContainer>
    )

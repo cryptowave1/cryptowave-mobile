@@ -7,11 +7,11 @@ import { SortValue } from '../common/SortValue'
 export default class AssetPairTrades {
    [immerable] = true
 
-   private static readonly TRADES_MAX_COUNT: number = 2000;
+   private static readonly TRADES_MAX_COUNT: number = 400
 
    private readonly assetPair: AssetPair
    private supported?: boolean
-   private readonly trades: Trade[]
+   private trades: Trade[]
 
    constructor(assetPair: AssetPair, trades: Trade[] = [], supported?: boolean) {
       this.assetPair = assetPair
@@ -38,7 +38,7 @@ export default class AssetPairTrades {
    addTrades(trades: Trade[]) {
       this.trades.push(...trades)
       if (trades.length > AssetPairTrades.TRADES_MAX_COUNT) {
-         this.trades.splice(0, trades.length - AssetPairTrades.TRADES_MAX_COUNT)
+         this.trades = trades.slice(trades.length - AssetPairTrades.TRADES_MAX_COUNT)
       }
    }
 
