@@ -12,7 +12,7 @@ import {
    flex, horizontalLayout, lightText,
    marginListItemL,
    middleAligned, roundedCornerM,
-   textN1,
+   textN1, textO1,
 } from '../../style/globalStyle'
 import formatPrice from '../../utils/functions/formatPrice'
 import globalConstants from '../../style/globalConstants'
@@ -27,7 +27,7 @@ import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
    RECENT_TRADES_CONTAINER_HEIGHT_MIN,
-   TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX
+   TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX, TRADES_LIST_MINI_MAX_ELEMENTS
 } from '../../features/constants';
 
 interface Props {
@@ -73,7 +73,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       const color = isPriceUp ? theme.complementary.c1.first : theme.complementary.c1.second
 
       return <View style={[styles.priceWrapper, horizontalLayout, centerAligned]}>
-         <Ionicons color={color} size={23} name={isPriceUp ? 'arrow-up-sharp' : 'arrow-down-sharp'}/>
+         <Ionicons color={color} size={20} name={isPriceUp ? 'arrow-up-sharp' : 'arrow-down-sharp'}/>
          <Text style={[styles.priceText, {
             color: color
          }]}>{formatPrice(price)}</Text>
@@ -93,8 +93,9 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          hasLastTrade = true
          child = <View style={styles.tradeDataWrapper}>
             {getPriceComponent(lastTrade.getPrice(), isPriceUp)}
-            <Animated.View style={[tradesListStyle]}>
-               <TradesListMiniHorizontal trades={props.assetPairTrades.getLastNTrades(10)}/>
+            <Animated.View
+               style={[tradesListStyle, {marginTop: globalConstants.layout.distance.m, backgroundColor: 'red'}]}>
+               <TradesListMiniHorizontal trades={props.assetPairTrades.getLastNTrades(TRADES_LIST_MINI_MAX_ELEMENTS)}/>
             </Animated.View>
          </View>
       }
@@ -130,22 +131,25 @@ export default SingleExchangePairTrades
 const styles = StyleSheet.create({
    innerWrapper: {
       ...centerAligned,
-      ...middleAligned,
       ...bgO1,
       ...flex,
-      ...roundedCornerM
+      ...roundedCornerM,
+      backgroundColor: theme.normal.n3,
+      justifyContent: 'flex-end',
    },
    exchangeText: {
-      ...textN1,
+      ...textO1,
       ...lightText,
       position: 'absolute',
       top: globalConstants.layout.distance.xs,
    },
-   priceWrapper: {},
+   priceWrapper: {
+      top: globalConstants.layout.distance.s
+   },
    priceText: {
       ...textN1,
       marginLeft: globalConstants.layout.distance.s,
-      fontSize: 20
+      fontSize: 17,
    },
    notSupported: {
       ...textN1,
@@ -153,6 +157,6 @@ const styles = StyleSheet.create({
    tradeDataWrapper: {
       ...flex,
       ...centerAligned,
-      ...middleAligned,
+      justifyContent: 'flex-end'
    },
 })

@@ -81,7 +81,6 @@ export const middleAligned: ViewStyle = {
 }
 
 
-
 /**
  * Containers
  */
@@ -128,5 +127,10 @@ export const borderSizeM: ViewStyle = {
 export const borderColorN1: ViewStyle = {
    ...borderSizeM,
    borderColor: theme.normal.n1,
+}
+
+export const borderColorN2: ViewStyle = {
+   ...borderSizeM,
+   borderColor: theme.normal.n2,
 }
 

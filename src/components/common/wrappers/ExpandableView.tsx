@@ -28,7 +28,7 @@ const ExpandableView: React.FC<Props> = (props: Props) => {
       },
       onActive: (event, ctx) => {
          // @ts-ignore
-         y.value = clamp((event.translationY - ctx.offsetY) * -1, props.minHeight, props.maxHeight)
+         y.value = clamp(ctx.offsetY - event.translationY , props.minHeight, props.maxHeight)
       }
    });
 

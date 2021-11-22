@@ -83,32 +83,59 @@ const kraken: Exchange = new Exchange(
    )
 )
 
-// const binance3: Exchange = new Exchange(
-//    'binance3',
-//    strings.exchange_name_binance,
-//    new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceTradeResponse[]>(
-//       (params: { symbolPair: SymbolPair, limit: number }) => {
-//          const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
-//          return {
-//             method: 'GET' as const,
-//             endpoint: 'https://api.binance.com/api/v3/trades',
-//             query: {
-//                symbol: ticker,
-//                limit: params.limit,
-//             },
-//          }
-//       },
-//       (response: BinanceTradeResponse[]) => {
-//          return response.map((obj: BinanceTradeResponse) => new Trade(obj.price, obj.qty, obj.time))
-//       },
-//       (err: any) => {
-//          if (err.code === -1121) {
-//             throw new PairNotSupportedError()
-//          }
-//          throw new NetworkRequestError()
-//       },
-//    )
-// )
-//
+const binance3: Exchange = new Exchange(
+   'binance3',
+   strings.exchange_name_binance,
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceResponse[]>(
+      (params: { symbolPair: SymbolPair, limit: number }) => {
+         const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
+         return {
+            method: 'GET' as const,
+            endpoint: 'https://api.binance.com/api/v3/trades',
+            query: {
+               symbol: ticker,
+               limit: params.limit,
+            },
+         }
+      },
+      (response: BinanceResponse[]) => {
+         return response.map((obj: BinanceResponse) => new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
+      },
+      (err: any) => {
+         if (err.code === -1121) {
+            throw new PairNotSupportedError()
+         }
+         throw new NetworkRequestError()
+      },
+   )
+)
 
-export default [binance, kraken]
+const binance4: Exchange = new Exchange(
+   'binance4',
+   strings.exchange_name_binance,
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BinanceResponse[]>(
+      (params: { symbolPair: SymbolPair, limit: number }) => {
+         const ticker: string = `${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
+         return {
+            method: 'GET' as const,
+            endpoint: 'https://api.binance.com/api/v3/trades',
+            query: {
+               symbol: ticker,
+               limit: params.limit,
+            },
+         }
+      },
+      (response: BinanceResponse[]) => {
+         return response.map((obj: BinanceResponse) => new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
+      },
+      (err: any) => {
+         if (err.code === -1121) {
+            throw new PairNotSupportedError()
+         }
+         throw new NetworkRequestError()
+      },
+   )
+)
+
+
+export default [binance, kraken, binance3, binance4]
