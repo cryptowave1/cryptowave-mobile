@@ -18,9 +18,9 @@ export default {
    },
 
    elevation: {
-      s: 3,
-      m: 5,
-      l: 9,
+      s: 6,
+      m: 9,
+      l: 12,
    },
 
    border: {

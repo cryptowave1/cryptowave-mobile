@@ -8,6 +8,7 @@ import {
 } from '../../style/globalStyle'
 import formatPrice from '../../utils/functions/formatPrice'
 import globalConstants from '../../style/globalConstants';
+import ElevatedView from '../common/wrappers/ElevatedView';
 
 interface Props {
    asset: Asset
@@ -16,12 +17,12 @@ interface Props {
 }
 
 const SingleAssetComponent: React.FC<Props> = (props: Props) => {
-   return <TouchableOpacity
+   const child = <TouchableOpacity
       key={props.asset.getSymbol()}
       onPress={() => {
          props.onPressed(props.asset)
       }}
-      style={[props.isSelected ? styles.selectedStyle : null, styles.container]}>
+      style={[styles.container]}>
       <Image
          source={{
             uri: props.asset.getImageUrl(),
@@ -32,6 +33,16 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
          <Text style={styles.price}>${formatPrice(props.asset.getMarketData().getPriceUsd())}</Text>
       </View>
    </TouchableOpacity>
+
+   if (props.isSelected) {
+      return <ElevatedView outerViewStyle={{...paddingM}} elevation={globalConstants.elevation.m}>
+         {child}
+      </ElevatedView>
+   }
+
+   return <View>
+      {child}
+   </View>
 }
 
 export default SingleAssetComponent
@@ -41,7 +52,6 @@ const styles = StyleSheet.create({
       ...horizontalLayout,
       ...marginListItemS,
       ...centerAligned,
-      ...flex,
       ...paddingM,
       height: 50,
    },

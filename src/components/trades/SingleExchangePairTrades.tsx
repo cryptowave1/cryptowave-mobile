@@ -10,8 +10,8 @@ import {
    bgO1,
    centerAligned,
    flex,
-   marginListItemL,
-   middleAligned,
+   marginListItemL, marginListItemM,
+   middleAligned, paddingL, paddingM,
    textN1,
 } from '../../style/globalStyle'
 import formatPrice from '../../utils/functions/formatPrice'
@@ -44,20 +44,26 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       return <Text style={styles.notSupported}>{text.exchange_trades_pair_not_supported}</Text>
    }
 
-   return <ElevatedView elevation={globalConstants.elevation.s} style={styles.wrapper}>
-      <Text style={styles.exchangeText}>{props.exchange.getName()}</Text>
-      {getChild()}
+   return <ElevatedView
+      elevation={15}
+      outerViewStyle={{...flex, ...marginListItemL}}
+      innerViewStyle={styles.innerWrapper}>
+      <View style={styles.innerWrapper}>
+         <>
+            <Text style={styles.exchangeText}>{props.exchange.getName()}</Text>
+            {getChild()}
+         </>
+      </View>
    </ElevatedView>
 }
 export default SingleExchangePairTrades
 
 const styles = StyleSheet.create({
-   wrapper: {
+   innerWrapper: {
       ...centerAligned,
       ...middleAligned,
-      ...marginListItemL,
       ...bgO1,
-      ...flex,
+      ...flex
    },
    exchangeText: {
       ...textN1,

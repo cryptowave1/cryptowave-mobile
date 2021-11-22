@@ -1,34 +1,33 @@
 import React from 'react'
-import { View, Platform, ViewStyle } from 'react-native'
+import { View, ViewStyle } from 'react-native'
 import globalConstants from '../../../style/globalConstants'
+import { Shadow } from 'react-native-shadow-2'
 
 interface Props {
    elevation?: number
-   style?: ViewStyle | ViewStyle[]
-   children: JSX.Element | JSX.Element[]
+   outerViewStyle?: ViewStyle | ViewStyle[]
+   innerViewStyle?: ViewStyle | ViewStyle[]
+   children: JSX.Element
 }
+
 
 const ElevatedView: React.FC<Props & Record<string, any>> =
    ({
        elevation = globalConstants.elevation.m,
-       style,
+       outerViewStyle,
+       innerViewStyle,
        ...otherProps
     }) => {
-      const additionalStyle: ViewStyle = Platform.OS === 'android'
-         ? {elevation}
-         : {
-            shadowColor: '#000',
-            shadowOpacity: 0.2 * elevation + 0.2,
-            shadowRadius: 1 * elevation,
-            shadowOffset: {
-               width: 0,
-               height: 0,
-            },
-         }
-      additionalStyle.backgroundColor = '#fff'
 
-      return <View style={[additionalStyle, style]} {...otherProps}>
-         {otherProps.children}
+      return <View style={outerViewStyle}>
+         <Shadow
+            distance={elevation}
+            containerViewStyle={{flex: 1}}
+            viewStyle={[{alignSelf: 'stretch', flex: 1, width: '100%', height: '100%'}, innerViewStyle]}>
+
+            {otherProps.children}
+
+         </Shadow>
       </View>
    }
 export default ElevatedView

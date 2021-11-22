@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import commonConstants from '../../style/globalConstants'
-import ElevatedView from '../common/wrappers/ElevatedView'
-import { bgO1, flex, marginM, textN1 } from '../../style/globalStyle'
+import { bgO1, flex, paddingM, paddingS, roundedCornerM, textN1 } from '../../style/globalStyle'
+import ElevatedView from '../common/wrappers/ElevatedView';
 
 interface Props {
    value: string
@@ -12,7 +11,7 @@ interface Props {
 const AssetSearchInput: React.FC<Props> = (props: Props) => {
    const [value, onChangeText] = useState<string>(props.value)
 
-   return <ElevatedView elevation={commonConstants.elevation.s} style={styles.wrapper}>
+   return <ElevatedView outerViewStyle={styles.outerView} innerViewStyle={styles.wrapper}>
       <TextInput
          style={styles.input}
          value={value}
@@ -25,11 +24,12 @@ const AssetSearchInput: React.FC<Props> = (props: Props) => {
 export default AssetSearchInput
 
 const styles = StyleSheet.create({
+   outerView: {
+      ...paddingM,
+      height: 70,
+   },
    wrapper: {
       ...bgO1,
-      ...marginM,
-      height: 50,
-      margin: commonConstants.layout.distance.s
    },
    input: {
       ...textN1,

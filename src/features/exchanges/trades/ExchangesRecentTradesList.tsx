@@ -9,8 +9,6 @@ import text from '../../../strings'
 // @ts-ignore
 import IoniconsIcon from 'react-native-vector-icons/dist/Ionicons'
 import {
-   borderColorN1,
-   borderSizeS,
    centerAligned,
    flex,
    horizontalLayout,
@@ -72,8 +70,8 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
             style={styles.sortButton}>
             <Text style={styles.sortButtonText}>{text.common_price}</Text>
             <IoniconsIcon name={sortValue === 'asc' ? 'caret-up-outline' : 'caret-down-outline'}
-                           size={globalConstants.icons.size.m}
-                           color={theme.normal.n2}/>
+                          size={globalConstants.icons.size.m}
+                          color={theme.normal.n2}/>
          </TouchableOpacity>
          <View style={styles.exchangesTradesList}>
             {
@@ -116,6 +114,5 @@ const styles = StyleSheet.create({
       ...paddingL,
       paddingTop: 0,
       marginTop: globalConstants.layout.distance.m,
-      // backgroundColor: 'red',
    },
 })
