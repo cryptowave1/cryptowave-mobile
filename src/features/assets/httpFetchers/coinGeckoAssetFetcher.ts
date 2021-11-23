@@ -1,7 +1,7 @@
-import HttpRequestStrategy from './HttpFetchStrategy'
-import Asset from '../../assets/Asset'
-import { MarketData } from '../../market/MarketData'
-import { COIN_GECKO_API_URL } from './httpFetchConstants'
+import HttpRequestStrategy from '../../../models/http/HttpFetchStrategy'
+import Asset from '../../../models/assets/Asset'
+import { MarketData } from '../../../models/market/MarketData'
+import { COIN_GECKO_API_URL } from './httpFetchersConstants'
 
 export interface CoinGeckoAssetFetcherResponseItem {
    symbol: string

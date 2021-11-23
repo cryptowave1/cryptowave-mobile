@@ -1,4 +1,4 @@
-import { getQueryString } from '../../../utils/functions/getQueryString'
+import { getQueryString } from '../../utils/functions/getQueryString'
 
 interface RequestParams {
    endpoint: string

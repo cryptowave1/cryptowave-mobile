@@ -1,6 +1,6 @@
 import strings from '../../strings'
 import Exchange, { FetchRecentTradesArguments } from '../../models/exchanges/Exchange'
-import HttpRequestStrategy from '../../models/http/fetch/HttpFetchStrategy'
+import HttpRequestStrategy from '../../models/http/HttpFetchStrategy'
 import SymbolPair from '../../models/assets/SymbolPair'
 import Trade from '../../models/market/Trade'
 import { NetworkRequestError, PairNotSupportedError } from '../../errors/errors'

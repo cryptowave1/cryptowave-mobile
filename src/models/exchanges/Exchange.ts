@@ -1,5 +1,5 @@
 import { immerable } from 'immer'
-import HttpFetchStrategy from '../http/fetch/HttpFetchStrategy'
+import HttpFetchStrategy from '../http/HttpFetchStrategy'
 import SymbolPair from '../assets/SymbolPair'
 
 export interface FetchRecentTradesArguments {

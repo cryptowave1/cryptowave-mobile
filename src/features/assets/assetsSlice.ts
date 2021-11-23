@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Asset from '../../models/assets/Asset'
 import { AppDispatch, AppThunk } from '../../app/store'
-import AssetsFetcher from '../../models/http/fetch/AssetsFetcher'
-import coinGeckoAssetsListFetcher from '../../models/http/fetch/coinGeckoAssetsListFetcher'
-import coinGeckoAssetFetcher from '../../models/http/fetch/coinGeckoAssetFetcher'
+import AssetsFetcher from '../../models/http/AssetsFetcher'
+import coinGeckoAssetsListFetcher from './httpFetchers/coinGeckoAssetsListFetcher'
+import coinGeckoAssetFetcher from './httpFetchers/coinGeckoAssetFetcher'
 
 export interface AssetsState {
    loading: boolean
