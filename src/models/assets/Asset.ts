@@ -23,9 +23,7 @@ export default class Asset {
    }
 
    public static filterAssets(assets: Asset[], label: string): Asset[] {
-      return assets.filter(asset =>
-         asset.getSymbol().toLowerCase().indexOf(label.toLowerCase()) > -1 ||
-         asset.getName().toLowerCase().indexOf(label.toLowerCase()) > -1)
+      return assets.filter(asset => asset.getSymbol().toLowerCase().indexOf(label.toLowerCase()) > -1)
    }
 
    public static sortAssetsByMarketCap(assets: Asset[]): Asset[] {
