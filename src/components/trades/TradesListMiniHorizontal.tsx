@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import Trade from '../../models/market/Trade'
 import { theme } from '../../style/theme'
-import { borderColorN2, centerAligned, middleAligned, textN1 } from '../../style/globalStyle'
+import { borderColorN2, centerAligned, flex, middleAligned, textN1 } from '../../style/globalStyle'
 import formatNumber from '../../utils/functions/formatNumber'
 import { TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX } from '../../features/constants'
 

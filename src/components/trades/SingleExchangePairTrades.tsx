@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
@@ -11,7 +11,7 @@ import {
    centerAligned,
    flex, horizontalLayout, lightText,
    marginListItemL,
-   middleAligned, roundedCornerM,
+   roundedCornerM,
    textN1, textO1,
 } from '../../style/globalStyle'
 import formatNumber from '../../utils/functions/formatNumber'
@@ -23,7 +23,7 @@ import { theme } from '../../style/theme'
 // @ts-ignore
 import Ionicons from 'react-native-vector-icons/dist/Ionicons'
 import TradesListMiniHorizontal from './TradesListMiniHorizontal'
-import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
+import Animated, { Easing, interpolate, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated'
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
    RECENT_TRADES_CONTAINER_HEIGHT_MIN,
@@ -34,7 +34,7 @@ interface Props {
    loading: boolean
    exchange: Exchange
    assetPairTrades: AssetPairTrades | undefined
-   sharedExpandableViewHeight: any
+   sharedExpandableViewHeight: Animated.SharedValue<number>
 }
 
 const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
@@ -42,17 +42,21 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
 
    const [lastTradePrice, setLastTradePRice] = useState<number>(0)
 
+   const expandableViewHeight: Animated.SharedValue<number> = useDerivedValue(() => {
+      return props.sharedExpandableViewHeight.value
+   }, [props.sharedExpandableViewHeight.value])
+
    const tradesListStyle: ViewStyle = useAnimatedStyle(() => ({
-      height: interpolate(props.sharedExpandableViewHeight.value,
+      height: interpolate(expandableViewHeight.value,
          [0, RECENT_TRADES_CONTAINER_HEIGHT_MIN, RECENT_TRADES_CONTAINER_HEIGHT_MAX],
          [0, 0, TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX]),
-      opacity: interpolate(props.sharedExpandableViewHeight.value,
+      opacity: interpolate(expandableViewHeight.value,
          [0,
             RECENT_TRADES_CONTAINER_HEIGHT_MIN,
             (RECENT_TRADES_CONTAINER_HEIGHT_MAX + RECENT_TRADES_CONTAINER_HEIGHT_MIN) / 2,
             RECENT_TRADES_CONTAINER_HEIGHT_MAX],
          [0, 0, 0.7, 1])
-   }))
+   }), [expandableViewHeight.value])
 
    const isPriceUp: boolean = useMemo(() => {
       let result: boolean
@@ -66,6 +70,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       }
       return result
    }, [props.assetPairTrades])
+
 
    const getPriceComponent = (price: number, isPriceUp: boolean) => {
       const color = isPriceUp ? theme.complementary.c1.first : theme.complementary.c1.second

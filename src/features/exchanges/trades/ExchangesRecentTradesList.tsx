@@ -23,12 +23,17 @@ import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
 import ExpandableView from '../../../components/common/wrappers/ExpandableView'
 import ElevatedView from '../../../components/common/wrappers/ElevatedView'
-import { RECENT_TRADES_POLLING_INTERVAL_MS } from '../../constants'
+import {
+   RECENT_TRADES_CONTAINER_HEIGHT_MAX,
+   RECENT_TRADES_CONTAINER_HEIGHT_MIN,
+   RECENT_TRADES_POLLING_INTERVAL_MS
+} from '../../constants'
+import Animated, { Easing, withTiming } from 'react-native-reanimated'
 
 interface Props {
    style?: ViewStyle
    assetPair: AssetPair
-   sharedExpandableViewHeight: any
+   sharedExpandableViewHeight: Animated.SharedValue<number>
 }
 
 type SortValue = 'asc' | 'desc'
@@ -51,6 +56,17 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
             sortValue))
       , [exchangeTrades, sortValue])
 
+   useEffect(() => {
+      const hasOneLastTrade = displayedExchangeTrades
+         .some(exchangeTrade => exchangeTrade.getAssetPairTrades(assetPairTicker)?.getLastNTrades(1).length)
+
+      props.sharedExpandableViewHeight.value = withTiming(hasOneLastTrade
+         ? RECENT_TRADES_CONTAINER_HEIGHT_MAX
+         : RECENT_TRADES_CONTAINER_HEIGHT_MIN, {
+         duration: 1000,
+         easing: Easing.out(Easing.exp),
+      })
+   }, [displayedExchangeTrades])
 
    useEffect(() => {
       if (!props.assetPair) {
