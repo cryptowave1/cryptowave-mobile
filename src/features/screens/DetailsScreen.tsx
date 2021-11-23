@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import TopBarHome from '../layout/TopBarHome'
+import TopBarHome from '../../components/layout/TopBarHome'
 import { bgO1, centerAligned, flex, horizontalLayout, textO1 } from '../../style/globalStyle'
 // @ts-ignore
 import IoniconsIcon from 'react-native-vector-icons/dist/Ionicons'

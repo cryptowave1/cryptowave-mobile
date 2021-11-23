@@ -10,7 +10,7 @@ import {
 import { theme } from '../../style/theme'
 import formatNumber from '../../utils/functions/formatNumber'
 import globalConstants from '../../style/globalConstants'
-import getPreciseTime from '../../utils/functions/getPrciseTime'
+import getPreciseTime from '../../utils/functions/getPreciseTime'
 
 interface Props {
    trade: Trade
@@ -40,7 +40,6 @@ const SingleTradeListItem: React.FC<Props> = (props: Props) => {
       </View>
    </View>
 }
-
 export default SingleTradeListItem
 
 const styles = StyleSheet.create({

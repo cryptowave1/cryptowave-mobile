@@ -2,7 +2,7 @@ import Asset from '../../models/assets/Asset'
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import {
-   borderColorN1, centerAligned, flex,
+   borderColorN1, centerAligned,
    horizontalLayout,
    marginListItemS, paddingM, textN1,
 } from '../../style/globalStyle'
@@ -44,7 +44,6 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
       {child}
    </View>
 }
-
 export default SingleAssetComponent
 
 const styles = StyleSheet.create({

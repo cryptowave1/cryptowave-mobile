@@ -14,7 +14,6 @@ const Logo: React.FC<Props> = ({style, width = 200}: Props) => {
       />
    </View>
 }
-
 export default Logo
 
 const styles = StyleSheet.create({

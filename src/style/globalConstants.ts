@@ -28,7 +28,7 @@ export default {
          s: s,
          m: s * 1.5,
          l: s * 2,
-         xxl: s * 5
+         xxl: s * 5,
       },
 
       width: {

@@ -40,7 +40,6 @@ export default class AssetsFetcher {
       }
 
       const idsToFetch: string[] = filteredAssetsList
-         // filter out currently available assets
          .filter(assetsListItem => !this.fetchedAssets.has(assetsListItem.id))
          .map(assetsListItem => assetsListItem.id)
          .slice(0, 300) // Prevent too long request error code

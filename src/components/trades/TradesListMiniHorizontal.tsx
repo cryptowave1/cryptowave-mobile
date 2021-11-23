@@ -29,7 +29,6 @@ const TradesListMiniHorizontal: React.FC<Props> = (props: Props) => {
       )}
       horizontal={true}/>
 }
-
 export default TradesListMiniHorizontal
 
 const styles = StyleSheet.create({

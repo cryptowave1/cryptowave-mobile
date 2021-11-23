@@ -1,11 +1,6 @@
 import createFlipperDebugger from 'redux-flipper'
-import { enableMapSet } from 'immer'
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import rootReducers from './rootReducers'
-
-// Enables the use of Map/Set objects inside the store's state
-// todo akolov: find out why it is not working correctly
-enableMapSet()
 
 export const store = configureStore({
    reducer: rootReducers,

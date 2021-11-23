@@ -13,7 +13,6 @@ const CenteredSpinner: React.FC<Props> = ({size = 'small', style}: Props) => {
       <Spinner size={size}/>
    </View>
 }
-
 export default CenteredSpinner
 
 const styles = StyleSheet.create({

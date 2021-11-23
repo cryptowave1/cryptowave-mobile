@@ -1,8 +1,8 @@
 import strings from '../../strings'
-import Exchange, { FetchRecentTradesArguments } from './Exchange'
-import HttpRequestStrategy from '../http/fetch/HttpFetchStrategy'
-import SymbolPair from '../assets/SymbolPair'
-import Trade from '../market/Trade'
+import Exchange, { FetchRecentTradesArguments } from '../../models/exchanges/Exchange'
+import HttpRequestStrategy from '../../models/http/fetch/HttpFetchStrategy'
+import SymbolPair from '../../models/assets/SymbolPair'
+import Trade from '../../models/market/Trade'
 import { NetworkRequestError, PairNotSupportedError } from '../../errors/errors'
 import { REQUESTED_TRADES_LIMIT } from '../../constants';
 

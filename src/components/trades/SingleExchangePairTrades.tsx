@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import Trade from '../../models/market/Trade'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'

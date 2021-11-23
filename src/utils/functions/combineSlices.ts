@@ -27,5 +27,4 @@ const combineSlices = <T, U>(sliceReducer: Reducer, sliceInitialState: T, childS
 
    return reduceReducers(sliceReducer, childReducers) as Reducer<T & { [key: string]: U }>
 }
-
 export default combineSlices

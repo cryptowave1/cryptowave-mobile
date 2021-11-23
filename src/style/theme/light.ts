@@ -7,7 +7,7 @@ export default {
    opposing: {
       o1: '#fff',
       o2: '#eaeff5',
-      o3: '#EAF4F4'
+      o3: '#EAF4F4',
    },
    complementary: {
       c1: {

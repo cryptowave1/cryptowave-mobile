@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import commonConstants from '../../style/globalConstants'
-import ElevatedView from '../../components/common/wrappers/ElevatedView'
+import ElevatedView from '../common/wrappers/ElevatedView'
 import { bgN1, flex } from '../../style/globalStyle'
 
 interface Props {
@@ -20,7 +20,6 @@ const TopBarHome: React.FC<Props> = (props: Props) => {
       </View>
    </ElevatedView>
 }
-
 export default TopBarHome
 
 const styles = StyleSheet.create({

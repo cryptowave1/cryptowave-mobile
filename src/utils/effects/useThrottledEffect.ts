@@ -19,5 +19,4 @@ export const useThrottledEffect = (callback: Function, deps: any = [], delay: nu
       [delay, ...deps],
    )
 }
-
 export default useThrottledEffect

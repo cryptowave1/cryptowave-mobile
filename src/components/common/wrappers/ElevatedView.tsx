@@ -23,9 +23,7 @@ const ElevatedView: React.FC<Props> =
             distance={elevation}
             containerViewStyle={{flex: 1}}
             viewStyle={[{alignSelf: 'stretch', flex: 1, width: '100%', height: '100%'}, innerViewStyle]}>
-
             {otherProps.children}
-
          </Shadow>
       </View>
    }

@@ -10,5 +10,4 @@ interface Props {
 const Spinner: React.FC<Props> = ({size = 'small', color}: Props) => {
    return <ActivityIndicator size={size} color={color || theme.normal.n1}/>
 }
-
 export default Spinner

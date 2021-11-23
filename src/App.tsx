@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { store } from './app/store'
 import { Provider } from 'react-redux'
 import Root from './router/Root'
+import { store } from './app/store'
 
 const App: React.FC = () => {
    return (
@@ -10,5 +10,4 @@ const App: React.FC = () => {
       </Provider>
    )
 }
-
 export default App

@@ -2,15 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AssetPair } from '../../models/assets/AssetPair'
 import { AppDispatch, AppThunk, RootState } from '../../app/store'
 import Trade from '../../models/market/Trade'
-import exchangesCollection from '../../models/exchanges/exchangesCollection'
+import exchangesCollection from './exchangesCollection'
 import Exchange from '../../models/exchanges/Exchange'
 import ExchangeTrades from '../../models/exchanges/ExchangeTrades'
 import { PairNotSupportedError } from '../../errors/errors'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
-
-export interface ExchangesState {
-   exchangeIdToExchangeTrades: { [key: string]: ExchangeTrades }
-}
 
 interface ExchangeId {
    exchangeId: string
@@ -28,6 +24,10 @@ export interface ExchangeIdAssetPairTrades extends ExchangeId {
 export interface ExchangeIdAssetPairError extends ExchangeId {
    assetPair: AssetPair
    error: Error
+}
+
+export interface ExchangesState {
+   exchangeIdToExchangeTrades: { [key: string]: ExchangeTrades }
 }
 
 const exchangesInitialState: ExchangesState = {
@@ -79,14 +79,14 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit?: number): Ap
                   dispatch(exchangesSlice.actions.fetchRecentTradesSuccess({
                      exchangeId: exchange.getId(),
                      assetPair: assetPair,
-                     trades: trades
+                     trades: trades,
                   }))
                })
                .catch((err) => {
                   dispatch(exchangesSlice.actions.fetchRecentTradesFailed({
                      exchangeId: exchange.getId(),
                      assetPair: assetPair,
-                     error: err
+                     error: err,
                   }))
                })
          }

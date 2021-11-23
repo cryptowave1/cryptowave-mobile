@@ -55,7 +55,7 @@ export const assetsSlice = createSlice({
    },
 })
 
-const assetStore = new AssetsFetcher(coinGeckoAssetsListFetcher, coinGeckoAssetFetcher)
+const assetsFetcher = new AssetsFetcher(coinGeckoAssetsListFetcher, coinGeckoAssetFetcher)
 
 export const fetchAdditionalAssets = (label: string, resultsPerPage: number, pageNumber: number): AppThunk =>
    async (dispatch: AppDispatch) => {
@@ -64,7 +64,7 @@ export const fetchAdditionalAssets = (label: string, resultsPerPage: number, pag
       }
       dispatch(assetsSlice.actions.fetchAdditionalAssetsStart())
       try {
-         const assets = (await assetStore.searchAssets(label, resultsPerPage, pageNumber)).getAvailableAssets()
+         const assets = (await assetsFetcher.searchAssets(label, resultsPerPage, pageNumber)).getAvailableAssets()
          dispatch(assetsSlice.actions.fetchAdditionalAssetsSuccess(assets))
       } catch (err) {
          dispatch(assetsSlice.actions.fetchAdditionalAssetsFailed(err as Error))
@@ -75,7 +75,7 @@ export const fetchAssetsThunk = (resultsPerPage: number, pageNumber: number): Ap
    async (dispatch: AppDispatch) => {
       dispatch(assetsSlice.actions.fetchAssetsStart())
       try {
-         const assets = (await assetStore.fetchAssets(resultsPerPage, pageNumber)).getAvailableAssets()
+         const assets = (await assetsFetcher.fetchAssets(resultsPerPage, pageNumber)).getAvailableAssets()
          dispatch(assetsSlice.actions.fetchAssetsSuccess(assets))
       } catch (err) {
          dispatch(assetsSlice.actions.fetchAssetsFailed(err as Error))
