@@ -64,7 +64,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
          duration: 1000,
          easing: Easing.out(Easing.exp),
       })
-   }, [props.assetPair])
+   }, [props.assetPair, exchangeTrades])
 
    useEffect(() => {
       if (!props.assetPair) {

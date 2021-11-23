@@ -11,7 +11,7 @@ import CenteredSpinner from '../../components/common/CenteredSpinner'
 
 const INITIAL_BASE_SELECTED_ASSET_SYMBOL = 'BTC'
 const INITIAL_QUOTE_SELECTED_ASSET_SYMBOL = 'USDT'
-const INITIAL_ASSETS_FETCH_COUNT = 20
+const INITIAL_ASSETS_FETCH_COUNT = 200
 
 interface Props {
    onSelectedAssetPair: (assetPair: AssetPair) => void
