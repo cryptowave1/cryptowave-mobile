@@ -15,14 +15,12 @@ import {
    horizontalLayout,
    middleAligned,
    paddingL,
-   paddingS, textN1, textO1
+   paddingS, textO1
 } from '../../../style/globalStyle'
 import { theme } from '../../../style/theme'
 import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
-import ExpandableView from '../../../components/common/wrappers/ExpandableView'
-import ElevatedView from '../../../components/common/wrappers/ElevatedView'
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
    RECENT_TRADES_CONTAINER_HEIGHT_MIN,
