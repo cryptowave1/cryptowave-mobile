@@ -20,12 +20,14 @@ export default class HttpRequestStrategy<RequiredType, ExecuteArgumentsType, Res
       this.transformErrorFunction = transformErrorFunction
    }
 
-   public async execute(params: ExecuteArgumentsType): Promise<RequiredType | Response> {
+   public async execute(params?: ExecuteArgumentsType): Promise<RequiredType> {
       const requestParams: RequestParams = this.transformRequestFunction(params)
       let endpoint = requestParams.endpoint
-      let queryString = getQueryString(requestParams.query)
-      if (queryString.length) {
-         endpoint += `?${getQueryString(requestParams.query)}`
+      if (requestParams.query) {
+         let queryString = getQueryString(requestParams.query)
+         if (queryString.length) {
+            endpoint += `?${getQueryString(requestParams.query)}`
+         }
       }
       try {
          const response: Response | Error = await fetch(endpoint, {
@@ -42,7 +44,8 @@ export default class HttpRequestStrategy<RequiredType, ExecuteArgumentsType, Res
          if (this.transformResponseFunction) {
             return this.transformResponseFunction(result)
          }
-         return response
+
+         return result as unknown as RequiredType
       } catch (err) {
          if (this.transformErrorFunction) {
             throw this.transformErrorFunction(err)

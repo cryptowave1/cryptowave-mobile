@@ -4,9 +4,9 @@ import Animated, {
    useAnimatedStyle,
    useAnimatedGestureHandler,
    useDerivedValue, useSharedValue,
-} from 'react-native-reanimated';
+} from 'react-native-reanimated'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import { clamp } from 'react-native-redash';
+import { clamp } from 'react-native-redash'
 
 interface Props {
    maxHeight: number
@@ -24,13 +24,13 @@ const ExpandableView: React.FC<Props> = (props: Props) => {
    const gestureHandler = useAnimatedGestureHandler({
       onStart: (_, ctx) => {
          // @ts-ignore
-         ctx.offsetY = y.value;
+         ctx.offsetY = y.value
       },
       onActive: (event, ctx) => {
          // @ts-ignore
          y.value = clamp(ctx.offsetY - event.translationY , props.minHeight, props.maxHeight)
       }
-   });
+   })
 
    // @ts-ignore
    const animatedStyle = useAnimatedStyle(() => ({height: y.value}))
@@ -41,6 +41,6 @@ const ExpandableView: React.FC<Props> = (props: Props) => {
             {props.children}
          </Animated.View>
       </PanGestureHandler>
-   );
+   )
 }
 export default ExpandableView

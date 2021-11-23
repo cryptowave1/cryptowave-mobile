@@ -5,6 +5,8 @@ import SymbolPair from '../assets/SymbolPair'
 import Trade from '../market/Trade'
 import { NetworkRequestError, PairNotSupportedError } from '../../errors/errors'
 
+const HANDLED_OBJECTS_LIMIT = 5
+
 interface BinanceResponse {
    price: number
    qty: number
@@ -29,7 +31,7 @@ const binance: Exchange = new Exchange(
       },
       (response: BinanceResponse[]) => {
          return response
-            .slice(-5)
+            .slice(-HANDLED_OBJECTS_LIMIT)
             .map((obj: BinanceResponse) =>
                new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
       },
@@ -69,7 +71,7 @@ const kraken: Exchange = new Exchange(
          }
 
          return Object.values(response.result)[0]
-            .slice(-5)
+            .slice(-HANDLED_OBJECTS_LIMIT)
             .map((arr) =>
                new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2])))
       },
@@ -119,7 +121,7 @@ const huobi: Exchange = new Exchange(
                trades.push(new Trade(obj.direction === 'buy' ? 'b' : 's', obj.price, obj.amount, obj.ts))
             })
          })
-         return trades
+         return trades.slice(-HANDLED_OBJECTS_LIMIT)
       },
       (err: any) => {
          if (err['err-msg'] === 'invalid symbol') {

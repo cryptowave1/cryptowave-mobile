@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Asset from '../../models/assets/Asset'
-import { AppDispatch, AppThunk, RootState, store } from '../../app/store'
-import fetchAssets from '../../api/coinGecko/fetchAssets'
-import { fetchAssetsListItemsThunk } from './assetsListItemsSlice'
-import { AssetsListItem, filterAssetsListItems } from '../../models/assets/AssetsListItem'
-import async, { ErrorCallback, QueueObject } from 'async'
+import { AppDispatch, AppThunk } from '../../app/store'
+import AssetsFetcher from '../../models/http/fetch/AssetsFetcher'
+import coinGeckoAssetsListFetcher from '../../models/http/fetch/coinGeckoAssetsListFetcher'
+import coinGeckoAssetFetcher from '../../models/http/fetch/coinGeckoAssetFetcher'
 
 export interface AssetsState {
    loading: boolean
@@ -46,7 +45,7 @@ export const assetsSlice = createSlice({
       },
       fetchAdditionalAssetsSuccess(state, action: PayloadAction<Asset[]>) {
          state.loadingAdditionalAssets = false
-         state.assets.push(...action.payload)
+         state.assets = action.payload
          state.fetchAdditionalAssetsError = undefined
       },
       fetchAdditionalAssetsFailed(state, action: PayloadAction<Error>) {
@@ -56,44 +55,17 @@ export const assetsSlice = createSlice({
    },
 })
 
-const fetchAdditionalAssetsQueue: QueueObject<AppThunk> = async.queue<AppThunk>(
-   (task: AppThunk, callback: ErrorCallback) => {
-      store.dispatch(task)
-      callback()
-   }, 1)
-
-export const addToFetchAdditionalAssetsQueue = (thunk: AppThunk) => {
-   fetchAdditionalAssetsQueue.push(thunk)
-}
+const assetStore = new AssetsFetcher(coinGeckoAssetsListFetcher, coinGeckoAssetFetcher)
 
 export const fetchAdditionalAssets = (label: string, resultsPerPage: number, pageNumber: number): AppThunk =>
-   async (dispatch: AppDispatch, getState: () => RootState) => {
+   async (dispatch: AppDispatch) => {
       if (!label.length) {
          return
       }
-
       dispatch(assetsSlice.actions.fetchAdditionalAssetsStart())
-
-      if (!getState().assetsList.assetsListItems?.length) {
-         dispatch(fetchAssetsListItemsThunk())
-      }
-
-      const filteredAssetsList: AssetsListItem[] = filterAssetsListItems(getState().assetsList.assetsListItems, label)
-      if (!filteredAssetsList.length) {
-         return // the item is not found in the list of assets
-      }
-
       try {
-         const currentAssets: Asset[] = getState().assets.assets
-         let idsToFetch: string[] = filteredAssetsList
-            // filter out currently available assets
-            .filter(assetsListItem => !currentAssets.find((asset: Asset) => asset.getId() === assetsListItem.id))
-            .map(assetsListItem => assetsListItem.id)
-            .slice(0, 300) // Prevent too long request error code
-
-         const fetchResultsPerPage: number = resultsPerPage >= idsToFetch.length ? idsToFetch.length : resultsPerPage
-         const newAssets: Asset[] = await fetchAssets(fetchResultsPerPage, pageNumber, idsToFetch)
-         dispatch(assetsSlice.actions.fetchAdditionalAssetsSuccess(newAssets))
+         const assets = (await assetStore.searchAssets(label, resultsPerPage, pageNumber)).getAvailableAssets()
+         dispatch(assetsSlice.actions.fetchAdditionalAssetsSuccess(assets))
       } catch (err) {
          dispatch(assetsSlice.actions.fetchAdditionalAssetsFailed(err as Error))
       }
@@ -103,7 +75,7 @@ export const fetchAssetsThunk = (resultsPerPage: number, pageNumber: number): Ap
    async (dispatch: AppDispatch) => {
       dispatch(assetsSlice.actions.fetchAssetsStart())
       try {
-         const assets = await fetchAssets(resultsPerPage, pageNumber)
+         const assets = (await assetStore.fetchAssets(resultsPerPage, pageNumber)).getAvailableAssets()
          dispatch(assetsSlice.actions.fetchAssetsSuccess(assets))
       } catch (err) {
          dispatch(assetsSlice.actions.fetchAssetsFailed(err as Error))

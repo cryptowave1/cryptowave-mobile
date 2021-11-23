@@ -10,7 +10,7 @@ import {
    textN1
 } from '../../style/globalStyle'
 import { theme } from '../../style/theme'
-import formatPrice from '../../utils/functions/formatPrice'
+import formatNumber from '../../utils/functions/formatNumber'
 import globalConstants from '../../style/globalConstants'
 import strings from '../../strings'
 
@@ -34,13 +34,13 @@ const SingleTradeListItem: React.FC<Props> = (props: Props) => {
       </View>
       <View>
          <Text style={{...textN1, ...boldText}}>
-            {formatPrice(props.trade.getPrice())}
+            {formatNumber(props.trade.getPrice())}
          </Text>
       </View>
       <View style={styles.qtyWrapper}>
          <Text style={{...textN1, ...boldText}}>
             <Text style={{...text}}>{`${strings.common_qty}:  `}</Text>
-            {formatPrice(props.trade.getBaseQty())}
+            {formatNumber(props.trade.getBaseQty())}
          </Text>
       </View>
    </View>

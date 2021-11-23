@@ -7,7 +7,7 @@ import { AssetPair } from '../../models/assets/AssetPair'
 import AssetSelector from './AssetSelectorComponet'
 import { fetchAssetsThunk } from './assetsSlice'
 import { flex } from '../../style/globalStyle'
-import CenteredSpinner from '../../components/common/CenteredSpinner';
+import CenteredSpinner from '../../components/common/CenteredSpinner'
 
 const INITIAL_BASE_SELECTED_ASSET_SYMBOL = 'BTC'
 const INITIAL_QUOTE_SELECTED_ASSET_SYMBOL = 'USDT'

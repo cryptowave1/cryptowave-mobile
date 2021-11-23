@@ -6,7 +6,7 @@ import {
    horizontalLayout,
    marginListItemS, paddingM, textN1,
 } from '../../style/globalStyle'
-import formatPrice from '../../utils/functions/formatPrice'
+import formatNumber from '../../utils/functions/formatNumber'
 import globalConstants from '../../style/globalConstants'
 import ElevatedView from '../common/wrappers/ElevatedView'
 
@@ -30,7 +30,7 @@ const SingleAssetComponent: React.FC<Props> = (props: Props) => {
          style={styles.image}/>
       <View>
          <Text style={styles.name}>{props.asset.getSymbol().toUpperCase()}</Text>
-         <Text style={styles.price}>${formatPrice(props.asset.getMarketData().getPriceUsd())}</Text>
+         <Text style={styles.price}>${formatNumber(props.asset.getMarketData().getPriceUsd())}</Text>
       </View>
    </TouchableOpacity>
 

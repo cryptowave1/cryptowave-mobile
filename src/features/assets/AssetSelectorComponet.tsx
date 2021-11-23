@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Asset from '../../models/assets/Asset'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToFetchAdditionalAssetsQueue, fetchAdditionalAssets, fetchAssetsThunk } from './assetsSlice'
+import { fetchAdditionalAssets, fetchAssetsThunk } from './assetsSlice'
 import useThrottledEffect from '../../utils/effects/useThrottledEffect'
 import AssetSearchInput from '../../components/assets/AssetSearchInput'
 import AssetsList from '../../components/assets/AssetsList'
@@ -33,10 +33,11 @@ const AssetSelector: React.FC<Props> = (props: Props) => {
    }, [])
 
    useThrottledEffect(() => {
-      if (text.length) {
-         addToFetchAdditionalAssetsQueue(
-            fetchAdditionalAssets(text, ADDITIONAL_ASSETS_FETCH_COUNT, 1))
+      if (!text.length) {
+         return
       }
+      dispatch(fetchAdditionalAssets(text, ADDITIONAL_ASSETS_FETCH_COUNT, 1))
+
    }, [text], 2000)
 
    const filterAssets = (assets: Asset[], label: string): Asset[] => {

@@ -14,7 +14,7 @@ import {
    middleAligned, roundedCornerM,
    textN1, textO1,
 } from '../../style/globalStyle'
-import formatPrice from '../../utils/functions/formatPrice'
+import formatNumber from '../../utils/functions/formatNumber'
 import globalConstants from '../../style/globalConstants'
 import Exchange from '../../models/exchanges/Exchange'
 import { useNavigation } from '@react-navigation/native'
@@ -22,13 +22,13 @@ import { HomeScreenProps } from '../../router/routes'
 import { theme } from '../../style/theme'
 // @ts-ignore
 import Ionicons from 'react-native-vector-icons/dist/Ionicons'
-import TradesListMiniHorizontal from './TradesListMiniHorizontal';
+import TradesListMiniHorizontal from './TradesListMiniHorizontal'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
    RECENT_TRADES_CONTAINER_HEIGHT_MIN,
    TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX, TRADES_LIST_MINI_MAX_ELEMENTS
-} from '../../features/constants';
+} from '../../features/constants'
 
 interface Props {
    loading: boolean
@@ -74,7 +74,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          <Ionicons color={color} size={20} name={isPriceUp ? 'arrow-up-sharp' : 'arrow-down-sharp'}/>
          <Text style={[styles.priceText, {
             color: color
-         }]}>{formatPrice(price)}</Text>
+         }]}>{formatNumber(price)}</Text>
       </View>
    }
 
@@ -91,16 +91,15 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
          hasLastTrade = true
          child = <View style={styles.tradeDataWrapper}>
             {getPriceComponent(lastTrade.getPrice(), isPriceUp)}
-            <Animated.View
-               style={[tradesListStyle, {marginTop: globalConstants.layout.distance.m, backgroundColor: 'red'}]}>
-               <TradesListMiniHorizontal trades={props.assetPairTrades.getLastNTrades(TRADES_LIST_MINI_MAX_ELEMENTS)}/>
+            <Animated.View style={[tradesListStyle, styles.miniRecentTradesWrapper]}>
+               <TradesListMiniHorizontal style={{...roundedCornerM}}
+                                         trades={props.assetPairTrades.getLastNTrades(TRADES_LIST_MINI_MAX_ELEMENTS)}/>
             </Animated.View>
          </View>
       }
    } else {
       child = <Text style={styles.notSupported}>{strings.exchange_trades_pair_not_supported}</Text>
    }
-
 
    return <TouchableOpacity
       style={{...flex}}
@@ -115,9 +114,8 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       }}>
       <ElevatedView
          elevation={15}
-         outerViewStyle={{...flex, ...marginListItemL}}
-         innerViewStyle={styles.innerWrapper}>
-         <View style={styles.innerWrapper}>
+         outerViewStyle={{...flex, ...marginListItemL}}>
+         <View style={[styles.innerWrapper, {justifyContent: hasLastTrade ? 'flex-end' : 'center'}]}>
             <Text style={styles.exchangeText}>{props.exchange.getName()}</Text>
             {child}
          </View>
@@ -133,7 +131,6 @@ const styles = StyleSheet.create({
       ...flex,
       ...roundedCornerM,
       backgroundColor: theme.normal.n3,
-      justifyContent: 'flex-end',
    },
    exchangeText: {
       ...textO1,
@@ -151,11 +148,14 @@ const styles = StyleSheet.create({
    },
    notSupported: {
       ...textO1,
-      top: -globalConstants.layout.distance.m,
+      marginTop: globalConstants.layout.distance.s
    },
    tradeDataWrapper: {
       ...flex,
       ...centerAligned,
       justifyContent: 'flex-end'
+   },
+   miniRecentTradesWrapper: {
+      marginTop: globalConstants.layout.distance.m,
    },
 })

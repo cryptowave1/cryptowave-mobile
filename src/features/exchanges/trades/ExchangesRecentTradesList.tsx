@@ -21,8 +21,9 @@ import { theme } from '../../../style/theme'
 import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
-import ExpandableView from '../../../components/common/wrappers/ExpandableView';
-import ElevatedView from '../../../components/common/wrappers/ElevatedView';
+import ExpandableView from '../../../components/common/wrappers/ExpandableView'
+import ElevatedView from '../../../components/common/wrappers/ElevatedView'
+import { RECENT_TRADES_POLLING_INTERVAL_MS } from '../../constants'
 
 interface Props {
    style?: ViewStyle
@@ -59,7 +60,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
          dispatch(fetchRecentTradesThunk(props.assetPair))
       }
       cb()
-      const interval = setInterval(cb, 3000)
+      const interval = setInterval(cb, RECENT_TRADES_POLLING_INTERVAL_MS)
       return () => clearInterval(interval)
    }, [props.assetPair])
 
