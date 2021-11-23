@@ -22,8 +22,6 @@ import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
 import {
-   RECENT_TRADES_CONTAINER_HEIGHT_MAX,
-   RECENT_TRADES_CONTAINER_HEIGHT_MIN,
    RECENT_TRADES_POLLING_INTERVAL_MS
 } from '../../constants'
 import Animated, { Easing, withTiming } from 'react-native-reanimated'
@@ -39,7 +37,7 @@ type SortValue = 'asc' | 'desc'
 const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
    const dispatch = useDispatch()
 
-   const [sortValue, setSortValue] = useState<SortValue>('desc')
+   const [sortValue, setSortValue] = useState<SortValue>('asc')
 
    const exchangeTrades: ExchangeTrades[] = useSelector((state: RootState) =>
       Object.values(state.exchanges.exchangeIdToExchangeTrades))

@@ -61,17 +61,17 @@ export default class AssetPairTrades {
       }
       if (sortValue === 'asc') {
          if (!left?.getLastPrice()) {
-            return -1
+            return 1
          }
          if (!right?.getLastPrice()) {
-            return 1
+            return -1
          }
       } else {
          if (!left?.getLastPrice()) {
-            return 1
+            return -1
          }
          if (!right?.getLastPrice()) {
-            return -1
+            return 1
          }
       }
 
