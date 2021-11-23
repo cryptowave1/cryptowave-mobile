@@ -8,6 +8,7 @@ import AssetSelector from './AssetSelectorComponet'
 import { fetchAssetsThunk } from './assetsSlice'
 import { flex } from '../../style/globalStyle'
 import CenteredSpinner from '../../components/common/CenteredSpinner'
+import strings from '../../strings'
 
 const INITIAL_BASE_SELECTED_ASSET_SYMBOL = 'BTC'
 const INITIAL_QUOTE_SELECTED_ASSET_SYMBOL = 'USDT'
@@ -58,6 +59,7 @@ const AssetPairSelector: React.FC<Props> = (props: Props) => {
                      initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
                      selectedAsset={baseSelectedAsset}
                      onSelectedAssetChange={onBaseChange}
+                     inputPlaceholder={strings.common_base.toUpperCase()}
                   />
                </View>
                <View style={styles.singleAssetListWrapper}>
@@ -65,6 +67,7 @@ const AssetPairSelector: React.FC<Props> = (props: Props) => {
                      initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
                      selectedAsset={quoteSelectedAsset}
                      onSelectedAssetChange={onQuoteChange}
+                     inputPlaceholder={strings.common_quote.toUpperCase()}
                   />
                </View>
             </>

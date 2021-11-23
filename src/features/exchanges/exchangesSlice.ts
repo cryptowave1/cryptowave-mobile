@@ -47,7 +47,6 @@ export const exchangesSlice = createSlice({
       fetchRecentTradesSuccess(state, action: PayloadAction<ExchangeIdAssetPairTrades>) {
          state.exchangeIdToExchangeTrades[action.payload.exchangeId]
             .setPairSupported(action.payload.assetPair, true)
-         state.exchangeIdToExchangeTrades[action.payload.exchangeId]
             .addPairTrades(action.payload.assetPair, action.payload.trades)
       },
       fetchRecentTradesFailed(state, action: PayloadAction<ExchangeIdAssetPairError>) {
@@ -66,7 +65,7 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit?: number): Ap
 
       exchanges.forEach(exchange => {
          let assetPairTrades: AssetPairTrades | undefined =
-            getState().exchanges.exchangeIdToExchangeTrades[exchange.getId()].getAssetPairTrades(assetPair.toTicker())
+            getState().exchanges.exchangeIdToExchangeTrades[exchange.getId()].getAssetPairTrades(assetPair)
          if (!assetPairTrades) {
             dispatch(exchangesSlice.actions.initAssetPairTrades(
                {exchangeId: exchange.getId(), assetPair: assetPair}))

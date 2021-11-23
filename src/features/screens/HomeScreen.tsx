@@ -8,7 +8,7 @@ import commonConstants from '../../style/globalConstants'
 import { bgN1, bgO1, flex, roundedCornerXXL } from '../../style/globalStyle'
 import Logo from '../../components/common/Logo'
 import ExpandableView from '../../components/common/wrappers/ExpandableView'
-import { useSharedValue } from 'react-native-reanimated'
+import { Easing, useSharedValue, withTiming } from 'react-native-reanimated'
 import ElevatedView from '../../components/common/wrappers/ElevatedView'
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
@@ -20,10 +20,26 @@ interface Props {
 
 const HomeScreen: React.FC<Props> = (props: Props) => {
    const [assetPair, setAssetPair] = useState<AssetPair | undefined>(undefined)
+   const [isInitialPairChanged, setInitialPairChanged] = useState<boolean>(false)
 
-   const onAssetPairChange = useCallback((_assetPair: AssetPair) => setAssetPair(_assetPair), [assetPair])
+   const onAssetPairChange = useCallback((_assetPair: AssetPair) => {
+      if (assetPair) {
+         setInitialPairChanged(true)
+      }
+      setAssetPair(_assetPair)
+   }, [assetPair])
 
    const height = useSharedValue(0)
+
+   useEffect(() => {
+      if (!assetPair || isInitialPairChanged) {
+         return
+      }
+      height.value = withTiming(RECENT_TRADES_CONTAINER_HEIGHT_MIN, {
+         duration: 1000,
+         easing: Easing.out(Easing.exp),
+      })
+   }, [assetPair, isInitialPairChanged])
 
    return <View style={[styles.wrapper]}>
       <TopBarHome>

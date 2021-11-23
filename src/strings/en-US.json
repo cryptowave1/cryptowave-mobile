@@ -1,4 +1,6 @@
 {
+   "common_base": "base",
+   "common_quote": "quote",
    "common_price": "Price",
    "common_qty": "Qty",
    "exchange_name_binance": "Binance",

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { bgO1, flex, paddingM, paddingS, roundedCornerM, textN1 } from '../../style/globalStyle'
+import { bgO1, flex, paddingM, textN1 } from '../../style/globalStyle'
 import ElevatedView from '../common/wrappers/ElevatedView'
 
 interface Props {
    value: string
+   placeholder: string
    onValueChange: (value: string) => void
 }
 
@@ -18,7 +19,9 @@ const AssetSearchInput: React.FC<Props> = (props: Props) => {
          onChangeText={text => {
             props.onValueChange(text)
             onChangeText(text)
-         }}/>
+         }}
+         placeholder={props.placeholder}
+      />
    </ElevatedView>
 }
 export default AssetSearchInput

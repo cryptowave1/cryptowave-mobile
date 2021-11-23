@@ -44,27 +44,30 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
    const exchangeTrades: ExchangeTrades[] = useSelector((state: RootState) =>
       Object.values(state.exchanges.exchangeIdToExchangeTrades))
 
-   const assetPairTicker = props.assetPair.toTicker()
-
    const displayedExchangeTrades: ExchangeTrades[] = useMemo(
       () => exchangeTrades
          .sort((left, right) => AssetPairTrades.getComparatorValue(
-            left.getAssetPairTrades(assetPairTicker),
-            right.getAssetPairTrades(assetPairTicker),
+            left.getAssetPairTrades(props.assetPair),
+            right.getAssetPairTrades(props.assetPair),
             sortValue))
       , [exchangeTrades, sortValue])
 
-   useEffect(() => {
-      const hasOneLastTrade = displayedExchangeTrades
-         .some(exchangeTrade => exchangeTrade.getAssetPairTrades(assetPairTicker)?.getLastNTrades(1).length)
+   const areAllExchangeTradesLoaded = displayedExchangeTrades
+      .every(exchangeTrades => !!exchangeTrades.getAssetPairTrades(props.assetPair) &&
+         !exchangeTrades.getAssetPairTrades(props.assetPair)!.isLoading())
 
-      props.sharedExpandableViewHeight.value = withTiming(hasOneLastTrade
-         ? RECENT_TRADES_CONTAINER_HEIGHT_MAX
-         : RECENT_TRADES_CONTAINER_HEIGHT_MIN, {
-         duration: 1000,
-         easing: Easing.out(Easing.exp),
-      })
-   }, [props.assetPair, exchangeTrades])
+   useEffect(() => {
+      let conditionWait = setInterval(() => {
+         if (areAllExchangeTradesLoaded) {
+            clearInterval(conditionWait);
+            // VERY HACKY SOLUTION TO A NASTY REANIMATED BUG todo akolov: find a way to fix this
+            props.sharedExpandableViewHeight.value = withTiming(
+               props.sharedExpandableViewHeight.value - 0.1, {duration: 10})
+            props.sharedExpandableViewHeight.value = withTiming(
+               props.sharedExpandableViewHeight.value + 0.1, {duration: 10})
+         }
+      }, 50)
+   }, [props.assetPair, areAllExchangeTradesLoaded])
 
    useEffect(() => {
       if (!props.assetPair) {
@@ -97,9 +100,8 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
                   .map((exchangeTrades, index) => <SingleExchangePairTrades
                      key={index}
                      exchange={exchangeTrades.getExchange()}
-                     loading={!exchangeTrades.getAssetPairTrades(assetPairTicker) ||
-                     exchangeTrades.getAssetPairTrades(assetPairTicker)!.getSupported() === undefined}
-                     assetPairTrades={exchangeTrades.getAssetPairTrades(assetPairTicker)}
+                     loading={!!exchangeTrades.getAssetPairTrades(props.assetPair)?.isLoading()}
+                     assetPairTrades={exchangeTrades.getAssetPairTrades(props.assetPair)}
                      sharedExpandableViewHeight={props.sharedExpandableViewHeight}
                   />)
             }

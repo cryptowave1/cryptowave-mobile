@@ -15,7 +15,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({route, navigation}: Detail
    const {exchange, assetPair} = route.params
    const assetPairTradesFromStore = useSelector((state: RootState) => state
       .exchanges.exchangeIdToExchangeTrades[exchange.getId()])
-      .getAssetPairTrades(assetPair.toTicker())
+      .getAssetPairTrades(assetPair)
 
    return <View style={[styles.wrapper]}>
       <TopBarHome style={styles.topBar}>

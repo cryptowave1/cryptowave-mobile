@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       marginRight: globalConstants.layout.distance.m,
    },
    amountWrapper: {
-      width: 50,
+      width: 80,
       marginLeft: globalConstants.layout.distance.m,
       marginRight: globalConstants.layout.distance.m,
    },

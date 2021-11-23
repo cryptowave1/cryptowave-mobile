@@ -50,6 +50,10 @@ export default class AssetPairTrades {
       return this.trades.slice(-count)
    }
 
+   isLoading(): boolean {
+      return this.getSupported() === undefined
+   }
+
    public static getComparatorValue(left: (AssetPairTrades | undefined), right: (AssetPairTrades | undefined),
                                     sortValue: SortValue): number {
       if (!left?.getLastPrice() && !right?.getLastPrice()) {

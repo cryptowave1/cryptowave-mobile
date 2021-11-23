@@ -17,6 +17,7 @@ interface Props {
    onSelectedAssetChange: (asset: Asset) => void
    selectedAsset?: Asset
    initalSymbol: string
+   inputPlaceholder: string
 }
 
 const AssetSelector: React.FC<Props> = (props: Props) => {
@@ -52,6 +53,7 @@ const AssetSelector: React.FC<Props> = (props: Props) => {
    return <View style={styles.wrapper}>
       <AssetSearchInput
          value={text}
+         placeholder={props.inputPlaceholder}
          onValueChange={(value: string) => {
             setInputChanged(true)
             setText(value)
