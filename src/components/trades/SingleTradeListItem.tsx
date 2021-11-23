@@ -35,7 +35,7 @@ const SingleTradeListItem: React.FC<Props> = (props: Props) => {
       </View>
       <View style={styles.timeWrapper}>
          <Text style={[textO1]}>
-            {getPreciseTime(new Date(props.trade.getTimestamp() * 1000))}
+            {getPreciseTime(props.trade.getTimestamp())}
          </Text>
       </View>
    </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       marginRight: globalConstants.layout.distance.m,
    },
    amountWrapper: {
-      width: 80,
+      width: 100,
       marginLeft: globalConstants.layout.distance.m,
       marginRight: globalConstants.layout.distance.m,
    },

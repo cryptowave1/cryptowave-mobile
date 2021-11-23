@@ -1,8 +1,10 @@
 import { getIntlLocale } from '../../strings'
 
-const getPreciseTime = (date: Date): string => {
+const getPreciseTime = (timestamp: number): string => {
+   const date = new Date(timestamp)
    const options = {
-      fractionalSecondDigits: 2,
+      hour12: false,
+      hour: '2-digit',
       minute: 'numeric',
       second: 'numeric',
    } as const

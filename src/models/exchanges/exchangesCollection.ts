@@ -73,7 +73,7 @@ const kraken: Exchange = new Exchange(
          return Object.values(response.result)[0]
             .slice(-HANDLED_OBJECTS_LIMIT)
             .map((arr) =>
-               new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2])))
+               new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2] as number * 1000)))
       },
       (err: any) => {
          if (err[0].includes('Unknown asset pair')) {

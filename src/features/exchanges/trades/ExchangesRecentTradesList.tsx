@@ -66,7 +66,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
             props.sharedExpandableViewHeight.value = withTiming(
                props.sharedExpandableViewHeight.value + 0.1, {duration: 10})
          }
-      }, 50)
+      }, 10)
    }, [props.assetPair, areAllExchangeTradesLoaded])
 
    useEffect(() => {
