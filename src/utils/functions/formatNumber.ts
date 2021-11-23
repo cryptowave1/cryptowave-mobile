@@ -1,8 +1,8 @@
 import { getIntlLocale } from '../../strings'
 
 let getDecimalsString = (value: number) => {
-   if (Math.floor(value) === value) return '';
-   return value.toString().split('.')[1];
+   if (Math.floor(value) === value) return ''
+   return value.toString().split('.')[1]
 }
 
 function rightTrim(char: string, str: string): string {
@@ -10,9 +10,9 @@ function rightTrim(char: string, str: string): string {
       return ''
    }
    if (str.slice(str.length - char.length) === char) {
-      return rightTrim(char, str.slice(0, 0 - char.length));
+      return rightTrim(char, str.slice(0, 0 - char.length))
    } else {
-      return str;
+      return str
    }
 }
 

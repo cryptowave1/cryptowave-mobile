@@ -10,7 +10,7 @@ import {
 import { theme } from '../../style/theme'
 import formatNumber from '../../utils/functions/formatNumber'
 import globalConstants from '../../style/globalConstants'
-import getPreciseTime from '../../utils/functions/getPrciseTime';
+import getPreciseTime from '../../utils/functions/getPrciseTime'
 
 interface Props {
    trade: Trade

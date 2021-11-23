@@ -10,7 +10,7 @@ const SingleTrade = ({trade}: { trade: Trade }) => {
    const color = trade.getType() === 'b' ? theme.complementary.c1.first : theme.complementary.c1.second
    return <View style={[{backgroundColor: color}, styles.tradeWrapper]}>
       <Text style={{...textN1}}>{formatNumber(trade.getPrice())}</Text>
-      <Text style={{...textN1}}>{formatNumber(trade.getBaseQty(), 4)}</Text>
+      <Text style={{...textN1}}>{formatNumber(trade.getBaseQty())}</Text>
    </View>
 }
 

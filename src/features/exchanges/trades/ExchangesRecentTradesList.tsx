@@ -59,7 +59,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
    useEffect(() => {
       let conditionWait = setInterval(() => {
          if (areAllExchangeTradesLoaded) {
-            clearInterval(conditionWait);
+            clearInterval(conditionWait)
             // VERY HACKY SOLUTION TO A NASTY REANIMATED BUG todo akolov: find a way to fix this
             props.sharedExpandableViewHeight.value = withTiming(
                props.sharedExpandableViewHeight.value - 0.1, {duration: 10})
