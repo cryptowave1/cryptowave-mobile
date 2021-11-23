@@ -1,67 +1,66 @@
 import React from 'react'
-import { StyleSheet, Text, View, ViewStyle } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Trade from '../../models/market/Trade'
 import {
-   boldText,
+   boldText, centerAligned,
    horizontalLayout,
-   middleAligned,
-   paddingS,
-   text,
-   textN1
+   paddingS, text,
+   textO1
 } from '../../style/globalStyle'
 import { theme } from '../../style/theme'
 import formatNumber from '../../utils/functions/formatNumber'
 import globalConstants from '../../style/globalConstants'
-import strings from '../../strings'
+import getPreciseTime from '../../utils/functions/getPrciseTime';
 
 interface Props {
    trade: Trade
 }
 
 const SingleTradeListItem: React.FC<Props> = (props: Props) => {
-   const tradeWrapperStyle: ViewStyle = props.trade.getType() === 'b'
-      ? {backgroundColor: theme.complementary.c1.first}
-      : {backgroundColor: theme.complementary.c1.second}
+   const priceColor: string = props.trade.getType() === 'b'
+      ? theme.complementary.c1.first
+      : theme.complementary.c1.second
 
-   return <View style={[styles.tradeWrapper, tradeWrapperStyle, horizontalLayout]}>
-      <View>
-         <Text style={{...textN1, ...boldText}}>
-            {props.trade.getType().toUpperCase()}
-         </Text>
-      </View>
+
+   return <View style={[styles.tradeWrapper, horizontalLayout]}>
       <View style={styles.priceWrapper}>
-         <Text style={[textN1]}>{strings.common_price}:</Text>
-      </View>
-      <View>
-         <Text style={{...textN1, ...boldText}}>
+         <Text style={[text, boldText, {color: priceColor}]}>
             {formatNumber(props.trade.getPrice())}
          </Text>
       </View>
-      <View style={styles.qtyWrapper}>
-         <Text style={{...textN1, ...boldText}}>
-            <Text style={{...text}}>{`${strings.common_qty}:  `}</Text>
+      <View style={styles.amountWrapper}>
+         <Text style={[textO1]}>
             {formatNumber(props.trade.getBaseQty())}
+         </Text>
+      </View>
+      <View style={styles.timeWrapper}>
+         <Text style={[textO1]}>
+            {getPreciseTime(new Date(props.trade.getTimestamp() * 1000))}
          </Text>
       </View>
    </View>
 }
 
-export default React.memo(SingleTradeListItem)
+export default SingleTradeListItem
 
 const styles = StyleSheet.create({
    tradeWrapper: {
       ...paddingS,
-      backgroundColor: 'red',
+      ...centerAligned,
    },
    priceWrapper: {
+      width: 90,
       marginLeft: globalConstants.layout.distance.m,
       marginRight: globalConstants.layout.distance.m,
    },
-   qtyWrapper: {
-      ...middleAligned,
+   amountWrapper: {
+      width: 50,
+      marginLeft: globalConstants.layout.distance.m,
+      marginRight: globalConstants.layout.distance.m,
+   },
+   timeWrapper: {
+      width: 80,
       position: 'absolute',
-      top: 4,
-      right: globalConstants.layout.distance.m,
-      width: 90
+      right: 0
    }
 })

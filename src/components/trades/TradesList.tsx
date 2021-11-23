@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, ViewStyle } from 'react-native'
 import AssetPairTrades from '../../models/assets/AssetPairTrades'
 import ElevatedView from '../common/wrappers/ElevatedView'
 import {
+   bgN3,
    paddingL, roundedCornerM
 } from '../../style/globalStyle'
 import SingleTradeListItem from './SingleTradeListItem'
@@ -17,7 +18,7 @@ const TradesList: React.FC<Props> = (props: Props) => {
       <FlatList
          style={styles.flatList}
          data={[...props.assetPairTrades.getTrades()].reverse()}
-         renderItem={({item}) => <SingleTradeListItem key={item.getTimestamp()} trade={item}/>}
+         renderItem={({item}) => <SingleTradeListItem trade={item}/>}
       />
    </ElevatedView>
 }
@@ -25,6 +26,7 @@ export default TradesList
 
 const styles = StyleSheet.create({
    flatList: {
-      ...roundedCornerM
+      ...roundedCornerM,
+      ...bgN3
    }
 })

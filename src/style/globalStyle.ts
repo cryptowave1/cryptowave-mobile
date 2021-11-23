@@ -36,6 +36,10 @@ export const bgN1: ViewStyle = {
    backgroundColor: theme.normal.n1,
 }
 
+export const bgN3: ViewStyle = {
+   backgroundColor: theme.normal.n3,
+}
+
 export const bgO1: ViewStyle = {
    backgroundColor: theme.opposing.o1,
 }
