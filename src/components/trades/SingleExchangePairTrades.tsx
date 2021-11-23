@@ -10,7 +10,7 @@ import {
    bgO1,
    centerAligned,
    flex, horizontalLayout, lightText,
-   marginListItemL,
+   marginListItemL, marginListItemM,
    roundedCornerM,
    textN1, textO1,
 } from '../../style/globalStyle'
@@ -119,7 +119,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
       }}>
       <ElevatedView
          elevation={15}
-         outerViewStyle={{...flex, ...marginListItemL}}>
+         outerViewStyle={styles.outerWrapper}>
          <View style={[styles.innerWrapper, {justifyContent: hasLastTrade ? 'flex-end' : 'center'}]}>
             <Text style={styles.exchangeText}>{props.exchange.getName()}</Text>
             {child}
@@ -130,6 +130,11 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
 export default SingleExchangePairTrades
 
 const styles = StyleSheet.create({
+   outerWrapper: {
+      top: globalConstants.layout.distance.s,
+      ...flex,
+      ...marginListItemM
+   },
    innerWrapper: {
       ...centerAligned,
       ...bgO1,
@@ -144,7 +149,8 @@ const styles = StyleSheet.create({
       top: globalConstants.layout.distance.xs,
    },
    priceWrapper: {
-      top: globalConstants.layout.distance.s
+      top: globalConstants.layout.distance.s,
+      marginBottom: globalConstants.layout.distance.xs,
    },
    priceText: {
       ...textN1,

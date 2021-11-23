@@ -133,6 +133,6 @@ const styles = StyleSheet.create({
       ...flex,
       ...paddingL,
       paddingTop: 0,
-      marginTop: globalConstants.layout.distance.m,
+      marginTop: globalConstants.layout.distance.xs,
    },
 })

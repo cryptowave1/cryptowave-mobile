@@ -63,8 +63,8 @@ export const marginListItemS: ViewStyle = {
 }
 
 export const marginListItemM: ViewStyle = {
-   ...marginListItem,
    margin: globalConstants.layout.distance.m,
+   ...marginListItem,
 }
 
 export const marginListItemL: ViewStyle = {

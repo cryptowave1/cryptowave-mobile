@@ -133,4 +133,39 @@ const huobi: Exchange = new Exchange(
    )
 )
 
-export default [binance, kraken, huobi]
+
+type  BitfinexResponse = Array<Array<number>>
+
+const bitfinex: Exchange = new Exchange(
+   'bitfinex',
+   strings.exchange_name_bitfinex,
+   new HttpRequestStrategy<Trade[], { symbolPair: SymbolPair, limit: number }, BitfinexResponse>(
+      (params: { symbolPair: SymbolPair, limit: number }) => {
+         const ticker: string = `t${params.symbolPair.getBaseSymbol().toUpperCase()}${params.symbolPair.getQuoteSymbol().toUpperCase()}`
+         return {
+            method: 'GET' as const,
+            endpoint: `https://api-pub.bitfinex.com/v2/trades/${ticker}/hist`,
+            query: {
+               limit: params.limit,
+            },
+         }
+      },
+      (response: BitfinexResponse) => {
+         if (!response.length) {
+            throw new PairNotSupportedError()
+         }
+         return response.map(arr => new Trade(arr[2] > 0 ? 'b' : 's', arr[3], Math.abs(arr[2]), arr[1]))
+      },
+      (err: any) => {
+         if (err.message === 'Unknown symbol') {
+            throw new PairNotSupportedError()
+         } else if (err instanceof PairNotSupportedError) {
+            throw err
+         }
+         throw new NetworkRequestError()
+      },
+   )
+)
+
+
+export default [binance, kraken, huobi, bitfinex]
