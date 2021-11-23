@@ -74,7 +74,9 @@ const styles = StyleSheet.create({
    },
    tradesInnerStyle: {
       ...bgN1,
-      ...roundedCornerXXL
+      ...roundedCornerXXL,
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
    },
    tradesList: {
       marginTop: commonConstants.layout.distance.s
