@@ -4,8 +4,7 @@ import HttpRequestStrategy from '../http/fetch/HttpFetchStrategy'
 import SymbolPair from '../assets/SymbolPair'
 import Trade from '../market/Trade'
 import { NetworkRequestError, PairNotSupportedError } from '../../errors/errors'
-
-const HANDLED_OBJECTS_LIMIT = 5
+import { REQUESTED_TRADES_LIMIT } from '../../constants';
 
 interface BinanceResponse {
    price: number
@@ -31,7 +30,7 @@ const binance: Exchange = new Exchange(
       },
       (response: BinanceResponse[]) => {
          return response
-            .slice(-HANDLED_OBJECTS_LIMIT)
+            .slice(-REQUESTED_TRADES_LIMIT)
             .map((obj: BinanceResponse) =>
                new Trade(obj.isBuyerMaker ? 'b' : 's', obj.price, obj.qty, obj.time))
       },
@@ -62,6 +61,7 @@ const kraken: Exchange = new Exchange(
             endpoint: 'https://api.kraken.com/0/public/Trades',
             query: {
                pair: ticker,
+               since: Math.floor(Date.now() / 1000 - 1000),
             },
          }
       },
@@ -71,7 +71,7 @@ const kraken: Exchange = new Exchange(
          }
 
          return Object.values(response.result)[0]
-            .slice(-HANDLED_OBJECTS_LIMIT)
+            .slice(-REQUESTED_TRADES_LIMIT)
             .map((arr) =>
                new Trade(arr[3] as 'b' | 's', Number(arr[0]), Number(arr[1]), Number(arr[2] as number * 1000)))
       },
@@ -121,7 +121,8 @@ const huobi: Exchange = new Exchange(
                trades.push(new Trade(obj.direction === 'buy' ? 'b' : 's', obj.price, obj.amount, obj.ts))
             })
          })
-         return trades.slice(-HANDLED_OBJECTS_LIMIT)
+         return trades.sort((left, right) => left.getTimestamp() - right.getTimestamp())
+            .slice(-REQUESTED_TRADES_LIMIT)
       },
       (err: any) => {
          if (err['err-msg'] === 'invalid symbol') {

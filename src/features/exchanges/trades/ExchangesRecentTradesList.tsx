@@ -22,9 +22,9 @@ import globalConstants from '../../../style/globalConstants'
 import ExchangeTrades from '../../../models/exchanges/ExchangeTrades'
 import AssetPairTrades from '../../../models/assets/AssetPairTrades'
 import {
-   RECENT_TRADES_POLLING_INTERVAL_MS
-} from '../../constants'
-import Animated, { Easing, withTiming } from 'react-native-reanimated'
+   RECENT_TRADES_POLLING_INTERVAL_MS, REQUESTED_TRADES_LIMIT
+} from '../../../constants'
+import Animated, { withTiming } from 'react-native-reanimated'
 
 interface Props {
    style?: ViewStyle
@@ -72,7 +72,7 @@ const ExchangesRecentTradesList: React.FC<Props> = (props: Props) => {
          return
       }
       const cb = () => {
-         dispatch(fetchRecentTradesThunk(props.assetPair))
+         dispatch(fetchRecentTradesThunk(props.assetPair, REQUESTED_TRADES_LIMIT))
       }
       cb()
       const interval = setInterval(cb, RECENT_TRADES_POLLING_INTERVAL_MS)

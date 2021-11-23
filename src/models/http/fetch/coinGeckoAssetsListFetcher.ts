@@ -1,6 +1,6 @@
 import HttpRequestStrategy from './HttpFetchStrategy'
 import { AssetsListItem } from '../../assets/AssetsListItem'
-import { COIN_GECKO_API_URL } from './constants'
+import { COIN_GECKO_API_URL } from './httpFetchConstants'
 
 const LIST_ENDPOINT = '/api/v3/coins/list'
 const coinGeckoAssetsListFetcher = new HttpRequestStrategy<AssetsListItem[], void, AssetsListItem[]>(

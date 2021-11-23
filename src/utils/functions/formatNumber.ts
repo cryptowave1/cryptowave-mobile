@@ -16,11 +16,11 @@ function rightTrim(char: string, str: string): string {
    }
 }
 
-const formatNumber = (number: number, decimalPlaces?: number): string => {
-   if (!decimalPlaces) {
+const formatNumber = (number: number, maxDecimalPlaces: number = 8, decimalPlaces?: number): string => {
+   if (decimalPlaces === undefined) {
       let decimalStr = getDecimalsString(number)
       decimalStr = rightTrim('0', decimalStr)
-      decimalPlaces = decimalStr.length
+      decimalPlaces = decimalStr.length > maxDecimalPlaces ? maxDecimalPlaces : decimalStr.length
    }
 
    return new Intl.NumberFormat(getIntlLocale(), {minimumFractionDigits: decimalPlaces}).format(number)

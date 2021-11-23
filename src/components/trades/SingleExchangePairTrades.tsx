@@ -27,8 +27,8 @@ import Animated, { Easing, interpolate, useAnimatedStyle, useDerivedValue, withT
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
    RECENT_TRADES_CONTAINER_HEIGHT_MIN,
-   TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX, TRADES_LIST_MINI_MAX_ELEMENTS
-} from '../../features/constants'
+   TRADES_LIST_HORIZONTAL_CONTAINER_HEIGHT_MAX, TRADES_LIST_HORIZONTAL_MAX_ELEMENTS
+} from '../../features/featuresConstants'
 
 interface Props {
    loading: boolean
@@ -49,7 +49,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
    const tradesListStyle: ViewStyle = useAnimatedStyle(() => ({
       height: interpolate(expandableViewHeight.value,
          [0, RECENT_TRADES_CONTAINER_HEIGHT_MIN, RECENT_TRADES_CONTAINER_HEIGHT_MAX],
-         [0, 0, TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX]),
+         [0, 0, TRADES_LIST_HORIZONTAL_CONTAINER_HEIGHT_MAX]),
       opacity: interpolate(expandableViewHeight.value,
          [0,
             RECENT_TRADES_CONTAINER_HEIGHT_MIN,
@@ -98,7 +98,7 @@ const SingleExchangePairTrades: React.FC<Props> = (props: Props) => {
             {getPriceComponent(lastTrade.getPrice(), isPriceUp)}
             <Animated.View style={[tradesListStyle, styles.miniRecentTradesWrapper]}>
                <TradesListMiniHorizontal style={{...roundedCornerM}}
-                                         trades={props.assetPairTrades.getLastNTrades(TRADES_LIST_MINI_MAX_ELEMENTS)}/>
+                                         trades={props.assetPairTrades.getLastNTrades(TRADES_LIST_HORIZONTAL_MAX_ELEMENTS)}/>
             </Animated.View>
          </View>
       }

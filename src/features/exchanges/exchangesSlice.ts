@@ -72,7 +72,7 @@ export const fetchRecentTradesThunk = (assetPair: AssetPair, limit?: number): Ap
          }
          if (assetPairTrades?.getSupported() !== false) {
             exchange.getFetchPairRecentTradesStrategy().execute({
-               limit: limit ? limit : undefined,
+               limit: limit,
                symbolPair: assetPair.toSymbolPair(),
             })
                .then((trades: Trade[]) => {

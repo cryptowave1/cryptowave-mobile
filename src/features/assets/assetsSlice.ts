@@ -41,7 +41,7 @@ export const assetsSlice = createSlice({
       },
       fetchAdditionalAssetsStart(state) {
          state.loadingAdditionalAssets = true
-         state.error = undefined
+         state.fetchAdditionalAssetsError = undefined
       },
       fetchAdditionalAssetsSuccess(state, action: PayloadAction<Asset[]>) {
          state.loadingAdditionalAssets = false

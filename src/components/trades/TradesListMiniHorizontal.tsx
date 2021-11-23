@@ -2,9 +2,9 @@ import React from 'react'
 import { FlatList, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import Trade from '../../models/market/Trade'
 import { theme } from '../../style/theme'
-import { borderColorN2, centerAligned, flex, middleAligned, textN1 } from '../../style/globalStyle'
+import { borderColorN2, centerAligned, middleAligned, textN1 } from '../../style/globalStyle'
 import formatNumber from '../../utils/functions/formatNumber'
-import { TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX } from '../../features/constants'
+import { TRADES_LIST_HORIZONTAL_CONTAINER_HEIGHT_MAX } from '../../features/featuresConstants'
 
 const SingleTrade = ({trade}: { trade: Trade }) => {
    const color = trade.getType() === 'b' ? theme.complementary.c1.first : theme.complementary.c1.second
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
       ...borderColorN2,
       ...centerAligned,
       ...middleAligned,
-      width: 100,
-      height: TRADES_LIST_MINI_CONTAINER_HEIGHT_MAX,
+      width: 95,
+      height: TRADES_LIST_HORIZONTAL_CONTAINER_HEIGHT_MAX,
    }
 })

@@ -13,7 +13,7 @@ import ElevatedView from '../../components/common/wrappers/ElevatedView'
 import {
    RECENT_TRADES_CONTAINER_HEIGHT_MAX,
    RECENT_TRADES_CONTAINER_HEIGHT_MIN
-} from '../constants'
+} from '../featuresConstants'
 
 interface Props {
 }
