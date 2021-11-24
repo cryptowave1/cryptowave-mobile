@@ -154,7 +154,10 @@ const bitfinex: Exchange = new Exchange(
          if (!response.length) {
             throw new PairNotSupportedError()
          }
-         return response.map(arr => new Trade(arr[2] > 0 ? 'b' : 's', arr[3], Math.abs(arr[2]), arr[1]))
+         return response
+            .map(arr => new Trade(arr[2] > 0 ? 'b' : 's', arr[3], Math.abs(arr[2]), arr[1]))
+            .sort((left, right) => left.getTimestamp() - right.getTimestamp())
+            .slice(-REQUESTED_TRADES_LIMIT)
       },
       (err: any) => {
          if (err.message === 'Unknown symbol') {
