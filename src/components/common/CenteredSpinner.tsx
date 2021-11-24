@@ -9,7 +9,7 @@ interface Props {
 }
 
 const CenteredSpinner: React.FC<Props> = ({size = 'small', style}: Props) => {
-   return <View style={[style, styles.container]}>
+   return <View style={[styles.container, style]}>
       <Spinner size={size}/>
    </View>
 }

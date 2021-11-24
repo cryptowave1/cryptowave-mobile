@@ -56,7 +56,7 @@ const AssetPairSelector: React.FC<Props> = (props: Props) => {
             : <>
                <View style={styles.singleAssetListWrapper}>
                   <AssetSelector
-                     initalSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
+                     initialSymbol={INITIAL_BASE_SELECTED_ASSET_SYMBOL}
                      selectedAsset={baseSelectedAsset}
                      onSelectedAssetChange={onBaseChange}
                      inputPlaceholder={strings.common_base.toUpperCase()}
@@ -64,7 +64,7 @@ const AssetPairSelector: React.FC<Props> = (props: Props) => {
                </View>
                <View style={styles.singleAssetListWrapper}>
                   <AssetSelector
-                     initalSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
+                     initialSymbol={INITIAL_QUOTE_SELECTED_ASSET_SYMBOL}
                      selectedAsset={quoteSelectedAsset}
                      onSelectedAssetChange={onQuoteChange}
                      inputPlaceholder={strings.common_quote.toUpperCase()}

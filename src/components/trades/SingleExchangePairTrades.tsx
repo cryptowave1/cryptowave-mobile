@@ -10,7 +10,7 @@ import {
    bgO1,
    centerAligned,
    flex, horizontalLayout, lightText,
-   marginListItemL, marginListItemM,
+   marginListItemM,
    roundedCornerM,
    textN1, textO1,
 } from '../../style/globalStyle'

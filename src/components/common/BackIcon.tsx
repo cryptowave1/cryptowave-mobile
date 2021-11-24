@@ -12,7 +12,7 @@ interface Props {
    navigation: NavigationProp<any>
 }
 
-const HomeScreen: React.FC<Props> = (props: Props) => {
+const BackIcon: React.FC<Props> = (props: Props) => {
    return <TouchableOpacity
       style={[styles.wrapper, props.style]}
       onPress={props.navigation.goBack}>
@@ -22,12 +22,13 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
          name={'chevron-back-sharp'}/>
    </TouchableOpacity>
 }
-export default HomeScreen
+export default BackIcon
 
 const styles = StyleSheet.create({
    wrapper: {
       ...centerAligned,
       ...middleAligned,
+      paddingLeft: globalConstants.layout.distance.m,
       width: 50,
       height: 50,
    },

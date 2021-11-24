@@ -13,6 +13,7 @@ interface Props {
 const AssetsList: React.FC<Props> = (props: Props) => {
    return <FlatList
       data={props.assets}
+      style={[{flexGrow: 0}, props.style]}
       renderItem={({item}) => <SingleAssetComponent
          asset={item}
          isSelected={props.selectedAsset?.getId() === item.getId()}
