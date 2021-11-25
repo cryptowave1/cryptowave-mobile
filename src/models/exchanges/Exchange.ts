@@ -1,6 +1,7 @@
 import { immerable } from 'immer'
 import HttpFetchStrategy from '../http/HttpFetchStrategy'
 import SymbolPair from '../assets/SymbolPair'
+import Trade from '../market/Trade';
 
 export interface FetchRecentTradesArguments {
    symbolPair: SymbolPair
@@ -12,10 +13,10 @@ export default class Exchange {
 
    private readonly id: string
    private readonly name: string
-   private readonly fetchPairRecentTradesStrategy: HttpFetchStrategy<any, FetchRecentTradesArguments, any>
+   private readonly fetchPairRecentTradesStrategy: HttpFetchStrategy<Trade[], FetchRecentTradesArguments, any>
 
    constructor(id: string, name: string, fetchPairRecentTradesStrategy:
-      HttpFetchStrategy<any, { symbolPair: SymbolPair, limit: number }, any>) {
+      HttpFetchStrategy<Trade[], FetchRecentTradesArguments, any>) {
       this.id = id
       this.name = name
       this.fetchPairRecentTradesStrategy = fetchPairRecentTradesStrategy
@@ -29,7 +30,7 @@ export default class Exchange {
       return this.name
    }
 
-   getFetchPairRecentTradesStrategy(): HttpFetchStrategy<any, FetchRecentTradesArguments, any> {
+   getFetchPairRecentTradesStrategy(): HttpFetchStrategy<Trade[], FetchRecentTradesArguments, any> {
       return this.fetchPairRecentTradesStrategy
    }
 
